@@ -1,0 +1,120 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Dark Luxury + Neon Theme */
+  --font-size: 16px;
+  
+  /* Colors */
+  --background: #0A0A0A;
+  --surface: #1A1A1A;
+  --foreground: #FFFFFF;
+  --muted-foreground: #A0A0A0;
+  --accent: #00F0FF;
+  --accent-hover: #00D4E6;
+  --border: #2A2A2A;
+  --error: #FF4444;
+  --success: #00FF88;
+  
+  /* Card colors */
+  --card: #1A1A1A;
+  --card-foreground: #FFFFFF;
+  
+  /* Form elements */
+  --input: #2A2A2A;
+  --input-background: #1A1A1A;
+  
+  /* Typography */
+  --font-heading: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  
+  /* Spacing */
+  --radius: 8px;
+  
+  /* Sizes */
+  --text-6xl: 4rem;
+  --text-5xl: 3rem;
+  --text-4xl: 2.25rem;
+  --text-3xl: 1.875rem;
+  --text-2xl: 1.5rem;
+  --text-xl: 1.25rem;
+  --text-lg: 1.125rem;
+  --text-base: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-border: var(--border);
+  --color-error: var(--error);
+  --color-success: var(--success);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    color: var(--foreground);
+  }
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: var(--text-5xl);
+  }
+
+  h2 {
+    font-size: var(--text-4xl);
+  }
+
+  h3 {
+    font-size: var(--text-3xl);
+  }
+
+  h4 {
+    font-size: var(--text-2xl);
+  }
+
+  h5 {
+    font-size: var(--text-xl);
+  }
+
+  h6 {
+    font-size: var(--text-lg);
+  }
+
+  p {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+}

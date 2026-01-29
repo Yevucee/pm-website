@@ -1,0 +1,96 @@
+backend:
+  name: github
+  repo: "YOUR_GITHUB_USERNAME/YOUR_REPO"
+  branch: main
+  auth_type: pkce
+  app_id: "YOUR_GITHUB_OAUTH_APP_ID"
+
+site_url: "https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO"
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "releases"
+    label: "Music Releases"
+    folder: "content/releases"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Type", name: "type", widget: "select", options: ["single", "ep", "album"]}
+      - {label: "Release Date", name: "releaseDate", widget: "date"}
+      - {label: "Artwork", name: "artwork", widget: "image"}
+      - {label: "Spotify URL", name: "spotifyUrl", widget: "string"}
+      - {label: "Apple Music URL", name: "appleMusicUrl", widget: "string"}
+      - {label: "YouTube URL", name: "youtubeUrl", widget: "string"}
+      - {label: "Tracks", name: "tracks", widget: "list", required: false}
+
+  - name: "events"
+    label: "Events"
+    folder: "content/events"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Type", name: "type", widget: "select", options: ["boat-party", "club-night", "festival"]}
+      - {label: "Date", name: "date", widget: "date"}
+      - {label: "Time", name: "time", widget: "string"}
+      - {label: "Venue", name: "venue", widget: "string"}
+      - {label: "City", name: "city", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Lineup", name: "lineup", widget: "list", required: false}
+      - label: "Ticket Tiers"
+        name: "ticketTiers"
+        widget: "list"
+        fields:
+          - {label: "Name", name: "name", widget: "string"}
+          - {label: "Price (£)", name: "price", widget: "number"}
+          - {label: "Stripe Payment Link", name: "stripeLink", widget: "string", required: false}
+          - {label: "Available", name: "available", widget: "boolean", default: true}
+      - {label: "Sold Out", name: "soldOut", widget: "boolean", default: false, required: false}
+
+  - name: "merch"
+    label: "Merchandise"
+    folder: "content/merch"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Price (£)", name: "price", widget: "number"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Sizes", name: "sizes", widget: "list", default: ["S", "M", "L", "XL"]}
+      - {label: "Category", name: "category", widget: "select", options: ["apparel", "accessories"]}
+      - {label: "Stripe Payment Link", name: "stripeLink", widget: "string", required: false}
+      - {label: "In Stock", name: "inStock", widget: "boolean", default: true}
+
+  - name: "media"
+    label: "Media"
+    folder: "content/media"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Type", name: "type", widget: "select", options: ["photo", "video"]}
+      - {label: "Image/Thumbnail", name: "image", widget: "image"}
+      - {label: "Video URL", name: "videoUrl", widget: "string", required: false}
+      - {label: "Date", name: "date", widget: "date"}
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "content/settings/general.json"
+        fields:
+          - {label: "Artist Name", name: "artistName", widget: "string"}
+          - {label: "Tagline", name: "tagline", widget: "string"}
+          - {label: "Booking Email", name: "bookingEmail", widget: "string"}
+          - {label: "Management Email", name: "managementEmail", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "Instagram URL", name: "instagram", widget: "string"}
+          - {label: "Twitter URL", name: "twitter", widget: "string"}
+          - {label: "Spotify URL", name: "spotify", widget: "string"}
+          - {label: "Apple Music URL", name: "appleMusic", widget: "string"}
+          - {label: "YouTube URL", name: "youtube", widget: "string"}
