@@ -3,6 +3,7 @@ import { Button } from '@/app/components/button';
 import { Calendar, MapPin, Clock, ChevronLeft, Users, Music } from 'lucide-react';
 import { upcomingEvents, pastEvents } from '@/data/mock-data';
 import { cn } from '@/app/components/ui/utils';
+import { goToStripeLink } from '@/utils/stripe';
 
 export function EventDetailPage() {
   const { id } = useParams();
@@ -162,7 +163,12 @@ export function EventDetailPage() {
                           <p className="text-sm text-error">Sold Out</p>
                         )}
                         {tier.available && (
-                          <Button variant="primary" size="sm" className="w-full mt-2">
+                          <Button
+                            variant="primary"
+                            size="sm"
+                            className="w-full mt-2"
+                            onClick={() => goToStripeLink(tier.stripeLink)}
+                          >
                             Buy Now
                           </Button>
                         )}

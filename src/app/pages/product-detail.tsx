@@ -4,6 +4,7 @@ import { Button } from '@/app/components/button';
 import { ChevronLeft, ShoppingCart } from 'lucide-react';
 import { merchProducts } from '@/data/mock-data';
 import { cn } from '@/app/components/ui/utils';
+import { goToStripeLink } from '@/utils/stripe';
 
 export function ProductDetailPage() {
   const { id } = useParams();
@@ -77,7 +78,12 @@ export function ProductDetailPage() {
             </div>
 
             {/* Buy Button */}
-            <Button variant="primary" size="lg" className="w-full mb-4">
+            <Button
+              variant="primary"
+              size="lg"
+              className="w-full mb-4"
+              onClick={() => goToStripeLink(product.stripeLink)}
+            >
               <ShoppingCart size={20} className="mr-2" />
               Buy Now - £{product.price}
             </Button>
@@ -94,8 +100,10 @@ export function ProductDetailPage() {
                 </summary>
                 <div className="px-6 pb-6 text-muted-foreground">
                   <p>
-                    Premium quality {product.category === 'apparel' ? 'apparel' : 'accessory'} featuring the official The PM branding.
-                    Made from high-quality materials for maximum comfort and durability.
+                    {product.description
+                      ? product.description
+                      : `Premium quality ${product.category === 'apparel' ? 'apparel' : 'accessory'} featuring the official The PM branding.
+                    Made from high-quality materials for maximum comfort and durability.`}
                   </p>
                 </div>
               </details>

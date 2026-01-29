@@ -2,7 +2,8 @@ import { Button } from '@/app/components/button';
 import { ReleaseCard } from '@/app/components/release-card';
 import { EventCard } from '@/app/components/event-card';
 import { ProductCard } from '@/app/components/product-card';
-import { releases, upcomingEvents, merchProducts } from '@/data/mock-data';
+import { upcomingEvents, merchProducts } from '@/data/mock-data';
+import { releases } from '@/data/releases';
 
 export function DesignSystemPage() {
   return (

@@ -1,11 +1,11 @@
 backend:
   name: github
-  repo: "YOUR_GITHUB_USERNAME/YOUR_REPO"
+  repo: "Yevucee/pm-website"
   branch: main
   auth_type: pkce
-  app_id: "YOUR_GITHUB_OAUTH_APP_ID"
+  app_id: "Ov23liOdnKZXWD16o7UH"
 
-site_url: "https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO"
+site_url: "https://yevucee.github.io/pm-website"
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
@@ -22,8 +22,11 @@ collections:
       - {label: "Release Date", name: "releaseDate", widget: "date"}
       - {label: "Artwork", name: "artwork", widget: "image"}
       - {label: "Spotify URL", name: "spotifyUrl", widget: "string"}
+      - {label: "Show Spotify", name: "spotifyEnabled", widget: "boolean", default: true}
       - {label: "Apple Music URL", name: "appleMusicUrl", widget: "string"}
+      - {label: "Show Apple Music", name: "appleMusicEnabled", widget: "boolean", default: true}
       - {label: "YouTube URL", name: "youtubeUrl", widget: "string"}
+      - {label: "Show YouTube", name: "youtubeEnabled", widget: "boolean", default: true}
       - {label: "Tracks", name: "tracks", widget: "list", required: false}
 
   - name: "events"
@@ -31,6 +34,8 @@ collections:
     folder: "content/events"
     create: true
     slug: "{{slug}}"
+    format: "json"
+    extension: "json"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Type", name: "type", widget: "select", options: ["boat-party", "club-night", "festival"]}
@@ -56,8 +61,11 @@ collections:
     folder: "content/merch"
     create: true
     slug: "{{slug}}"
+    format: "json"
+    extension: "json"
     fields:
       - {label: "Name", name: "name", widget: "string"}
+      - {label: "Description", name: "description", widget: "text", required: false}
       - {label: "Price (£)", name: "price", widget: "number"}
       - {label: "Image", name: "image", widget: "image"}
       - {label: "Sizes", name: "sizes", widget: "list", default: ["S", "M", "L", "XL"]}

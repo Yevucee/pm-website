@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/app/components/button';
 import { Music, Play, ChevronLeft, Download } from 'lucide-react';
-import { releases } from '@/data/mock-data';
+import { releases } from '@/data/releases';
 
 export function ReleaseDetailPage() {
   const { id } = useParams();
@@ -54,26 +54,36 @@ export function ReleaseDetailPage() {
             )}
 
             {/* Streaming Buttons */}
-            <div className="space-y-3 mb-8">
-              <a href={release.spotifyUrl} target="_blank" rel="noopener noreferrer" className="block">
-                <Button variant="primary" size="lg" className="w-full">
-                  <Music size={20} className="mr-2" />
-                  Listen on Spotify
-                </Button>
-              </a>
-              <a href={release.appleMusicUrl} target="_blank" rel="noopener noreferrer" className="block">
-                <Button variant="outline" size="lg" className="w-full">
-                  <Music size={20} className="mr-2" />
-                  Listen on Apple Music
-                </Button>
-              </a>
-              <a href={release.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block">
-                <Button variant="outline" size="lg" className="w-full">
-                  <Play size={20} className="mr-2" />
-                  Watch on YouTube
-                </Button>
-              </a>
-            </div>
+            {(release.spotifyEnabled !== false && release.spotifyUrl) ||
+            (release.appleMusicEnabled !== false && release.appleMusicUrl) ||
+            (release.youtubeEnabled !== false && release.youtubeUrl) ? (
+              <div className="space-y-3 mb-8">
+                {release.spotifyEnabled !== false && release.spotifyUrl && (
+                  <a href={release.spotifyUrl} target="_blank" rel="noopener noreferrer" className="block">
+                    <Button variant="primary" size="lg" className="w-full">
+                      <Music size={20} className="mr-2" />
+                      Listen on Spotify
+                    </Button>
+                  </a>
+                )}
+                {release.appleMusicEnabled !== false && release.appleMusicUrl && (
+                  <a href={release.appleMusicUrl} target="_blank" rel="noopener noreferrer" className="block">
+                    <Button variant="outline" size="lg" className="w-full">
+                      <Music size={20} className="mr-2" />
+                      Listen on Apple Music
+                    </Button>
+                  </a>
+                )}
+                {release.youtubeEnabled !== false && release.youtubeUrl && (
+                  <a href={release.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block">
+                    <Button variant="outline" size="lg" className="w-full">
+                      <Play size={20} className="mr-2" />
+                      Watch on YouTube
+                    </Button>
+                  </a>
+                )}
+              </div>
+            ) : null}
 
             {/* Spotify Player Placeholder */}
             <div className="bg-surface border border-border rounded-lg p-8 mb-8">

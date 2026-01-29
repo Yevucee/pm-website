@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import { MobileNav } from './mobile-nav';
 import { cn } from '@/app/components/ui/utils';
 import { useEffect, useState } from 'react';
 import logoWhite from '@/assets/90895916a69a9114996bd02b90cd9a69f7af6594.png';
@@ -35,18 +34,18 @@ export function Header() {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center gap-3 py-3 lg:gap-6 lg:py-0 lg:min-h-[4rem]">
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
               src={logoWhite} 
               alt="The PM" 
-              className="h-16 w-auto"
+              className="h-12 w-auto"
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Navigation */}
+          <nav className="flex flex-1 items-center justify-center gap-1 overflow-x-auto lg:overflow-visible">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               
@@ -55,7 +54,7 @@ export function Header() {
                   key={item.path}
                   to={item.path}
                   className={cn(
-                    'px-4 py-2 rounded-lg transition-colors font-medium',
+                    'px-3 py-1.5 rounded-lg transition-colors font-medium whitespace-nowrap text-sm',
                     isActive ? 'text-accent' : 'text-muted-foreground hover:text-foreground'
                   )}
                 >
@@ -64,9 +63,6 @@ export function Header() {
               );
             })}
           </nav>
-
-          {/* Mobile Navigation */}
-          <MobileNav />
         </div>
       </div>
     </header>

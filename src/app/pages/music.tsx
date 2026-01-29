@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ReleaseCard } from '@/app/components/release-card';
-import { releases } from '@/data/mock-data';
+import { releases } from '@/data/releases';
 import { cn } from '@/app/components/ui/utils';
 
 export function MusicPage() {

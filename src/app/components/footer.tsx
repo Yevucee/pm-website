@@ -17,7 +17,8 @@ export function Footer() {
     { label: 'Music', path: '/music' },
     { label: 'Events', path: '/events' },
     { label: 'Merch', path: '/merch' },
-    { label: 'Media', path: '/media' }
+    { label: 'Media', path: '/media' },
+    { label: 'Admin Login', path: '/admin' }
   ];
 
   return (

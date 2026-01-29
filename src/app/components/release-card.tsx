@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Music, ExternalLink } from 'lucide-react';
-import { Release } from '@/data/mock-data';
+import { Release } from '@/data/releases';
 import { cn } from '@/app/components/ui/utils';
 
 interface ReleaseCardProps {
@@ -8,6 +8,10 @@ interface ReleaseCardProps {
 }
 
 export function ReleaseCard({ release }: ReleaseCardProps) {
+  const showSpotify = Boolean(release.spotifyUrl) && release.spotifyEnabled !== false;
+  const showAppleMusic = Boolean(release.appleMusicUrl) && release.appleMusicEnabled !== false;
+  const showStreaming = showSpotify || showAppleMusic;
+
   return (
     <Link
       to={`/music/${release.id}`}
@@ -19,26 +23,32 @@ export function ReleaseCard({ release }: ReleaseCardProps) {
           alt={release.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-          <div className="flex gap-2">
-            <a
-              href={release.spotifyUrl}
-              onClick={(e) => e.stopPropagation()}
-              className="w-10 h-10 flex items-center justify-center bg-accent text-black rounded-full hover:scale-110 transition-transform"
-              aria-label="Spotify"
-            >
-              <Music size={18} />
-            </a>
-            <a
-              href={release.appleMusicUrl}
-              onClick={(e) => e.stopPropagation()}
-              className="w-10 h-10 flex items-center justify-center bg-accent text-black rounded-full hover:scale-110 transition-transform"
-              aria-label="Apple Music"
-            >
-              <Music size={18} />
-            </a>
+        {showStreaming && (
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+            <div className="flex gap-2">
+              {showSpotify && (
+                <a
+                  href={release.spotifyUrl}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-10 h-10 flex items-center justify-center bg-accent text-black rounded-full hover:scale-110 transition-transform"
+                  aria-label="Spotify"
+                >
+                  <Music size={18} />
+                </a>
+              )}
+              {showAppleMusic && (
+                <a
+                  href={release.appleMusicUrl}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-10 h-10 flex items-center justify-center bg-accent text-black rounded-full hover:scale-110 transition-transform"
+                  aria-label="Apple Music"
+                >
+                  <Music size={18} />
+                </a>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="p-4">
         <div className="flex items-center gap-2 mb-2">
