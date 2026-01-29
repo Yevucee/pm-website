@@ -31,6 +31,23 @@ interface Frontmatter {
   description?: string;
 }
 
+const resolvePublicAsset = (value?: string) => {
+  if (!value) {
+    return '';
+  }
+
+  if (/^https?:\/\//i.test(value)) {
+    return value;
+  }
+
+  if (value.startsWith('/uploads/')) {
+    const base = import.meta.env.BASE_URL || '/';
+    return `${base.replace(/\/$/, '')}${value}`;
+  }
+
+  return value;
+};
+
 const rawReleaseFiles = import.meta.glob('../../content/releases/*.md', {
   as: 'raw',
   eager: true,
@@ -104,7 +121,7 @@ export const releases: Release[] = Object.entries(rawReleaseFiles)
       title: data.title ?? 'Untitled Release',
       type: data.type ?? 'single',
       releaseDate: data.releaseDate ?? '',
-      artwork: data.artwork ?? '',
+      artwork: resolvePublicAsset(data.artwork),
       spotifyUrl: data.spotifyUrl ?? '',
       appleMusicUrl: data.appleMusicUrl ?? '',
       youtubeUrl: data.youtubeUrl ?? '',

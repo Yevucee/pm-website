@@ -75,6 +75,24 @@ const normalizeStripeLink = (value?: string) => {
   return trimmed ? trimmed : PLACEHOLDER_STRIPE_LINK;
 };
 
+const resolvePublicAsset = (value?: string) => {
+  const trimmed = value?.trim();
+  if (!trimmed) {
+    return '';
+  }
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+
+  if (trimmed.startsWith('/uploads/')) {
+    const base = import.meta.env.BASE_URL || '/';
+    return `${base.replace(/\/$/, '')}${trimmed}`;
+  }
+
+  return trimmed;
+};
+
 const normalizeEventType = (value?: string): Event['type'] => {
   if (value === 'boat-party' || value === 'festival') {
     return value;
@@ -100,7 +118,7 @@ const parseEvent = (path: string, data: EventContent): Event | null => {
   const time = data.time?.trim() || '';
   const venue = data.venue?.trim() || '';
   const city = data.city?.trim() || '';
-  const image = data.image?.trim() || '';
+  const image = resolvePublicAsset(data.image);
   const description = data.description?.trim() || '';
   const ticketTiers = Array.isArray(data.ticketTiers)
     ? data.ticketTiers
@@ -140,7 +158,7 @@ const parseProduct = (path: string, data: ProductContent): Product | null => {
 
   const id = path.split('/').pop()?.replace(/\.json$/, '') || '';
   const name = data.name?.trim() || '';
-  const image = data.image?.trim() || '';
+  const image = resolvePublicAsset(data.image);
   const sizes = Array.isArray(data.sizes) && data.sizes.length > 0 ? data.sizes : ['One Size'];
 
   if (!id || !name || !image) {
