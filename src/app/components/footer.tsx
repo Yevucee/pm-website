@@ -37,8 +37,10 @@ export function Footer() {
     { label: 'Events', path: '/events' },
     { label: 'Merch', path: '/merch' },
     { label: 'Media', path: '/media' },
-    { label: 'Admin Login', path: '/admin' }
+    { label: 'Admin Login', path: '/admin', external: true }
   ];
+
+  const adminUrl = `${import.meta.env.BASE_URL || '/'}admin/`;
 
   return (
     <footer className="bg-surface border-t border-border mt-auto">
@@ -61,13 +63,23 @@ export function Footer() {
             <h4 className="font-heading text-xl mb-4">QUICK LINKS</h4>
             <nav className="flex flex-col gap-2">
               {quickLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="text-muted-foreground hover:text-accent transition-colors"
-                >
-                  {link.label}
-                </Link>
+                link.external ? (
+                  <a
+                    key={link.path}
+                    href={adminUrl}
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </nav>
           </div>
