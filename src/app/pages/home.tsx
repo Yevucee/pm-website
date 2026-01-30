@@ -41,7 +41,7 @@ export function HomePage() {
             Award-winning DJ, Pidgin rap pioneer, and curator of London's most successful annual boat party.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://open.spotify.com/artist/thepm" target="_blank" rel="noopener noreferrer">
+            <a href={latestRelease?.spotifyUrl || 'https://open.spotify.com/album/3Ym3xOwfN2rByjWBiLnNqu'} target="_blank" rel="noopener noreferrer">
               <Button variant="primary" size="lg">
                 <Play size={20} className="mr-2" />
                 Listen on Spotify

@@ -45,6 +45,7 @@ collections:
       - {label: "City", name: "city", widget: "string"}
       - {label: "Image", name: "image", widget: "image"}
       - {label: "Description", name: "description", widget: "text"}
+      - {label: "Coming Soon", name: "comingSoon", widget: "boolean", default: false}
       - {label: "Lineup", name: "lineup", widget: "list", required: false}
       - label: "Ticket Tiers"
         name: "ticketTiers"
@@ -102,3 +103,4 @@ collections:
           - {label: "Spotify URL", name: "spotify", widget: "string"}
           - {label: "Apple Music URL", name: "appleMusic", widget: "string"}
           - {label: "YouTube URL", name: "youtube", widget: "string"}
+          - {label: "TikTok URL", name: "tiktok", widget: "string", required: false}

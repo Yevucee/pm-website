@@ -8,6 +8,7 @@ export interface Event {
   city: string;
   image: string;
   description: string;
+  comingSoon?: boolean;
   lineup?: string[];
   ticketTiers: {
     name: string;
@@ -39,6 +40,7 @@ interface EventContent {
   city?: string;
   image?: string;
   description?: string;
+  comingSoon?: boolean;
   lineup?: string[];
   ticketTiers?: {
     name?: string;
@@ -144,6 +146,7 @@ const parseEvent = (path: string, data: EventContent): Event | null => {
     city,
     image,
     description,
+    comingSoon: data.comingSoon,
     lineup: Array.isArray(data.lineup) ? data.lineup : undefined,
     ticketTiers,
     soldOut: data.soldOut

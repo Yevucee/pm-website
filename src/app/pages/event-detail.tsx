@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
 import { Button } from '@/app/components/button';
 import { Calendar, MapPin, Clock, ChevronLeft, Users, Music } from 'lucide-react';
 import { upcomingEvents, pastEvents } from '@/data/mock-data';
@@ -8,6 +9,7 @@ import { goToStripeLink } from '@/utils/stripe';
 export function EventDetailPage() {
   const { id } = useParams();
   const event = [...upcomingEvents, ...pastEvents].find((e) => e.id === id);
+  const [interestStatus, setInterestStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   if (!event) {
     return (
@@ -23,6 +25,31 @@ export function EventDetailPage() {
   }
 
   const date = new Date(event.date);
+  const interestEndpoint = 'https://script.google.com/macros/s/AKfycbwi6dZZkeBbSxprzpaa4bLxf8ys8X_MsMzRy14ZmsUcFO9xmjXCH1je0Z3hPZBO1NP5RQ/exec';
+
+  const handleInterestSubmit = async (formData: FormData) => {
+    setInterestStatus('sending');
+    try {
+      const payload = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        message: formData.get('message'),
+        event: event.title
+      };
+
+      await fetch(interestEndpoint, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      setInterestStatus('success');
+    } catch (error) {
+      setInterestStatus('error');
+    }
+  };
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8">
@@ -139,9 +166,61 @@ export function EventDetailPage() {
           <div>
             <div className="sticky top-32">
               <div className="bg-surface border border-border rounded-xl p-6">
-                <h3 className="font-heading text-2xl mb-6">TICKETS</h3>
+                <h3 className="font-heading text-2xl mb-6">
+                  {event.comingSoon ? 'COMING SOON' : 'TICKETS'}
+                </h3>
                 
-                {event.soldOut ? (
+                {event.comingSoon ? (
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground text-sm">
+                      Tickets are not on sale yet. Register your interest and we will notify you.
+                    </p>
+                    {interestStatus === 'success' ? (
+                      <div className="bg-accent/10 border border-accent rounded-lg p-4 text-center">
+                        <p className="font-heading text-accent">Thanks! We will be in touch.</p>
+                      </div>
+                    ) : (
+                      <form
+                        className="space-y-3"
+                        onSubmit={(eventForm) => {
+                          eventForm.preventDefault();
+                          void handleInterestSubmit(new FormData(eventForm.currentTarget));
+                        }}
+                      >
+                        <input
+                          name="name"
+                          required
+                          placeholder="Full name"
+                          className="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm"
+                        />
+                        <input
+                          name="email"
+                          type="email"
+                          required
+                          placeholder="Email address"
+                          className="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm"
+                        />
+                        <input
+                          name="phone"
+                          placeholder="Phone (optional)"
+                          className="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm"
+                        />
+                        <textarea
+                          name="message"
+                          rows={3}
+                          placeholder="Message (optional)"
+                          className="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm"
+                        />
+                        {interestStatus === 'error' && (
+                          <p className="text-sm text-error">Something went wrong. Please try again.</p>
+                        )}
+                        <Button variant="primary" size="sm" className="w-full" disabled={interestStatus === 'sending'}>
+                          {interestStatus === 'sending' ? 'Sending...' : 'Register Interest'}
+                        </Button>
+                      </form>
+                    )}
+                  </div>
+                ) : event.soldOut ? (
                   <div className="bg-error/10 border border-error rounded-lg p-4 text-center">
                     <p className="font-heading text-error">SOLD OUT</p>
                   </div>
@@ -177,10 +256,12 @@ export function EventDetailPage() {
                   </div>
                 )}
 
-                <div className="mt-6 pt-6 border-t border-border text-sm text-muted-foreground text-center">
-                  <p>Secure checkout via Stripe</p>
-                  <p className="mt-1">Apple Pay • Google Pay accepted</p>
-                </div>
+                {!event.comingSoon && (
+                  <div className="mt-6 pt-6 border-t border-border text-sm text-muted-foreground text-center">
+                    <p>Secure checkout via Stripe</p>
+                    <p className="mt-1">Apple Pay • Google Pay accepted</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

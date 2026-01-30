@@ -10,7 +10,7 @@ interface EventCardProps {
 
 export function EventCard({ event }: EventCardProps) {
   const date = new Date(event.date);
-  const availableTier = event.ticketTiers.find((tier) => tier.available);
+  const availableTier = event.comingSoon ? undefined : event.ticketTiers.find((tier) => tier.available);
   const eventTypeLabel =
     event.type === 'boat-party' ? 'BOAT PARTY' : event.type === 'festival' ? 'FESTIVAL' : 'CLUB NIGHT';
 
@@ -28,6 +28,11 @@ export function EventCard({ event }: EventCardProps) {
         {event.soldOut && (
           <div className="absolute top-4 right-4 bg-error text-white px-3 py-1 rounded-lg font-heading">
             SOLD OUT
+          </div>
+        )}
+        {event.comingSoon && (
+          <div className="absolute top-4 right-4 bg-accent text-black px-3 py-1 rounded-lg font-heading">
+            COMING SOON
           </div>
         )}
       </div>
@@ -65,7 +70,17 @@ export function EventCard({ event }: EventCardProps) {
           </div>
         )}
 
-        {event.soldOut && (
+        {event.comingSoon && (
+          <div className="pt-4 border-t border-border">
+            <Link to={`/events/${event.id}`}>
+              <Button variant="outline" className="w-full">
+                Register Interest
+              </Button>
+            </Link>
+          </div>
+        )}
+
+        {event.soldOut && !event.comingSoon && (
           <div className="pt-4 border-t border-border">
             <Button variant="secondary" className="w-full" disabled>
               Sold Out
