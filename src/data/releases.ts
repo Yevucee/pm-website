@@ -32,20 +32,20 @@ interface Frontmatter {
 }
 
 const resolvePublicAsset = (value?: string) => {
-  if (!value) {
+  const trimmed = value?.trim();
+  if (!trimmed) {
     return '';
   }
 
-  if (/^https?:\/\//i.test(value)) {
-    return value;
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
   }
 
-  if (value.startsWith('/uploads/')) {
-    const base = import.meta.env.BASE_URL || '/';
-    return `${base.replace(/\/$/, '')}${value}`;
-  }
+  const base = import.meta.env.BASE_URL || '/';
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+  const normalizedPath = trimmed.startsWith('/') ? trimmed.slice(1) : trimmed;
 
-  return value;
+  return `${window.location.origin}${normalizedBase}${normalizedPath}`;
 };
 
 const rawReleaseFiles = import.meta.glob('../../content/releases/*.md', {

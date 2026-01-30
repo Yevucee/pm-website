@@ -85,12 +85,11 @@ const resolvePublicAsset = (value?: string) => {
     return trimmed;
   }
 
-  if (trimmed.startsWith('/uploads/')) {
-    const base = import.meta.env.BASE_URL || '/';
-    return `${base.replace(/\/$/, '')}${trimmed}`;
-  }
+  const base = import.meta.env.BASE_URL || '/';
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+  const normalizedPath = trimmed.startsWith('/') ? trimmed.slice(1) : trimmed;
 
-  return trimmed;
+  return `${window.location.origin}${normalizedBase}${normalizedPath}`;
 };
 
 const normalizeEventType = (value?: string): Event['type'] => {

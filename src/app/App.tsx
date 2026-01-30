@@ -15,7 +15,7 @@ import { DesignSystemPage } from '@/app/pages/design-system';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <div className="flex flex-col min-h-screen bg-background text-foreground">
         <Header />
         <main className="flex-1">
