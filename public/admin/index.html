@@ -225,6 +225,7 @@
         .then((text) => {
           configText = text;
           window.__CMS_CONFIG_TEXT = text;
+          window.__CMS_CONFIG_TEXT = text;
           const pick = (key) => {
             const match = text.match(
               new RegExp(`^\\s*${key}\\s*:\\s*(.+)$`, "m"),
@@ -291,6 +292,25 @@
       // #endregion
 
       if (window.CMS && window.CMS_MANUAL_INIT) {
+        if (window.__CMS_INIT_DONE) {
+          // #region agent log
+          fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sessionId: "debug-session",
+              runId: "run1",
+              hypothesisId: "B",
+              location: "public/admin/index.html:132",
+              message: "CMS.init skipped (already)",
+              data: { initDone: true },
+              timestamp: Date.now(),
+            }),
+          }).catch(() => {});
+          // #endregion
+          return;
+        }
+        window.__CMS_INIT_DONE = true;
         const initConfigUrl = window.CMS_CONFIG_PATH || "/admin/config.yml";
         // #region agent log
         fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
@@ -314,6 +334,7 @@
           if (hasYaml && configSourceText) {
             try {
               parsedConfig = window.jsyaml.load(configSourceText);
+              window.__CMS_PARSED_CONFIG = parsedConfig;
             } catch (parseError) {
               // #region agent log
               fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
@@ -323,7 +344,7 @@
                   sessionId: "debug-session",
                   runId: "run1",
                   hypothesisId: "B",
-                  location: "public/admin/index.html:156",
+                  location: "public/admin/index.html:161",
                   message: "YAML parse error",
                   data: { name: parseError?.name || "Error" },
                   timestamp: Date.now(),
