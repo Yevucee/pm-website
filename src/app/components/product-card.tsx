@@ -18,12 +18,12 @@ export function ProductCard({ product }: ProductCardProps) {
       </Link>
       <div className="p-4">
         <Link to={`/merch/${product.id}`}>
-          <h3 className="font-heading text-xl mb-2 group-hover:text-accent transition-colors">
+          <h3 className="font-heading text-lg sm:text-xl mb-2 group-hover:text-accent transition-colors">
             {product.name}
           </h3>
         </Link>
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-heading text-accent">£{product.price}</span>
+          <span className="text-xl sm:text-2xl font-heading text-accent">£{product.price}</span>
           <Link to={`/merch/${product.id}`}>
             <Button variant="primary" size="sm">
               View

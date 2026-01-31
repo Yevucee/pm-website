@@ -1,0 +1,13 @@
+{
+  "heroShow": true,
+  "heroTitle": "MUSIC",
+  "heroSubtitle": "",
+  "introText": "From pioneering Pidgin rap to global Afro-urban sounds, PM blends humour, storytelling, and classic hip-hop influences with African-infused beats.",
+  "releasesHeading": "RELEASES",
+  "filterLabels": [
+    { "label": "All", "value": "all" },
+    { "label": "Singles", "value": "single" },
+    { "label": "EPs", "value": "ep" },
+    { "label": "Albums", "value": "album" }
+  ]
+}

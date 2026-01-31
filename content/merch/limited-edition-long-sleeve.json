@@ -1,0 +1,10 @@
+{
+  "name": "Limited Edition Long Sleeve",
+  "description": "Limited long sleeve featuring exclusive artwork.",
+  "price": 35,
+  "image": "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800",
+  "sizes": ["S", "M", "L", "XL"],
+  "category": "apparel",
+  "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400",
+  "inStock": true
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Thames Party Cap",
+  "description": "Classic cap with embroidered branding.",
+  "price": 20,
+  "image": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800",
+  "sizes": ["One Size"],
+  "category": "accessories",
+  "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400",
+  "inStock": true
+}

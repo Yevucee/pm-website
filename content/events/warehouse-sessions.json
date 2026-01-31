@@ -1,0 +1,16 @@
+{
+  "title": "Warehouse Sessions",
+  "type": "club-night",
+  "date": "2025-02-21",
+  "time": "22:00",
+  "venue": "Fabric",
+  "city": "London",
+  "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200",
+  "description": "Deep underground vibes in Londons most iconic club space.",
+  "lineup": ["The PM", "Resident DJ", "B2B Session"],
+  "ticketTiers": [
+    { "name": "Early Bird", "price": 15, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" },
+    { "name": "General Admission", "price": 20, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" },
+    { "name": "VIP Table", "price": 150, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" }
+  ]
+}

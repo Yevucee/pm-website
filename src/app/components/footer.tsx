@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Instagram, Youtube, Music } from 'lucide-react';
 import logoWhite from '@/assets/90895916a69a9114996bd02b90cd9a69f7af6594.png';
+import { generalSettings } from '@/data/settings';
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
@@ -24,13 +25,13 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Instagram, href: 'https://www.instagram.com/_thepm_', label: 'Instagram' },
-    { icon: TikTokIcon, href: 'https://www.tiktok.com/@_thepm_', label: 'TikTok' },
-    { icon: XIcon, href: 'https://x.com/_thepm_', label: 'X' },
-    { icon: Youtube, href: 'https://www.youtube.com/@thepm', label: 'YouTube' },
-    { icon: Music, href: 'https://open.spotify.com/album/3Ym3xOwfN2rByjWBiLnNqu', label: 'Spotify' },
-    { icon: Music, href: 'https://music.apple.com/us/album/the-passion-mixtape/1774418927', label: 'Apple Music' }
-  ];
+    { icon: Instagram, href: generalSettings.instagram, label: 'Instagram' },
+    { icon: TikTokIcon, href: generalSettings.tiktok, label: 'TikTok' },
+    { icon: XIcon, href: generalSettings.twitter, label: 'X' },
+    { icon: Youtube, href: generalSettings.youtube, label: 'YouTube' },
+    { icon: Music, href: generalSettings.spotify, label: 'Spotify' },
+    { icon: Music, href: generalSettings.appleMusic, label: 'Apple Music' }
+  ].filter((item) => Boolean(item.href));
 
   const quickLinks = [
     { label: 'Music', path: '/music' },
@@ -45,21 +46,21 @@ export function Footer() {
   return (
     <footer className="bg-surface border-t border-border mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
           {/* Brand */}
-          <div>
+          <div className="text-center md:text-left">
             <img 
               src={logoWhite} 
-              alt="The PM" 
-              className="h-16 w-auto mb-4"
+              alt={generalSettings.artistName} 
+              className="h-14 sm:h-16 w-auto mb-4 mx-auto md:mx-0"
             />
             <p className="text-muted-foreground">
-              UK-based rapper, DJ & event organiser bringing underground sounds to the masses.
+              {generalSettings.tagline}
             </p>
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-center md:text-left">
             <h4 className="font-heading text-xl mb-4">QUICK LINKS</h4>
             <nav className="flex flex-col gap-2">
               {quickLinks.map((link) => (
@@ -85,9 +86,9 @@ export function Footer() {
           </div>
 
           {/* Social & Contact */}
-          <div>
+          <div className="text-center md:text-left">
             <h4 className="font-heading text-xl mb-4">CONNECT</h4>
-            <div className="flex gap-4 mb-4">
+            <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -106,18 +107,18 @@ export function Footer() {
             </div>
             <p className="text-muted-foreground text-sm">
               Bookings:{' '}
-              <a href="mailto:theonlypm@gmail.com" className="text-accent hover:underline">
-                theonlypm@gmail.com
+              <a href={`mailto:${generalSettings.bookingEmail}`} className="text-accent hover:underline">
+                {generalSettings.bookingEmail}
               </a>
             </p>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <p className="text-muted-foreground text-sm">
             © {currentYear} The PM. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm text-muted-foreground">
+          <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
             <Link to="/privacy" className="hover:text-accent transition-colors">
               Privacy Policy
             </Link>

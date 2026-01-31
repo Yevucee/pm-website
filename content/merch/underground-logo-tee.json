@@ -1,0 +1,10 @@
+{
+  "name": "Underground Logo Tee",
+  "description": "Soft cotton tee with the underground logo print.",
+  "price": 25,
+  "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800",
+  "sizes": ["S", "M", "L", "XL", "XXL"],
+  "category": "apparel",
+  "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400",
+  "inStock": true
+}

@@ -36,8 +36,8 @@ export function EventCard({ event }: EventCardProps) {
           </div>
         )}
       </div>
-      <div className="p-6">
-        <h3 className="font-heading text-2xl mb-3 group-hover:text-accent transition-colors">
+      <div className="p-5 sm:p-6">
+        <h3 className="font-heading text-xl sm:text-2xl mb-3 group-hover:text-accent transition-colors">
           {event.title}
         </h3>
         

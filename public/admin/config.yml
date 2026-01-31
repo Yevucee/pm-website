@@ -87,6 +87,196 @@ collections:
       - {label: "Video URL", name: "videoUrl", widget: "string", required: false}
       - {label: "Date", name: "date", widget: "date"}
 
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home"
+        name: "home"
+        file: "content/pages/home.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Hero - Description", name: "heroDescription", widget: "text", required: false}
+          - {label: "Hero - Image", name: "heroImage", widget: "image"}
+          - {label: "Hero - Primary CTA Label", name: "heroPrimaryCtaLabel", widget: "string", required: false}
+          - {label: "Hero - Primary CTA URL", name: "heroPrimaryCtaUrl", widget: "string", required: false}
+          - {label: "Hero - Secondary CTA Label", name: "heroSecondaryCtaLabel", widget: "string", required: false}
+          - {label: "Hero - Secondary CTA URL", name: "heroSecondaryCtaUrl", widget: "string", required: false}
+          - {label: "Hero - Tertiary CTA Label", name: "heroTertiaryCtaLabel", widget: "string", required: false}
+          - {label: "Hero - Tertiary CTA URL", name: "heroTertiaryCtaUrl", widget: "string", required: false}
+          - {label: "Bio - Show", name: "bioShow", widget: "boolean", default: true}
+          - {label: "Bio - Text", name: "bioText", widget: "text"}
+          - {label: "Bio - Button Label", name: "bioButtonLabel", widget: "string", required: false}
+          - {label: "Bio - Button URL", name: "bioButtonUrl", widget: "string", required: false}
+          - {label: "Latest Release - Show", name: "latestReleaseShow", widget: "boolean", default: true}
+          - {label: "Latest Release - Heading", name: "latestReleaseHeading", widget: "string"}
+          - {label: "Latest Release - Badge", name: "latestReleaseBadge", widget: "string", required: false}
+          - {label: "Upcoming Events - Show", name: "eventsShow", widget: "boolean", default: true}
+          - {label: "Upcoming Events - Heading", name: "eventsHeading", widget: "string"}
+          - {label: "Upcoming Events - Link Label", name: "eventsLinkLabel", widget: "string", required: false}
+          - {label: "Upcoming Events - Link URL", name: "eventsLinkUrl", widget: "string", required: false}
+          - {label: "Merch - Show", name: "merchShow", widget: "boolean", default: true}
+          - {label: "Merch - Heading", name: "merchHeading", widget: "string"}
+          - {label: "Merch - Link Label", name: "merchLinkLabel", widget: "string", required: false}
+          - {label: "Merch - Link URL", name: "merchLinkUrl", widget: "string", required: false}
+          - {label: "Social Proof - Show", name: "socialProofShow", widget: "boolean", default: true}
+          - {label: "Social Proof - Heading", name: "socialProofHeading", widget: "string"}
+          - label: "Social Proof - Logos"
+            name: "socialProofLogos"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Image", name: "image", widget: "image"}
+      - label: "About"
+        name: "about"
+        file: "content/pages/about.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Hero - Image", name: "heroImage", widget: "image", required: false}
+          - {label: "Intro Text", name: "introText", widget: "text"}
+          - {label: "Body", name: "body", widget: "markdown"}
+          - {label: "Stats - Show", name: "statsShow", widget: "boolean", default: true}
+          - label: "Stats"
+            name: "stats"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Value", name: "value", widget: "string"}
+          - {label: "Timeline - Show", name: "timelineShow", widget: "boolean", default: true}
+          - {label: "Timeline Heading", name: "timelineHeading", widget: "string"}
+          - label: "Timeline"
+            name: "timeline"
+            widget: "list"
+            fields:
+              - {label: "Year", name: "year", widget: "string"}
+              - {label: "Event", name: "event", widget: "string"}
+          - {label: "Press - Show", name: "pressShow", widget: "boolean", default: true}
+          - {label: "Press Heading", name: "pressHeading", widget: "string"}
+          - label: "Press Quotes"
+            name: "pressQuotes"
+            widget: "list"
+            fields:
+              - {label: "Quote", name: "quote", widget: "text"}
+              - {label: "Source", name: "source", widget: "string"}
+          - {label: "Press Kit Label", name: "pressKitLabel", widget: "string", required: false}
+          - {label: "Press Kit URL", name: "pressKitUrl", widget: "string", required: false}
+          - {label: "Booking CTA - Show", name: "bookingShow", widget: "boolean", default: true}
+          - {label: "Booking CTA Heading", name: "bookingHeading", widget: "string"}
+          - {label: "Booking CTA Text", name: "bookingText", widget: "text"}
+          - {label: "Booking CTA Button Label", name: "bookingButtonLabel", widget: "string"}
+          - {label: "Booking CTA Button URL", name: "bookingButtonUrl", widget: "string"}
+      - label: "Contact"
+        name: "contact"
+        file: "content/pages/contact.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Intro Text", name: "introText", widget: "text"}
+          - {label: "Sub Text", name: "subText", widget: "text", required: false}
+          - {label: "Form - Show", name: "formShow", widget: "boolean", default: true}
+          - {label: "Form - Heading", name: "formHeading", widget: "string", required: false}
+          - {label: "Form - Description", name: "formDescription", widget: "text", required: false}
+          - {label: "Form - Name Label", name: "formNameLabel", widget: "string", required: false}
+          - {label: "Form - Name Placeholder", name: "formNamePlaceholder", widget: "string", required: false}
+          - {label: "Form - Email Label", name: "formEmailLabel", widget: "string", required: false}
+          - {label: "Form - Email Placeholder", name: "formEmailPlaceholder", widget: "string", required: false}
+          - {label: "Form - Enquiry Label", name: "formEnquiryLabel", widget: "string", required: false}
+          - label: "Form - Enquiry Options"
+            name: "formEnquiryOptions"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Value", name: "value", widget: "string"}
+          - {label: "Form - Date Label", name: "formDateLabel", widget: "string", required: false}
+          - {label: "Form - Message Label", name: "formMessageLabel", widget: "string", required: false}
+          - {label: "Form - Message Placeholder", name: "formMessagePlaceholder", widget: "string", required: false}
+          - {label: "Form - Submit Label", name: "formSubmitLabel", widget: "string", required: false}
+          - label: "Additional Links"
+            name: "links"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+          - {label: "Direct Contact Heading", name: "directContactHeading", widget: "string", required: false}
+          - label: "Direct Contacts"
+            name: "directContacts"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Value", name: "value", widget: "string"}
+              - {label: "Link", name: "link", widget: "string", required: false}
+          - {label: "Social Heading", name: "socialHeading", widget: "string", required: false}
+          - label: "Social Links"
+            name: "socialLinks"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+          - {label: "Promoter Box Heading", name: "promoterHeading", widget: "string", required: false}
+          - {label: "Promoter Box Text", name: "promoterText", widget: "text", required: false}
+          - {label: "Promoter Button Label", name: "promoterButtonLabel", widget: "string", required: false}
+          - {label: "Promoter Button URL", name: "promoterButtonUrl", widget: "string", required: false}
+      - label: "Music"
+        name: "music"
+        file: "content/pages/music.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Intro Text", name: "introText", widget: "text", required: false}
+          - {label: "Releases Heading", name: "releasesHeading", widget: "string"}
+          - label: "Filter Labels"
+            name: "filterLabels"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Value", name: "value", widget: "string"}
+      - label: "Media"
+        name: "media"
+        file: "content/pages/media.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Intro Text", name: "introText", widget: "text", required: false}
+          - {label: "Gallery Heading", name: "galleryHeading", widget: "string", required: false}
+          - {label: "EPK Button Label", name: "epkButtonLabel", widget: "string", required: false}
+          - {label: "EPK Button URL", name: "epkButtonUrl", widget: "string", required: false}
+      - label: "Merch"
+        name: "merch"
+        file: "content/pages/merch.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Intro Text", name: "introText", widget: "text", required: false}
+          - {label: "Products Heading", name: "productsHeading", widget: "string", required: false}
+          - {label: "Payment Note", name: "paymentNote", widget: "string", required: false}
+      - label: "Events"
+        name: "events"
+        file: "content/pages/events.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Intro Text", name: "introText", widget: "text", required: false}
+          - {label: "Signature Section - Show", name: "signatureShow", widget: "boolean", default: true}
+          - {label: "Signature Badge", name: "signatureBadge", widget: "string", required: false}
+          - {label: "Signature Heading", name: "signatureHeading", widget: "string", required: false}
+          - {label: "Signature Text", name: "signatureText", widget: "text", required: false}
+          - {label: "Signature Subtext", name: "signatureSubtext", widget: "text", required: false}
+          - {label: "Upcoming - Show", name: "upcomingShow", widget: "boolean", default: true}
+          - {label: "Upcoming Heading", name: "upcomingHeading", widget: "string"}
+          - {label: "Past - Show", name: "pastShow", widget: "boolean", default: true}
+          - {label: "Past Heading", name: "pastHeading", widget: "string", required: false}
+
   - name: "settings"
     label: "Site Settings"
     files:

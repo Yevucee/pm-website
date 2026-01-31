@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/app/components/ui/utils';
 import { useEffect, useState } from 'react';
 import logoWhite from '@/assets/90895916a69a9114996bd02b90cd9a69f7af6594.png';
+import { generalSettings } from '@/data/settings';
 
 export function Header() {
   const location = useLocation();
@@ -39,13 +40,13 @@ export function Header() {
           <Link to="/" className="flex items-center">
             <img 
               src={logoWhite} 
-              alt="The PM" 
-              className="h-12 w-auto"
+              alt={generalSettings.artistName} 
+              className="h-10 sm:h-12 w-auto"
             />
           </Link>
 
           {/* Navigation */}
-          <nav className="flex flex-1 items-center justify-center gap-1 overflow-x-auto lg:overflow-visible">
+          <nav className="flex flex-1 items-center justify-center gap-1 sm:gap-2 overflow-x-auto lg:overflow-visible">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               
@@ -54,7 +55,7 @@ export function Header() {
                   key={item.path}
                   to={item.path}
                   className={cn(
-                    'px-3 py-1.5 rounded-lg transition-colors font-medium whitespace-nowrap text-sm',
+                    'px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors font-medium whitespace-nowrap text-xs sm:text-sm',
                     isActive ? 'text-accent' : 'text-muted-foreground hover:text-foreground'
                   )}
                 >

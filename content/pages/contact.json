@@ -1,0 +1,41 @@
+{
+  "heroShow": true,
+  "heroTitle": "BOOK THE PM",
+  "heroSubtitle": "Available for club nights, festivals, private events and collaborations",
+  "introText": "Get in touch for DJ bookings, event curation, collaborations, or press enquiries",
+  "subText": "",
+  "formShow": true,
+  "formHeading": "SEND A MESSAGE",
+  "formDescription": "",
+  "formNameLabel": "NAME *",
+  "formNamePlaceholder": "Your name",
+  "formEmailLabel": "EMAIL *",
+  "formEmailPlaceholder": "your@email.com",
+  "formEnquiryLabel": "ENQUIRY TYPE *",
+  "formEnquiryOptions": [
+    { "label": "Booking", "value": "booking" },
+    { "label": "Collaboration", "value": "collaboration" },
+    { "label": "Press", "value": "press" },
+    { "label": "Other", "value": "other" }
+  ],
+  "formDateLabel": "EVENT DATE (if applicable)",
+  "formMessageLabel": "MESSAGE *",
+  "formMessagePlaceholder": "Tell us about your event or enquiry...",
+  "formSubmitLabel": "Send Message",
+  "links": [],
+  "directContactHeading": "DIRECT CONTACT",
+  "directContacts": [
+    { "label": "BOOKINGS", "value": "bookings@thepm.uk", "link": "mailto:bookings@thepm.uk" },
+    { "label": "MANAGEMENT", "value": "management@thepm.uk", "link": "mailto:management@thepm.uk" },
+    { "label": "PHONE", "value": "+44 7700 900000", "link": "tel:+447700900000" }
+  ],
+  "socialHeading": "SOCIAL MEDIA",
+  "socialLinks": [
+    { "label": "Instagram", "url": "#" },
+    { "label": "Twitter", "url": "#" }
+  ],
+  "promoterHeading": "FOR PROMOTERS",
+  "promoterText": "Response time: Within 48 hours",
+  "promoterButtonLabel": "Download Technical Rider",
+  "promoterButtonUrl": "#"
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Manchester Underground",
+  "type": "club-night",
+  "date": "2025-03-07",
+  "time": "23:00",
+  "venue": "The Warehouse Project",
+  "city": "Manchester",
+  "image": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1200",
+  "description": "Bringing the heat to Manchester with a night of pure energy.",
+  "ticketTiers": [
+    { "name": "General Admission", "price": 25, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" },
+    { "name": "VIP Access", "price": 45, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" }
+  ]
+}

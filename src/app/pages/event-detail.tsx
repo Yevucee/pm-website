@@ -52,34 +52,34 @@ export function EventDetailPage() {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-        <Link to="/events" className="inline-flex items-center text-accent hover:text-accent-hover mb-8 transition-colors">
+        <Link to="/events" className="inline-flex items-center text-accent hover:text-accent-hover mb-6 sm:mb-8 transition-colors">
           <ChevronLeft size={20} className="mr-1" />
           Back to Events
         </Link>
 
         {/* Event Banner */}
-        <div className="relative aspect-[21/9] rounded-xl overflow-hidden mb-8">
+        <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden mb-8">
           <img
             src={event.image}
             alt={event.title}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-          <div className="absolute bottom-8 left-8">
+          <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8">
             <span className="px-3 py-1 bg-accent text-black rounded font-heading mb-4 inline-block">
               {event.type === 'boat-party' ? 'BOAT PARTY' : event.type === 'festival' ? 'FESTIVAL' : 'CLUB NIGHT'}
             </span>
-            <h1 className="font-heading text-4xl sm:text-5xl">{event.title}</h1>
+            <h1 className="font-heading text-3xl sm:text-5xl">{event.title}</h1>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {/* Event Info */}
           <div className="md:col-span-2">
             {/* Details */}
-            <div className="bg-surface border border-border rounded-xl p-6 mb-8">
+            <div className="bg-surface border border-border rounded-xl p-4 sm:p-6 mb-8">
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Calendar size={20} className="text-accent mt-1" />
@@ -109,15 +109,15 @@ export function EventDetailPage() {
 
             {/* Description */}
             <div className="mb-8">
-              <h2 className="font-heading text-3xl mb-4">ABOUT</h2>
-              <p className="text-muted-foreground text-lg">{event.description}</p>
+              <h2 className="font-heading text-2xl sm:text-3xl mb-4">ABOUT</h2>
+              <p className="text-muted-foreground text-base sm:text-lg">{event.description}</p>
             </div>
 
             {/* Lineup */}
             {event.lineup && event.lineup.length > 0 && (
               <div className="mb-8">
-                <h2 className="font-heading text-3xl mb-4">LINEUP</h2>
-                <div className="bg-surface border border-border rounded-xl p-6 space-y-3">
+                <h2 className="font-heading text-2xl sm:text-3xl mb-4">LINEUP</h2>
+                <div className="bg-surface border border-border rounded-xl p-4 sm:p-6 space-y-3">
                   {event.lineup.map((artist, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <Music size={18} className="text-accent" />
@@ -131,10 +131,10 @@ export function EventDetailPage() {
             {/* Info Sections */}
             <div className="space-y-6">
               <details className="bg-surface border border-border rounded-xl overflow-hidden">
-                <summary className="p-6 cursor-pointer font-heading text-xl hover:bg-accent/5 transition-colors">
+                <summary className="p-4 sm:p-6 cursor-pointer font-heading text-lg sm:text-xl hover:bg-accent/5 transition-colors">
                   WHAT'S INCLUDED
                 </summary>
-                <div className="px-6 pb-6 text-muted-foreground">
+                <div className="px-4 sm:px-6 pb-6 text-muted-foreground">
                   <ul className="space-y-2">
                     <li>• Entry to the venue</li>
                     <li>• Access to all floors and rooms</li>
@@ -145,10 +145,10 @@ export function EventDetailPage() {
               </details>
 
               <details className="bg-surface border border-border rounded-xl overflow-hidden">
-                <summary className="p-6 cursor-pointer font-heading text-xl hover:bg-accent/5 transition-colors">
+                <summary className="p-4 sm:p-6 cursor-pointer font-heading text-lg sm:text-xl hover:bg-accent/5 transition-colors">
                   FAQ
                 </summary>
-                <div className="px-6 pb-6 text-muted-foreground space-y-4">
+                <div className="px-4 sm:px-6 pb-6 text-muted-foreground space-y-4">
                   <div>
                     <p className="font-heading text-foreground mb-1">What's the age limit?</p>
                     <p>18+ with valid ID required at the door.</p>
@@ -164,8 +164,8 @@ export function EventDetailPage() {
 
           {/* Ticket Purchase */}
           <div>
-            <div className="sticky top-32">
-              <div className="bg-surface border border-border rounded-xl p-6">
+            <div className="md:sticky md:top-32">
+              <div className="bg-surface border border-border rounded-xl p-4 sm:p-6">
                 <h3 className="font-heading text-2xl mb-6">
                   {event.comingSoon ? 'COMING SOON' : 'TICKETS'}
                 </h3>
@@ -230,7 +230,7 @@ export function EventDetailPage() {
                       <div
                         key={tier.name}
                         className={cn(
-                          'border rounded-lg p-4',
+                          'border rounded-lg p-3 sm:p-4',
                           tier.available ? 'border-border hover:border-accent cursor-pointer transition-colors' : 'border-border opacity-50'
                         )}
                       >

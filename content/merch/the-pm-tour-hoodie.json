@@ -1,0 +1,10 @@
+{
+  "name": "The PM Tour Hoodie",
+  "description": "Premium heavyweight hoodie with official The PM branding.",
+  "price": 45,
+  "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+  "sizes": ["S", "M", "L", "XL"],
+  "category": "apparel",
+  "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400",
+  "inStock": true
+}

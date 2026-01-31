@@ -1,0 +1,14 @@
+{
+  "title": "Birmingham Bass",
+  "type": "club-night",
+  "date": "2025-03-28",
+  "time": "22:30",
+  "venue": "Lab11",
+  "city": "Birmingham",
+  "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200",
+  "description": "Heavy basslines and underground rhythms taking over Birminghams finest venue.",
+  "ticketTiers": [
+    { "name": "Early Bird", "price": 12, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" },
+    { "name": "General Admission", "price": 18, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" }
+  ]
+}

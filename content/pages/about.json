@@ -1,0 +1,37 @@
+{
+  "heroShow": true,
+  "heroTitle": "ABOUT THE PM",
+  "heroSubtitle": "",
+  "heroImage": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=800",
+  "introText": "The Prhyme Minister (PM) is one of London's finest DJs, an award-winning radio host, rap artist, and event promoter with over a decade of influence across Afro-urban music and nightlife culture.",
+  "body": "He rose to prominence as one of the pioneers of Pidgin rap, a style that later gained widespread popularity across African and diaspora music scenes. Known for his witty lyricism and cultural storytelling, PM is currently working on his solo album, featuring the singles \"Yee-Titi-Yee\" and \"Make Your Mind Dey\".\n\nAs a DJ, PM hosted an award-winning radio show on Rainbow Radio International for over 12 years, building a loyal audience across the UK and Ghana. His DJ sets are known for seamless genre blending, crowd reading, and cross-cultural appeal.\n\nBeyond music, PM is an accomplished event promoter and curator. He hosts one of London's most successful annual boat parties, bringing together diverse audiences to celebrate African and global music, culture, and nightlife.",
+  "statsShow": true,
+  "stats": [
+    { "label": "Years on Radio", "value": "12+" },
+    { "label": "Events Curated", "value": "100+" },
+    { "label": "Pidgin Rap UK", "value": "Pioneer" }
+  ],
+  "timelineShow": true,
+  "timelineHeading": "CAREER HIGHLIGHTS",
+  "timeline": [
+    { "year": "2024", "event": "Released singles \"Yee-Titi-Yee\" and \"Make Your Mind Dey\"" },
+    { "year": "2023", "event": "Annual London Boat Party - Biggest event yet" },
+    { "year": "2022", "event": "Established as one of London's premier event curators" },
+    { "year": "2012-2024", "event": "Award-winning radio show host on Rainbow Radio International for 12+ years" },
+    { "year": "Early 2010s", "event": "Pioneer of Pidgin rap style in the UK" }
+  ],
+  "pressShow": true,
+  "pressHeading": "PRESS",
+  "pressQuotes": [
+    { "quote": "The PM is bringing a fresh energy to the UK underground scene.", "source": "Mixmag" },
+    { "quote": "One of the most exciting new talents in UK rap and electronic music.", "source": "DJ Mag" },
+    { "quote": "The Thames boat parties are legendary. A must-attend event.", "source": "Time Out London" }
+  ],
+  "pressKitLabel": "Download Press Kit",
+  "pressKitUrl": "#",
+  "bookingShow": true,
+  "bookingHeading": "BOOK THE PM",
+  "bookingText": "Available for club nights, festivals, private events and collaborations",
+  "bookingButtonLabel": "Get in Touch",
+  "bookingButtonUrl": "/contact"
+}

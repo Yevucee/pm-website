@@ -7,87 +7,161 @@ import { Music, Ticket, ShoppingBag, Play } from 'lucide-react';
 import { upcomingEvents, merchProducts } from '@/data/mock-data';
 import { releases } from '@/data/releases';
 import { MobileActionBar } from '@/app/components/mobile-action-bar';
-import logoGoldStudio from '@/assets/4db82b1e147ec8481e449aea5677f3cd902b9758.png';
-import heroImage from '@/assets/d24d1977cc81d06fb12bd8b56ff811be50475c64.png';
+import { getPageContent, resolvePublicAsset } from '@/data/pages';
+
+interface HomePageContent {
+  heroShow?: boolean;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroDescription?: string;
+  heroImage?: string;
+  heroPrimaryCtaLabel?: string;
+  heroPrimaryCtaUrl?: string;
+  heroSecondaryCtaLabel?: string;
+  heroSecondaryCtaUrl?: string;
+  heroTertiaryCtaLabel?: string;
+  heroTertiaryCtaUrl?: string;
+  bioShow?: boolean;
+  bioText?: string;
+  bioButtonLabel?: string;
+  bioButtonUrl?: string;
+  latestReleaseShow?: boolean;
+  latestReleaseHeading?: string;
+  latestReleaseBadge?: string;
+  eventsShow?: boolean;
+  eventsHeading?: string;
+  eventsLinkLabel?: string;
+  eventsLinkUrl?: string;
+  merchShow?: boolean;
+  merchHeading?: string;
+  merchLinkLabel?: string;
+  merchLinkUrl?: string;
+  socialProofShow?: boolean;
+  socialProofHeading?: string;
+  socialProofLogos?: { name?: string; image?: string }[];
+}
 
 export function HomePage() {
+  const home = getPageContent<HomePageContent>('home', {});
   const latestRelease = releases[0];
   const featuredEvents = upcomingEvents.slice(0, 3);
   const featuredProducts = merchProducts.slice(0, 3);
+  const heroImageSrc = resolvePublicAsset(home.heroImage) || resolvePublicAsset('/uploads/stuck_indoors.jpg');
+  const isExternal = (url?: string) => Boolean(url && /^https?:\/\//i.test(url));
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      {home.heroShow !== false && (
+      <section className="relative min-h-[75vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Artist Background */}
         <div className="absolute inset-0">
           <img
-            src={heroImage}
-            alt="The PM - The Prhyme Minister Performing Live"
+            src={heroImageSrc}
+            alt={home.heroTitle || 'The PM'}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-background" />
         </div>
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h1 className="font-heading text-6xl sm:text-8xl mb-4 text-white drop-shadow-2xl">THE PRHYME MINISTER (PM)</h1>
-            <div className="h-1 w-32 bg-accent mx-auto mb-4"></div>
-            <p className="text-2xl sm:text-3xl font-heading text-accent drop-shadow-lg mb-4">
-              Mixing business with pleasure.
+          <div className="mb-6 sm:mb-8">
+            <h1 className="font-heading text-4xl sm:text-6xl lg:text-8xl mb-4 text-white drop-shadow-2xl leading-tight">
+              {home.heroTitle || 'THE PRHYME MINISTER (PM)'}
+            </h1>
+            <div className="h-1 w-24 sm:w-32 bg-accent mx-auto mb-4"></div>
+            <p className="text-xl sm:text-3xl font-heading text-accent drop-shadow-lg mb-4">
+              {home.heroSubtitle || 'Mixing business with pleasure.'}
             </p>
           </div>
-          <p className="text-base sm:text-lg text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-lg leading-relaxed">
-            Award-winning DJ, Pidgin rap pioneer, and curator of London's most successful annual boat party.
+          <p className="text-sm sm:text-lg text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-lg leading-relaxed">
+            {home.heroDescription ||
+              "Award-winning DJ, Pidgin rap pioneer, and curator of London's most successful annual boat party."}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={latestRelease?.spotifyUrl || 'https://open.spotify.com/album/3Ym3xOwfN2rByjWBiLnNqu'} target="_blank" rel="noopener noreferrer">
-              <Button variant="primary" size="lg">
-                <Play size={20} className="mr-2" />
-                Listen on Spotify
-              </Button>
-            </a>
-            <Link to="/events">
-              <Button variant="outline" size="lg">
-                <Ticket size={20} className="mr-2" />
-                Buy Tickets
-              </Button>
-            </Link>
-            <Link to="/merch">
-              <Button variant="ghost" size="lg">
-                <ShoppingBag size={20} className="mr-2" />
-                Explore Merch
-              </Button>
-            </Link>
+            {home.heroPrimaryCtaLabel && (
+              <a
+                href={home.heroPrimaryCtaUrl || latestRelease?.spotifyUrl || '#'}
+                target={isExternal(home.heroPrimaryCtaUrl) ? '_blank' : undefined}
+                rel={isExternal(home.heroPrimaryCtaUrl) ? 'noopener noreferrer' : undefined}
+                className="w-full sm:w-auto"
+              >
+                <Button variant="primary" size="lg" className="w-full sm:w-auto">
+                  <Play size={20} className="mr-2" />
+                  {home.heroPrimaryCtaLabel}
+                </Button>
+              </a>
+            )}
+            {home.heroSecondaryCtaLabel &&
+              (isExternal(home.heroSecondaryCtaUrl) ? (
+                <a href={home.heroSecondaryCtaUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    <Ticket size={20} className="mr-2" />
+                    {home.heroSecondaryCtaLabel}
+                  </Button>
+                </a>
+              ) : (
+                <Link to={home.heroSecondaryCtaUrl || '/events'} className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    <Ticket size={20} className="mr-2" />
+                    {home.heroSecondaryCtaLabel}
+                  </Button>
+                </Link>
+              ))}
+            {home.heroTertiaryCtaLabel &&
+              (isExternal(home.heroTertiaryCtaUrl) ? (
+                <a href={home.heroTertiaryCtaUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                  <Button variant="ghost" size="lg" className="w-full sm:w-auto">
+                    <ShoppingBag size={20} className="mr-2" />
+                    {home.heroTertiaryCtaLabel}
+                  </Button>
+                </a>
+              ) : (
+                <Link to={home.heroTertiaryCtaUrl || '/merch'} className="w-full sm:w-auto">
+                  <Button variant="ghost" size="lg" className="w-full sm:w-auto">
+                    <ShoppingBag size={20} className="mr-2" />
+                    {home.heroTertiaryCtaLabel}
+                  </Button>
+                </Link>
+              ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Bio Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+      {home.bioShow !== false && (
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-lg sm:text-xl text-foreground/90 leading-relaxed">
-            The Prhyme Minister (PM) is one of London's leading DJs, an award-winning radio host, rapper, and event promoter. A pioneer of Pidgin rap and a respected cultural curator, PM blends music, nightlife, and community to deliver unforgettable experiences on and off the stage.
+            {home.bioText ||
+              "The Prhyme Minister (PM) is one of London's leading DJs, an award-winning radio host, rapper, and event promoter. A pioneer of Pidgin rap and a respected cultural curator, PM blends music, nightlife, and community to deliver unforgettable experiences on and off the stage."}
           </p>
-          <Link to="/about">
-            <Button variant="ghost" size="lg" className="mt-8">
-              Read Full Story →
-            </Button>
-          </Link>
+          {home.bioButtonLabel && (
+            <Link to={home.bioButtonUrl || '/about'} className="inline-flex w-full sm:w-auto">
+              <Button variant="ghost" size="lg" className="mt-8 w-full sm:w-auto">
+                {home.bioButtonLabel}
+              </Button>
+            </Link>
+          )}
         </div>
       </section>
+      )}
 
       {/* Latest Release */}
-      <section id="latest" className="py-20 px-4 sm:px-6 lg:px-8">
+      {home.latestReleaseShow !== false && (
+      <section id="latest" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="font-heading text-4xl sm:text-5xl">LATEST RELEASE</h2>
-            <Link to="/music" className="text-accent hover:text-accent-hover transition-colors">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+            <h2 className="font-heading text-3xl sm:text-5xl">
+              {home.latestReleaseHeading || 'LATEST RELEASE'}
+            </h2>
+            <Link to="/music" className="text-accent hover:text-accent-hover transition-colors text-sm sm:text-base">
               View All →
             </Link>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
             <div className="aspect-square rounded-xl overflow-hidden">
               <img
                 src={latestRelease.artwork}
@@ -97,14 +171,14 @@ export function HomePage() {
             </div>
             <div>
               <span className="px-3 py-1 bg-accent/20 text-accent rounded uppercase text-sm font-heading inline-block mb-4">
-                NEW RELEASE
+                {home.latestReleaseBadge || 'NEW RELEASE'}
               </span>
-              <h3 className="font-heading text-4xl mb-4">{latestRelease.title}</h3>
+              <h3 className="font-heading text-3xl sm:text-4xl mb-4">{latestRelease.title}</h3>
               <p className="text-muted-foreground mb-6">
                 {new Date(latestRelease.releaseDate).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
               </p>
               
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap gap-3 mb-6">
                 <a href={latestRelease.spotifyUrl} target="_blank" rel="noopener noreferrer">
                   <Button variant="primary">
                     <Music size={18} className="mr-2" />
@@ -126,74 +200,86 @@ export function HomePage() {
               </div>
 
               {/* Spotify Embed Placeholder */}
-              <div className="bg-surface border border-border rounded-lg p-6 text-center text-muted-foreground">
-                <Music size={48} className="mx-auto mb-3 opacity-50" />
+              <div className="bg-surface border border-border rounded-lg p-5 text-center text-muted-foreground">
+                <Music size={40} className="mx-auto mb-3 opacity-50" />
                 <p>Spotify Player</p>
               </div>
             </div>
           </div>
         </div>
       </section>
+      )}
 
       {/* Upcoming Events */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface/50">
+      {home.eventsShow !== false && (
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-surface/50">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="font-heading text-4xl sm:text-5xl">UPCOMING EVENTS</h2>
-            <Link to="/events" className="text-accent hover:text-accent-hover transition-colors">
-              View All →
-            </Link>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+            <h2 className="font-heading text-3xl sm:text-5xl">
+              {home.eventsHeading || 'UPCOMING EVENTS'}
+            </h2>
+            {home.eventsLinkLabel && (
+              <Link to={home.eventsLinkUrl || '/events'} className="text-accent hover:text-accent-hover transition-colors text-sm sm:text-base">
+                {home.eventsLinkLabel}
+              </Link>
+            )}
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {featuredEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Merch Highlights */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {home.merchShow !== false && (
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="font-heading text-4xl sm:text-5xl">MERCH</h2>
-            <Link to="/merch" className="text-accent hover:text-accent-hover transition-colors">
-              Shop All →
-            </Link>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+            <h2 className="font-heading text-3xl sm:text-5xl">
+              {home.merchHeading || 'MERCH'}
+            </h2>
+            {home.merchLinkLabel && (
+              <Link to={home.merchLinkUrl || '/merch'} className="text-accent hover:text-accent-hover transition-colors text-sm sm:text-base">
+                {home.merchLinkLabel}
+              </Link>
+            )}
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Social Proof */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface/50">
+      {home.socialProofShow !== false && (
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-surface/50">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="font-heading text-4xl sm:text-5xl mb-12">AS SEEN AT</h2>
+          <h2 className="font-heading text-3xl sm:text-5xl mb-10 sm:mb-12">
+            {home.socialProofHeading || 'AS SEEN AT'}
+          </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
-            {[
-              { name: 'Fabric', image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200' },
-              { name: 'Ministry of Sound', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200' },
-              { name: 'Warehouse Project', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200' },
-              { name: 'Printworks', image: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=200' }
-            ].map((venue) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center">
+            {(home.socialProofLogos || []).map((venue) => (
               <div key={venue.name} className="grayscale hover:grayscale-0 transition-all opacity-50 hover:opacity-100">
                 <img
-                  src={venue.image}
-                  alt={venue.name}
-                  className="w-32 h-32 object-cover rounded-lg"
+                  src={resolvePublicAsset(venue.image)}
+                  alt={venue.name || 'Venue'}
+                  className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg"
                 />
               </div>
             ))}
           </div>
         </div>
       </section>
+      )}
 
       <MobileActionBar />
     </div>

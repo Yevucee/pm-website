@@ -66,7 +66,7 @@ export function ReleaseCard({ release }: ReleaseCardProps) {
             {new Date(release.releaseDate).toLocaleDateString('en-GB', { year: 'numeric', month: 'short' })}
           </span>
         </div>
-        <h3 className="font-heading text-xl mb-1 group-hover:text-accent transition-colors">
+        <h3 className="font-heading text-lg sm:text-xl mb-1 group-hover:text-accent transition-colors">
           {release.title}
         </h3>
       </div>

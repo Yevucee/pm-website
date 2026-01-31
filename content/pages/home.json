@@ -1,0 +1,48 @@
+{
+  "heroShow": true,
+  "heroTitle": "THE PRHYME MINISTER (PM)",
+  "heroSubtitle": "Mixing business with pleasure.",
+  "heroDescription": "Award-winning DJ, Pidgin rap pioneer, and curator of London's most successful annual boat party.",
+  "heroImage": "/uploads/stuck_indoors.jpg",
+  "heroPrimaryCtaLabel": "Listen on Spotify",
+  "heroPrimaryCtaUrl": "https://open.spotify.com/album/3Ym3xOwfN2rByjWBiLnNqu",
+  "heroSecondaryCtaLabel": "Buy Tickets",
+  "heroSecondaryCtaUrl": "/events",
+  "heroTertiaryCtaLabel": "Explore Merch",
+  "heroTertiaryCtaUrl": "/merch",
+  "bioShow": true,
+  "bioText": "The Prhyme Minister (PM) is one of London's leading DJs, an award-winning radio host, rapper, and event promoter. A pioneer of Pidgin rap and a respected cultural curator, PM blends music, nightlife, and community to deliver unforgettable experiences on and off the stage.",
+  "bioButtonLabel": "Read Full Story →",
+  "bioButtonUrl": "/about",
+  "latestReleaseShow": true,
+  "latestReleaseHeading": "LATEST RELEASE",
+  "latestReleaseBadge": "NEW RELEASE",
+  "eventsShow": true,
+  "eventsHeading": "UPCOMING EVENTS",
+  "eventsLinkLabel": "View All →",
+  "eventsLinkUrl": "/events",
+  "merchShow": true,
+  "merchHeading": "MERCH",
+  "merchLinkLabel": "Shop All →",
+  "merchLinkUrl": "/merch",
+  "socialProofShow": true,
+  "socialProofHeading": "AS SEEN AT",
+  "socialProofLogos": [
+    {
+      "name": "Fabric",
+      "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=200"
+    },
+    {
+      "name": "Ministry of Sound",
+      "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200"
+    },
+    {
+      "name": "Warehouse Project",
+      "image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200"
+    },
+    {
+      "name": "Printworks",
+      "image": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=200"
+    }
+  ]
+}
