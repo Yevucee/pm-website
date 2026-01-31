@@ -2,8 +2,9 @@ backend:
   name: github
   repo: "Yevucee/pm-website"
   branch: main
-  auth_type: pkce
-  app_id: "Ov23liOdnKZXWD16o7UH"
+  base_url: "https://pm-website-oauth.samuel-polley1.workers.dev"
+  auth_endpoint: "auth"
+  site_domain: "yevucee.github.io"
 
 site_url: "https://yevucee.github.io/pm-website"
 
