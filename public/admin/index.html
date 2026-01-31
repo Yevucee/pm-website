@@ -49,6 +49,91 @@
       });
       // #endregion
 
+      const extractParamKeys = (input) => {
+        if (!input) return [];
+        try {
+          return Array.from(new URLSearchParams(input).keys());
+        } catch {
+          return [];
+        }
+      };
+
+      const logLocationChange = (message) => {
+        const hash = window.location.hash || "";
+        const hashQuery = hash.includes("?") ? hash.split("?")[1] : "";
+        // #region agent log
+        sendLog({
+          sessionId: "debug-session",
+          runId: "run1",
+          hypothesisId: "D",
+          location: "public/admin/index.html:58",
+          message,
+          data: {
+            pathname: window.location.pathname,
+            searchKeys: extractParamKeys(window.location.search),
+            hashKeys: extractParamKeys(hashQuery),
+          },
+          timestamp: Date.now(),
+        });
+        // #endregion
+      };
+
+      window.addEventListener("hashchange", () =>
+        logLocationChange("Hash changed"),
+      );
+      window.addEventListener("popstate", () =>
+        logLocationChange("History changed"),
+      );
+
+      document.addEventListener("click", (event) => {
+        let node = event.target;
+        while (node && node !== document.body) {
+          if (node.tagName === "A" && node.href) {
+            const href = node.href;
+            const isAuth =
+              href.includes("api.netlify.com/auth") ||
+              href.includes("github.com") ||
+              href.includes("oauth");
+            if (isAuth) {
+              // #region agent log
+              sendLog({
+                sessionId: "debug-session",
+                runId: "run1",
+                hypothesisId: "E",
+                location: "public/admin/index.html:84",
+                message: "Auth link click",
+                data: {
+                  href,
+                  tagName: node.tagName,
+                  id: node.id || null,
+                },
+                timestamp: Date.now(),
+              });
+              // #endregion
+            }
+            break;
+          }
+          node = node.parentElement;
+        }
+      });
+
+      window.addEventListener("message", (event) => {
+        // #region agent log
+        sendLog({
+          sessionId: "debug-session",
+          runId: "run1",
+          hypothesisId: "F",
+          location: "public/admin/index.html:102",
+          message: "Window message event",
+          data: {
+            origin: event.origin,
+            dataType: typeof event.data,
+          },
+          timestamp: Date.now(),
+        });
+        // #endregion
+      });
+
       const originalFetch = window.fetch.bind(window);
       window.fetch = (input, init) => {
         const url = typeof input === "string" ? input : input?.url || "";
