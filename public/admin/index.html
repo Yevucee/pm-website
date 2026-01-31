@@ -32,6 +32,23 @@
       });
       // #endregion
 
+      const basePath = window.location.pathname.replace(/\/admin\/?$/, "/");
+      const cmsConfigPath = `${basePath}admin/config.yml`;
+      window.CMS_MANUAL_INIT = true;
+      window.CMS_CONFIG_PATH = cmsConfigPath;
+
+      // #region agent log
+      sendLog({
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "A",
+        location: "public/admin/index.html:34",
+        message: "Computed CMS config path",
+        data: { basePath, cmsConfigPath },
+        timestamp: Date.now(),
+      });
+      // #endregion
+
       const originalFetch = window.fetch.bind(window);
       window.fetch = (input, init) => {
         const url = typeof input === "string" ? input : input?.url || "";
@@ -70,7 +87,7 @@
         });
       };
 
-      const configUrl = "/admin/config.yml";
+      const configUrl = cmsConfigPath;
       // #region agent log
       sendLog({
         sessionId: "debug-session",
@@ -129,6 +146,28 @@
   </script>
   <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
+  <script>
+    // #region agent log
+    fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "B",
+        location: "public/admin/index.html:118",
+        message: "CMS init hook",
+        data: { cmsConfigPath: window.CMS_CONFIG_PATH || null },
+        timestamp: Date.now(),
+      }),
+    }).catch(() => {});
+    // #endregion
+    window.addEventListener("load", () => {
+      if (window.CMS && window.CMS_MANUAL_INIT) {
+        window.CMS.init();
+      }
+    });
+  </script>
 </head>
 <body>
   <!-- CMS mounts into the body automatically -->
