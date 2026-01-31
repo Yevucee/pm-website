@@ -1,11 +1,14 @@
 ---
-title: "Chop Knuckle"
-type: "single"
-releaseDate: "2019-06-06"
-artwork: "/uploads/chop_knuckle.jpg"
-spotifyUrl: "https://open.spotify.com/album/5xiNyjBkVurhyLGXgWkmi0"
-appleMusicUrl: "https://music.apple.com/us/album/chop-knuckle-single/1511830438"
-youtubeUrl: "https://play.google.com/store/music/album/The_PM_Chop_Knuckle?id=Bejyhwlio45uahfqmewk4j74p2e"
+title: Chop Knuckle
+type: single
+releaseDate: 2019-06-06
+artwork: /uploads/chop_knuckle.jpg
+spotifyUrl: https://open.spotify.com/album/5xiNyjBkVurhyLGXgWkmi0
+spotifyEnabled: true
+appleMusicUrl: https://music.apple.com/us/album/chop-knuckle-single/1511830438
+appleMusicEnabled: true
+youtubeUrl: https://play.google.com/store/music/album/The_PM_Chop_Knuckle?id=Bejyhwlio45uahfqmewk4j74p2e
+youtubeEnabled: false
 tracks: []
 ---
 Label: Cabinet Music London
