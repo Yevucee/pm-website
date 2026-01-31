@@ -195,6 +195,7 @@
       };
 
       const configUrl = cmsConfigPath;
+      let configText = null;
       // #region agent log
       sendLog({
         sessionId: "debug-session",
@@ -222,6 +223,7 @@
           return response.text();
         })
         .then((text) => {
+          configText = text;
           const pick = (key) => {
             const match = text.match(
               new RegExp(`^\\s*${key}\\s*:\\s*(.+)$`, "m"),
@@ -251,6 +253,7 @@
         .catch(() => {});
     })();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js" defer></script>
   <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
   <script>
@@ -304,7 +307,35 @@
         }).catch(() => {});
         // #endregion
         try {
-          window.CMS.init({ configUrl: initConfigUrl });
+          const hasYaml = !!window.jsyaml?.load;
+          let parsedConfig = null;
+          if (hasYaml && configText) {
+            parsedConfig = window.jsyaml.load(configText);
+          }
+          // #region agent log
+          fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sessionId: "debug-session",
+              runId: "run1",
+              hypothesisId: "B",
+              location: "public/admin/index.html:147",
+              message: "CMS init config prep",
+              data: {
+                hasYaml,
+                hasConfigText: !!configText,
+                parsedBackend: parsedConfig?.backend || null,
+              },
+              timestamp: Date.now(),
+            }),
+          }).catch(() => {});
+          // #endregion
+          if (parsedConfig) {
+            window.CMS.init({ config: parsedConfig });
+          } else {
+            window.CMS.init({ configUrl: initConfigUrl });
+          }
         } catch (error) {
           // #region agent log
           fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
