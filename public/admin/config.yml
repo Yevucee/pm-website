@@ -9,7 +9,7 @@ backend:
 site_url: "https://yevucee.github.io/pm-website"
 
 media_folder: "public/uploads"
-public_folder: "/uploads"
+public_folder: "/pm-website/uploads"
 
 collections:
   - name: "releases"
