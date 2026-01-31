@@ -307,10 +307,28 @@
         }).catch(() => {});
         // #endregion
         try {
-          const hasYaml = !!window.jsyaml?.load;
+          const hasYaml = typeof window.jsyaml !== "undefined";
           let parsedConfig = null;
           if (hasYaml && configText) {
-            parsedConfig = window.jsyaml.load(configText);
+            try {
+              parsedConfig = window.jsyaml.load(configText);
+            } catch (parseError) {
+              // #region agent log
+              fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  sessionId: "debug-session",
+                  runId: "run1",
+                  hypothesisId: "B",
+                  location: "public/admin/index.html:156",
+                  message: "YAML parse error",
+                  data: { name: parseError?.name || "Error" },
+                  timestamp: Date.now(),
+                }),
+              }).catch(() => {});
+              // #endregion
+            }
           }
           // #region agent log
           fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
@@ -347,7 +365,10 @@
               hypothesisId: "B",
               location: "public/admin/index.html:149",
               message: "CMS.init threw",
-              data: { name: error?.name || "Error" },
+              data: {
+                name: error?.name || "Error",
+                message: error?.message || null,
+              },
               timestamp: Date.now(),
             }),
           }).catch(() => {});
