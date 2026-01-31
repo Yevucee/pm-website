@@ -163,9 +163,51 @@
     }).catch(() => {});
     // #endregion
     window.addEventListener("load", () => {
+      // #region agent log
+      fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: "debug-session",
+          runId: "run1",
+          hypothesisId: "B",
+          location: "public/admin/index.html:127",
+          message: "Window load CMS presence",
+          data: { hasCMS: !!window.CMS },
+          timestamp: Date.now(),
+        }),
+      }).catch(() => {});
+      // #endregion
+
       if (window.CMS && window.CMS_MANUAL_INIT) {
         window.CMS.init();
       }
+
+      const config =
+        window.CMS?.config ||
+        (typeof window.CMS?.getConfig === "function"
+          ? window.CMS.getConfig()
+          : null);
+
+      // #region agent log
+      fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId: "debug-session",
+          runId: "run1",
+          hypothesisId: "B",
+          location: "public/admin/index.html:150",
+          message: "CMS config after init",
+          data: {
+            configPresent: !!config,
+            backend: config?.backend || null,
+            cmsKeys: window.CMS ? Object.keys(window.CMS) : [],
+          },
+          timestamp: Date.now(),
+        }),
+      }).catch(() => {});
+      // #endregion
     });
   </script>
 </head>
