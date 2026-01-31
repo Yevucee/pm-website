@@ -287,6 +287,7 @@
       // #endregion
 
       if (window.CMS && window.CMS_MANUAL_INIT) {
+        const initConfigUrl = window.CMS_CONFIG_PATH || "/admin/config.yml";
         // #region agent log
         fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
           method: "POST",
@@ -297,12 +298,30 @@
             hypothesisId: "B",
             location: "public/admin/index.html:136",
             message: "Calling CMS.init",
-            data: { configPath: window.CMS_CONFIG_PATH || null },
+            data: { configUrl: initConfigUrl },
             timestamp: Date.now(),
           }),
         }).catch(() => {});
         // #endregion
-        window.CMS.init();
+        try {
+          window.CMS.init({ configUrl: initConfigUrl });
+        } catch (error) {
+          // #region agent log
+          fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              sessionId: "debug-session",
+              runId: "run1",
+              hypothesisId: "B",
+              location: "public/admin/index.html:149",
+              message: "CMS.init threw",
+              data: { name: error?.name || "Error" },
+              timestamp: Date.now(),
+            }),
+          }).catch(() => {});
+          // #endregion
+        }
       }
 
       const config =
