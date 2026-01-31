@@ -70,8 +70,33 @@
         });
       };
 
-      originalFetch("/admin/config.yml")
-        .then((response) => response.text())
+      const configUrl = "/admin/config.yml";
+      // #region agent log
+      sendLog({
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "A",
+        location: "public/admin/index.html:69",
+        message: "Config fetch attempt",
+        data: { url: configUrl },
+        timestamp: Date.now(),
+      });
+      // #endregion
+      originalFetch(configUrl)
+        .then((response) => {
+          // #region agent log
+          sendLog({
+            sessionId: "debug-session",
+            runId: "run1",
+            hypothesisId: "A",
+            location: "public/admin/index.html:82",
+            message: "Config fetch response",
+            data: { url: configUrl, status: response.status },
+            timestamp: Date.now(),
+          });
+          // #endregion
+          return response.text();
+        })
         .then((text) => {
           const pick = (key) => {
             const match = text.match(
