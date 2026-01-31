@@ -135,6 +135,28 @@
       });
 
       const originalFetch = window.fetch.bind(window);
+      const originalOpen = window.open.bind(window);
+      window.open = (url, name, features) => {
+        const safeUrl = typeof url === "string" ? url : "";
+        const isAuth =
+          safeUrl.includes("api.netlify.com/auth") ||
+          safeUrl.includes("github.com") ||
+          safeUrl.includes("oauth");
+        if (isAuth) {
+          // #region agent log
+          sendLog({
+            sessionId: "debug-session",
+            runId: "run1",
+            hypothesisId: "E",
+            location: "public/admin/index.html:52",
+            message: "window.open auth",
+            data: { url: safeUrl },
+            timestamp: Date.now(),
+          });
+          // #endregion
+        }
+        return originalOpen(url, name, features);
+      };
       window.fetch = (input, init) => {
         const url = typeof input === "string" ? input : input?.url || "";
         const isAuthUrl =
@@ -265,6 +287,21 @@
       // #endregion
 
       if (window.CMS && window.CMS_MANUAL_INIT) {
+        // #region agent log
+        fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sessionId: "debug-session",
+            runId: "run1",
+            hypothesisId: "B",
+            location: "public/admin/index.html:136",
+            message: "Calling CMS.init",
+            data: { configPath: window.CMS_CONFIG_PATH || null },
+            timestamp: Date.now(),
+          }),
+        }).catch(() => {});
+        // #endregion
         window.CMS.init();
       }
 
