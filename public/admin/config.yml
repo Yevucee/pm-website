@@ -20,7 +20,11 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Type", name: "type", widget: "select", options: ["single", "ep", "album"]}
-      - {label: "Release Date", name: "releaseDate", widget: "date"}
+      - label: "Release Date"
+        name: "releaseDate"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
       - {label: "Artwork", name: "artwork", widget: "image"}
       - {label: "Spotify URL", name: "spotifyUrl", widget: "string"}
       - {label: "Show Spotify", name: "spotifyEnabled", widget: "boolean", default: true, required: false}
@@ -40,7 +44,11 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Type", name: "type", widget: "select", options: ["boat-party", "club-night", "festival"]}
-      - {label: "Date", name: "date", widget: "date"}
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
       - {label: "Time", name: "time", widget: "string"}
       - {label: "Venue", name: "venue", widget: "string"}
       - {label: "City", name: "city", widget: "string"}
@@ -85,7 +93,11 @@ collections:
       - {label: "Type", name: "type", widget: "select", options: ["photo", "video"]}
       - {label: "Image/Thumbnail", name: "image", widget: "image"}
       - {label: "Video URL", name: "videoUrl", widget: "string", required: false}
-      - {label: "Date", name: "date", widget: "date"}
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
 
   - name: "pages"
     label: "Pages"
