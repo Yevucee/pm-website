@@ -224,6 +224,7 @@
         })
         .then((text) => {
           configText = text;
+          window.__CMS_CONFIG_TEXT = text;
           const pick = (key) => {
             const match = text.match(
               new RegExp(`^\\s*${key}\\s*:\\s*(.+)$`, "m"),
@@ -308,10 +309,11 @@
         // #endregion
         try {
           const hasYaml = typeof window.jsyaml !== "undefined";
+          const configSourceText = window.__CMS_CONFIG_TEXT || null;
           let parsedConfig = null;
-          if (hasYaml && configText) {
+          if (hasYaml && configSourceText) {
             try {
-              parsedConfig = window.jsyaml.load(configText);
+              parsedConfig = window.jsyaml.load(configSourceText);
             } catch (parseError) {
               // #region agent log
               fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
@@ -342,7 +344,7 @@
               message: "CMS init config prep",
               data: {
                 hasYaml,
-                hasConfigText: !!configText,
+                hasConfigText: !!configSourceText,
                 parsedBackend: parsedConfig?.backend || null,
               },
               timestamp: Date.now(),
