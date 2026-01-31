@@ -85,8 +85,10 @@ function parseFrontmatter(raw: string): { data: Frontmatter; body: string } {
         return;
       }
 
-      if (value === 'true' || value === 'false') {
-        (data as Record<string, unknown>)[key] = value === 'true';
+      const unquotedValue = value.replace(/^["']|["']$/g, '');
+
+      if (unquotedValue === 'true' || unquotedValue === 'false') {
+        (data as Record<string, unknown>)[key] = unquotedValue === 'true';
         return;
       }
 
@@ -101,8 +103,7 @@ function parseFrontmatter(raw: string): { data: Frontmatter; body: string } {
         return;
       }
 
-      value = value.replace(/^["']|["']$/g, '');
-      (data as Record<string, unknown>)[key] = value;
+      (data as Record<string, unknown>)[key] = unquotedValue;
     });
 
   return { data, body: body.trim() };

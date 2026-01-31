@@ -85,14 +85,6 @@ export function ReleaseDetailPage() {
               </div>
             ) : null}
 
-            {/* Spotify Player Placeholder */}
-            <div className="bg-surface border border-border rounded-lg p-6 sm:p-8 mb-8">
-              <div className="flex flex-col items-center justify-center text-center">
-                <Music size={48} className="mb-4 text-accent opacity-50" />
-                <p className="text-muted-foreground">Embedded Spotify Player</p>
-              </div>
-            </div>
-
             {/* Tracklist */}
             {release.tracks && release.tracks.length > 0 && (
               <div className="mb-8">

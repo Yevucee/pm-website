@@ -199,11 +199,6 @@ export function HomePage() {
                 </a>
               </div>
 
-              {/* Spotify Embed Placeholder */}
-              <div className="bg-surface border border-border rounded-lg p-5 text-center text-muted-foreground">
-                <Music size={40} className="mx-auto mb-3 opacity-50" />
-                <p>Spotify Player</p>
-              </div>
             </div>
           </div>
         </div>
