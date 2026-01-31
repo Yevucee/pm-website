@@ -4,6 +4,104 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager</title>
+  <script>
+    (() => {
+      const endpoint =
+        "http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e";
+      const sendLog = (payload) => {
+        fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }).catch(() => {});
+      };
+
+      // #region agent log
+      sendLog({
+        sessionId: "debug-session",
+        runId: "run1",
+        hypothesisId: "C",
+        location: "public/admin/index.html:13",
+        message: "Admin page load",
+        data: {
+          href: window.location.href,
+          origin: window.location.origin,
+          pathname: window.location.pathname,
+        },
+        timestamp: Date.now(),
+      });
+      // #endregion
+
+      const originalFetch = window.fetch.bind(window);
+      window.fetch = (input, init) => {
+        const url = typeof input === "string" ? input : input?.url || "";
+        const isAuthUrl =
+          url.includes("api.netlify.com/auth") ||
+          url.includes("github.com/login/oauth") ||
+          url.includes("/.netlify/");
+        if (isAuthUrl) {
+          // #region agent log
+          sendLog({
+            sessionId: "debug-session",
+            runId: "run1",
+            hypothesisId: "B",
+            location: "public/admin/index.html:37",
+            message: "Auth fetch request",
+            data: { url, method: init?.method || "GET" },
+            timestamp: Date.now(),
+          });
+          // #endregion
+        }
+        return originalFetch(input, init).then((response) => {
+          if (isAuthUrl) {
+            // #region agent log
+            sendLog({
+              sessionId: "debug-session",
+              runId: "run1",
+              hypothesisId: "B",
+              location: "public/admin/index.html:51",
+              message: "Auth fetch response",
+              data: { url, status: response.status },
+              timestamp: Date.now(),
+            });
+            // #endregion
+          }
+          return response;
+        });
+      };
+
+      originalFetch("/admin/config.yml")
+        .then((response) => response.text())
+        .then((text) => {
+          const pick = (key) => {
+            const match = text.match(
+              new RegExp(`^\\s*${key}\\s*:\\s*(.+)$`, "m"),
+            );
+            return match ? match[1].replace(/["']/g, "").trim() : null;
+          };
+          // #region agent log
+          sendLog({
+            sessionId: "debug-session",
+            runId: "run1",
+            hypothesisId: "A",
+            location: "public/admin/index.html:74",
+            message: "Config snapshot",
+            data: {
+              backend: pick("name"),
+              authType: pick("auth_type"),
+              appId: pick("app_id"),
+              repo: pick("repo"),
+              siteUrl: pick("site_url"),
+              baseUrl: pick("base_url"),
+              authEndpoint: pick("auth_endpoint"),
+            },
+            timestamp: Date.now(),
+          });
+          // #endregion
+        })
+        .catch(() => {});
+    })();
+  </script>
   <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" defer></script>
 </head>
