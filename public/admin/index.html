@@ -353,6 +353,12 @@
               // #endregion
             }
           }
+          const collectionNames = Array.isArray(parsedConfig?.collections)
+            ? parsedConfig.collections.map((collection) => collection?.name || null)
+            : [];
+          const duplicateCollections = collectionNames.filter(
+            (name, index) => name && collectionNames.indexOf(name) !== index,
+          );
           // #region agent log
           fetch("http://127.0.0.1:7243/ingest/81df2ba7-2f20-433b-96d5-3a4a1746016e", {
             method: "POST",
@@ -367,6 +373,8 @@
                 hasYaml,
                 hasConfigText: !!configSourceText,
                 parsedBackend: parsedConfig?.backend || null,
+                collectionNames,
+                duplicateCollections,
               },
               timestamp: Date.now(),
             }),
