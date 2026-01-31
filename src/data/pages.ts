@@ -27,6 +27,12 @@ export const resolvePublicAsset = (value?: string) => {
   const base = import.meta.env.BASE_URL || '/';
   const normalizedBase = base.endsWith('/') ? base : `${base}/`;
   const normalizedPath = trimmed.startsWith('/') ? trimmed.slice(1) : trimmed;
+  const basePrefix = normalizedBase.replace(/^\/|\/$/g, '');
+  const normalizedWithSlash = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+
+  if (basePrefix && normalizedWithSlash.startsWith(`/${basePrefix}/`)) {
+    return `${window.location.origin}${normalizedWithSlash}`;
+  }
 
   return `${window.location.origin}${normalizedBase}${normalizedPath}`;
 };
