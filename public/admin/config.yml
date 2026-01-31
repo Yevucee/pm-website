@@ -23,11 +23,11 @@ collections:
       - {label: "Release Date", name: "releaseDate", widget: "date"}
       - {label: "Artwork", name: "artwork", widget: "image"}
       - {label: "Spotify URL", name: "spotifyUrl", widget: "string"}
-      - {label: "Show Spotify", name: "spotifyEnabled", widget: "boolean", default: true}
+      - {label: "Show Spotify", name: "spotifyEnabled", widget: "boolean", default: true, required: false}
       - {label: "Apple Music URL", name: "appleMusicUrl", widget: "string"}
-      - {label: "Show Apple Music", name: "appleMusicEnabled", widget: "boolean", default: true}
+      - {label: "Show Apple Music", name: "appleMusicEnabled", widget: "boolean", default: true, required: false}
       - {label: "YouTube URL", name: "youtubeUrl", widget: "string"}
-      - {label: "Show YouTube", name: "youtubeEnabled", widget: "boolean", default: true}
+      - {label: "Show YouTube", name: "youtubeEnabled", widget: "boolean", default: true, required: false}
       - {label: "Tracks", name: "tracks", widget: "list", required: false}
 
   - name: "events"
