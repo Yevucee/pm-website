@@ -289,6 +289,27 @@ collections:
           - {label: "Past - Show", name: "pastShow", widget: "boolean", default: true}
           - {label: "Past Heading", name: "pastHeading", widget: "string", required: false}
 
+      - label: "PM the DJ"
+        name: "pm-the-dj"
+        file: "content/pages/pm-the-dj.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Hero - Description", name: "heroDescription", widget: "text", required: false}
+          - {label: "Hero - Image", name: "heroImage", widget: "image", required: false}
+          - {label: "Bio Heading", name: "bioHeading", widget: "string", required: false}
+          - {label: "Bio Text", name: "bioText", widget: "text", required: false}
+          - {label: "Highlights Heading", name: "highlightsHeading", widget: "string", required: false}
+          - label: "Highlights"
+            name: "highlights"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Item", name: "item", widget: "string"}
+          - {label: "Booking Heading", name: "bookingHeading", widget: "string", required: false}
+          - {label: "Booking Intro", name: "bookingIntro", widget: "text", required: false}
+
   - name: "settings"
     label: "Site Settings"
     files:

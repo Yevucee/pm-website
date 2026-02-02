@@ -1,0 +1,18 @@
+{
+  "heroShow": true,
+  "heroTitle": "PM the DJ",
+  "heroSubtitle": "DJ • Host • Curator",
+  "heroDescription": "From Rainbow Radio to headline nights, PM delivers high-energy sets that move every crowd. Expect seamless blends, big moments, and a vibe tailored to your event.",
+  "heroImage": "/uploads/passion_mixtape.jpg",
+  "bioHeading": "About PM as a DJ",
+  "bioText": "A former Rainbow Radio star DJ and trusted selector across London’s nightlife scene, PM brings deep musical knowledge and crowd control to every set. From intimate celebrations to packed club nights, he curates unforgettable experiences across all genres.",
+  "highlightsHeading": "What you can expect",
+  "highlights": [
+    { "item": "All-genre flexibility: Afrobeats, Amapiano, Hip-Hop, R&B, Old School, Dancehall, House." },
+    { "item": "Crowd-first approach and seamless transitions." },
+    { "item": "Broadcast pedigree with years of live mix experience." },
+    { "item": "High-impact moments that keep the energy rising." }
+  ],
+  "bookingHeading": "Book PM the DJ",
+  "bookingIntro": "Tell us the basics and we’ll follow up to confirm availability and details."
+}

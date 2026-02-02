@@ -24,6 +24,7 @@ export function Header() {
     { label: 'Merch', path: '/merch' },
     { label: 'Media', path: '/media' },
     { label: 'About', path: '/about' },
+    { label: 'PM the DJ', path: '/pm-the-dj' },
     { label: 'Contact', path: '/contact' }
   ];
 

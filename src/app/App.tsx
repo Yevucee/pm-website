@@ -12,6 +12,7 @@ import { MediaPage } from '@/app/pages/media';
 import { AboutPage } from '@/app/pages/about';
 import { ContactPage } from '@/app/pages/contact';
 import { DesignSystemPage } from '@/app/pages/design-system';
+import { PmTheDjPage } from '@/app/pages/pm-the-dj';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/media" element={<MediaPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/pm-the-dj" element={<PmTheDjPage />} />
             <Route path="/design-system" element={<DesignSystemPage />} />
           </Routes>
         </main>
