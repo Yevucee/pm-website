@@ -19,6 +19,9 @@
     { "label": "Other", "value": "other" }
   ],
   "formDateLabel": "EVENT DATE (if applicable)",
+  "formTimeLabel": "EVENT TIME (if applicable)",
+  "formTimeStartLabel": "Start time",
+  "formTimeEndLabel": "End time",
   "formMessageLabel": "MESSAGE *",
   "formMessagePlaceholder": "Tell us about your event or enquiry...",
   "formSubmitLabel": "Send Message",

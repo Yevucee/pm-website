@@ -18,6 +18,9 @@ interface ContactPageContent {
   formEnquiryLabel?: string;
   formEnquiryOptions?: { label?: string; value?: string }[];
   formDateLabel?: string;
+  formTimeLabel?: string;
+  formTimeStartLabel?: string;
+  formTimeEndLabel?: string;
   formMessageLabel?: string;
   formMessagePlaceholder?: string;
   formSubmitLabel?: string;
@@ -121,6 +124,34 @@ export function ContactPage() {
                   id="date"
                   className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
                 />
+              </div>
+
+              <div>
+                <label className="block font-heading text-sm mb-2">
+                  {contact.formTimeLabel || 'EVENT TIME (if applicable)'}
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="time-start" className="block text-xs text-muted-foreground mb-2">
+                      {contact.formTimeStartLabel || 'Start time'}
+                    </label>
+                    <input
+                      type="time"
+                      id="time-start"
+                      className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="time-end" className="block text-xs text-muted-foreground mb-2">
+                      {contact.formTimeEndLabel || 'End time'}
+                    </label>
+                    <input
+                      type="time"
+                      id="time-end"
+                      className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
               </div>
               
               <div>

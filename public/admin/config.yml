@@ -205,6 +205,9 @@ collections:
               - {label: "Label", name: "label", widget: "string"}
               - {label: "Value", name: "value", widget: "string"}
           - {label: "Form - Date Label", name: "formDateLabel", widget: "string", required: false}
+          - {label: "Form - Time Label", name: "formTimeLabel", widget: "string", required: false}
+          - {label: "Form - Time Start Label", name: "formTimeStartLabel", widget: "string", required: false}
+          - {label: "Form - Time End Label", name: "formTimeEndLabel", widget: "string", required: false}
           - {label: "Form - Message Label", name: "formMessageLabel", widget: "string", required: false}
           - {label: "Form - Message Placeholder", name: "formMessagePlaceholder", widget: "string", required: false}
           - {label: "Form - Submit Label", name: "formSubmitLabel", widget: "string", required: false}
