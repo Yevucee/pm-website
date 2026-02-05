@@ -3,11 +3,12 @@ import { Button } from '@/app/components/button';
 import { ReleaseCard } from '@/app/components/release-card';
 import { EventCard } from '@/app/components/event-card';
 import { ProductCard } from '@/app/components/product-card';
-import { Music, Ticket, ShoppingBag, Play } from 'lucide-react';
+import { Ticket, ShoppingBag, Play } from 'lucide-react';
 import { upcomingEvents, merchProducts } from '@/data/mock-data';
 import { releases } from '@/data/releases';
 import { MobileActionBar } from '@/app/components/mobile-action-bar';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
+import { AppleMusicIcon, SpotifyIcon, YouTubeIcon } from '@/app/components/streaming-icons';
 
 interface HomePageContent {
   heroShow?: boolean;
@@ -87,8 +88,8 @@ export function HomePage() {
                 className="w-full sm:w-auto"
               >
                 <Button variant="primary" size="lg" className="w-full sm:w-auto">
-                  <Play size={20} className="mr-2" />
-                  {home.heroPrimaryCtaLabel}
+                  <SpotifyIcon className="h-5 w-5" />
+                  <span className="ml-2">{home.heroPrimaryCtaLabel}</span>
                 </Button>
               </a>
             )}
@@ -179,24 +180,30 @@ export function HomePage() {
               </p>
               
               <div className="flex flex-wrap gap-3 mb-6">
-                <a href={latestRelease.spotifyUrl} target="_blank" rel="noopener noreferrer">
-                  <Button variant="primary">
-                    <Music size={18} className="mr-2" />
-                    Spotify
-                  </Button>
-                </a>
-                <a href={latestRelease.appleMusicUrl} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline">
-                    <Music size={18} className="mr-2" />
-                    Apple Music
-                  </Button>
-                </a>
-                <a href={latestRelease.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline">
-                    <Play size={18} className="mr-2" />
-                    YouTube
-                  </Button>
-                </a>
+                {latestRelease.spotifyEnabled !== false && latestRelease.spotifyUrl && (
+                  <a href={latestRelease.spotifyUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="primary">
+                      <SpotifyIcon className="h-4 w-4" />
+                      <span className="ml-2">Spotify</span>
+                    </Button>
+                  </a>
+                )}
+                {latestRelease.appleMusicEnabled !== false && latestRelease.appleMusicUrl && (
+                  <a href={latestRelease.appleMusicUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline">
+                      <AppleMusicIcon className="h-4 w-4" />
+                      <span className="ml-2">Apple Music</span>
+                    </Button>
+                  </a>
+                )}
+                {latestRelease.youtubeEnabled !== false && latestRelease.youtubeUrl && (
+                  <a href={latestRelease.youtubeUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline">
+                      <YouTubeIcon className="h-4 w-4" />
+                      <span className="ml-2">YouTube</span>
+                    </Button>
+                  </a>
+                )}
               </div>
 
             </div>

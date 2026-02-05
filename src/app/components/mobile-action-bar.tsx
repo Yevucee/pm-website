@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Music, Ticket } from 'lucide-react';
+import { Ticket } from 'lucide-react';
 import { releases } from '@/data/releases';
 import { Button } from './button';
+import { SpotifyIcon } from '@/app/components/streaming-icons';
 
 export function MobileActionBar() {
   const latestRelease = releases[0];
@@ -16,8 +17,8 @@ export function MobileActionBar() {
           className="flex-1"
         >
           <Button variant="outline" className="w-full" size="md">
-            <Music size={20} className="mr-2" />
-            Listen
+            <SpotifyIcon className="h-5 w-5" />
+            <span className="ml-2">Listen</span>
           </Button>
         </a>
         <Link to="/events" className="flex-1">
