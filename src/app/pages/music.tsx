@@ -27,7 +27,7 @@ export function MusicPage() {
       <div className="max-w-7xl mx-auto">
         {music.heroShow !== false && (
           <h1 className="font-heading text-4xl sm:text-6xl mb-4">
-            {music.heroTitle || 'MUSIC'}
+            {music.heroTitle || 'PM THE ARTIST'}
           </h1>
         )}
         <p className="text-muted-foreground text-base sm:text-xl mb-8 max-w-3xl leading-relaxed">

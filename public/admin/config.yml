@@ -238,7 +238,7 @@ collections:
           - {label: "Promoter Box Text", name: "promoterText", widget: "text", required: false}
           - {label: "Promoter Button Label", name: "promoterButtonLabel", widget: "string", required: false}
           - {label: "Promoter Button URL", name: "promoterButtonUrl", widget: "string", required: false}
-      - label: "Music"
+      - label: "PM the Artist"
         name: "music"
         file: "content/pages/music.json"
         fields:

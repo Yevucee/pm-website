@@ -34,12 +34,11 @@ export function Footer() {
   ].filter((item) => Boolean(item.href));
 
   const quickLinks = [
-    { label: 'Music', path: '/music' },
+    { label: 'PM the Artist', path: '/music' },
     { label: 'PM Events', path: '/pm-events' },
     { label: 'Merch', path: '/merch' },
     { label: 'Media', path: '/media' },
     { label: 'PM the DJ', path: '/pm-the-dj' },
-    { label: 'PM the Artist', path: '/pm-the-artist' },
     { label: 'Admin Login', path: '/admin', external: true }
   ];
 

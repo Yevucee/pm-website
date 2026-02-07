@@ -14,7 +14,7 @@ export function ReleaseDetailPage() {
         <div className="text-center">
           <h1 className="font-heading text-4xl mb-4">Release Not Found</h1>
           <Link to="/music">
-            <Button variant="primary">Back to Music</Button>
+            <Button variant="primary">Back to PM the Artist</Button>
           </Link>
         </div>
       </div>
@@ -26,7 +26,7 @@ export function ReleaseDetailPage() {
       <div className="max-w-5xl mx-auto">
         <Link to="/music" className="inline-flex items-center text-accent hover:text-accent-hover mb-6 sm:mb-8 transition-colors">
           <ChevronLeft size={20} className="mr-1" />
-          Back to Music
+          Back to PM the Artist
         </Link>
 
         <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
