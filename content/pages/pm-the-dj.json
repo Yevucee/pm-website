@@ -5,7 +5,14 @@
   "heroDescription": "From Rainbow Radio to headline nights, PM delivers high-energy sets that move every crowd. Expect seamless blends, big moments, and a vibe tailored to your event.",
   "heroImage": "/uploads/passion_mixtape.jpg",
   "bioHeading": "About PM as a DJ",
-  "bioText": "A former Rainbow Radio star DJ and trusted selector across London’s nightlife scene, PM brings deep musical knowledge and crowd control to every set. From intimate celebrations to packed club nights, he curates unforgettable experiences across all genres.",
+  "bioText": "A former Rainbow Radio star DJ and trusted selector across London's nightlife scene, PM brings deep musical knowledge and crowd control to every set. From intimate celebrations to packed club nights, he curates unforgettable experiences across all genres.",
+  "featuresShow": true,
+  "features": [
+    { "title": "All-genre flexibility", "text": "Afrobeats, Amapiano, Hip-Hop, R&B, Old School, Dancehall, House." },
+    { "title": "Crowd-first approach", "text": "Reads the room and builds momentum throughout the night." },
+    { "title": "Broadcast pedigree", "text": "Rainbow Radio International host with years of live mix experience." },
+    { "title": "Signature energy", "text": "High-impact transitions and iconic moments for your event." }
+  ],
   "highlightsHeading": "What you can expect",
   "highlights": [
     { "item": "All-genre flexibility: Afrobeats, Amapiano, Hip-Hop, R&B, Old School, Dancehall, House." },
@@ -14,5 +21,16 @@
     { "item": "High-impact moments that keep the energy rising." }
   ],
   "bookingHeading": "Book PM the DJ",
-  "bookingIntro": "Tell us the basics and we’ll follow up to confirm availability and details."
+  "bookingIntro": "Tell us the basics and we'll follow up to confirm availability and details.",
+  "genreOptionsShow": true,
+  "genreOptions": [
+    { "genre": "Afrobeats" },
+    { "genre": "Amapiano" },
+    { "genre": "Hip-Hop" },
+    { "genre": "R&B" },
+    { "genre": "Old School" },
+    { "genre": "Dancehall" },
+    { "genre": "House" },
+    { "genre": "Mixed vibes" }
+  ]
 }

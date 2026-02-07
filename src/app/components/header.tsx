@@ -20,11 +20,12 @@ export function Header() {
   const navItems = [
     { label: 'Home', path: '/' },
     { label: 'Music', path: '/music' },
-    { label: 'Events', path: '/events' },
+    { label: 'PM Events', path: '/pm-events' },
     { label: 'Merch', path: '/merch' },
     { label: 'Media', path: '/media' },
     { label: 'About', path: '/about' },
     { label: 'PM the DJ', path: '/pm-the-dj' },
+    { label: 'PM the Artist', path: '/pm-the-artist' },
     { label: 'Contact', path: '/contact' }
   ];
 

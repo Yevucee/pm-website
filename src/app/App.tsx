@@ -13,6 +13,8 @@ import { AboutPage } from '@/app/pages/about';
 import { ContactPage } from '@/app/pages/contact';
 import { DesignSystemPage } from '@/app/pages/design-system';
 import { PmTheDjPage } from '@/app/pages/pm-the-dj';
+import { PmTheArtistPage } from '@/app/pages/pm-the-artist';
+import { PmEventsPage } from '@/app/pages/pm-events';
 
 function App() {
   return (
@@ -26,12 +28,15 @@ function App() {
             <Route path="/music/:id" element={<ReleaseDetailPage />} />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/events/:id" element={<EventDetailPage />} />
+            <Route path="/pm-events" element={<PmEventsPage />} />
+            <Route path="/pm-events/:id" element={<EventDetailPage />} />
             <Route path="/merch" element={<MerchPage />} />
             <Route path="/merch/:id" element={<ProductDetailPage />} />
             <Route path="/media" element={<MediaPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/pm-the-dj" element={<PmTheDjPage />} />
+            <Route path="/pm-the-artist" element={<PmTheArtistPage />} />
             <Route path="/design-system" element={<DesignSystemPage />} />
           </Routes>
         </main>

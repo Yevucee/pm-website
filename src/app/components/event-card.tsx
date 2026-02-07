@@ -62,7 +62,7 @@ export function EventCard({ event }: EventCardProps) {
               <p className="text-sm text-muted-foreground">From</p>
               <p className="font-heading text-2xl text-accent">£{availableTier.price}</p>
             </div>
-            <Link to={`/events/${event.id}`}>
+            <Link to={`/pm-events/${event.id}`}>
               <Button variant="primary">
                 Buy Tickets
               </Button>
@@ -72,7 +72,7 @@ export function EventCard({ event }: EventCardProps) {
 
         {event.comingSoon && (
           <div className="pt-4 border-t border-border">
-            <Link to={`/events/${event.id}`}>
+            <Link to={`/pm-events/${event.id}`}>
               <Button variant="outline" className="w-full">
                 Register Interest
               </Button>

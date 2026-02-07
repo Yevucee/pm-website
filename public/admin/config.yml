@@ -274,6 +274,14 @@ collections:
           - {label: "Intro Text", name: "introText", widget: "text", required: false}
           - {label: "Products Heading", name: "productsHeading", widget: "string", required: false}
           - {label: "Payment Note", name: "paymentNote", widget: "string", required: false}
+          - {label: "Shipping - Show", name: "shippingShow", widget: "boolean", default: true}
+          - {label: "Shipping Heading", name: "shippingHeading", widget: "string", required: false}
+          - label: "Shipping Items"
+            name: "shippingItems"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Text", name: "text", widget: "string"}
       - label: "Events"
         name: "events"
         file: "content/pages/events.json"
@@ -292,6 +300,23 @@ collections:
           - {label: "Past - Show", name: "pastShow", widget: "boolean", default: true}
           - {label: "Past Heading", name: "pastHeading", widget: "string", required: false}
 
+      - label: "PM Events"
+        name: "pm-events"
+        file: "content/pages/pm-events.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Intro Text", name: "introText", widget: "text", required: false}
+          - {label: "Signature Section - Show", name: "signatureShow", widget: "boolean", default: true}
+          - {label: "Signature Badge", name: "signatureBadge", widget: "string", required: false}
+          - {label: "Signature Heading", name: "signatureHeading", widget: "string", required: false}
+          - {label: "Signature Text", name: "signatureText", widget: "text", required: false}
+          - {label: "Signature Subtext", name: "signatureSubtext", widget: "text", required: false}
+          - {label: "Upcoming - Show", name: "upcomingShow", widget: "boolean", default: true}
+          - {label: "Upcoming Heading", name: "upcomingHeading", widget: "string"}
+          - {label: "Past - Show", name: "pastShow", widget: "boolean", default: true}
+          - {label: "Past Heading", name: "pastHeading", widget: "string", required: false}
       - label: "PM the DJ"
         name: "pm-the-dj"
         file: "content/pages/pm-the-dj.json"
@@ -303,6 +328,14 @@ collections:
           - {label: "Hero - Image", name: "heroImage", widget: "image", required: false}
           - {label: "Bio Heading", name: "bioHeading", widget: "string", required: false}
           - {label: "Bio Text", name: "bioText", widget: "text", required: false}
+          - {label: "Features - Show", name: "featuresShow", widget: "boolean", default: true}
+          - label: "Features"
+            name: "features"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Text", name: "text", widget: "text"}
           - {label: "Highlights Heading", name: "highlightsHeading", widget: "string", required: false}
           - label: "Highlights"
             name: "highlights"
@@ -312,6 +345,53 @@ collections:
               - {label: "Item", name: "item", widget: "string"}
           - {label: "Booking Heading", name: "bookingHeading", widget: "string", required: false}
           - {label: "Booking Intro", name: "bookingIntro", widget: "text", required: false}
+          - {label: "Genre Options - Show", name: "genreOptionsShow", widget: "boolean", default: true}
+          - label: "Genre Options"
+            name: "genreOptions"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Genre", name: "genre", widget: "string"}
+      - label: "PM the Artist"
+        name: "pm-the-artist"
+        file: "content/pages/pm-the-artist.json"
+        fields:
+          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
+          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Hero - Image", name: "heroImage", widget: "image", required: false}
+          - {label: "Intro Text", name: "introText", widget: "text"}
+          - {label: "Body", name: "body", widget: "markdown"}
+          - {label: "Stats - Show", name: "statsShow", widget: "boolean", default: true}
+          - label: "Stats"
+            name: "stats"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Value", name: "value", widget: "string"}
+          - {label: "Timeline - Show", name: "timelineShow", widget: "boolean", default: true}
+          - {label: "Timeline Heading", name: "timelineHeading", widget: "string"}
+          - label: "Timeline"
+            name: "timeline"
+            widget: "list"
+            fields:
+              - {label: "Year", name: "year", widget: "string"}
+              - {label: "Event", name: "event", widget: "string"}
+          - {label: "Press - Show", name: "pressShow", widget: "boolean", default: true}
+          - {label: "Press Heading", name: "pressHeading", widget: "string"}
+          - label: "Press Quotes"
+            name: "pressQuotes"
+            widget: "list"
+            fields:
+              - {label: "Quote", name: "quote", widget: "text"}
+              - {label: "Source", name: "source", widget: "string"}
+          - {label: "Press Kit Label", name: "pressKitLabel", widget: "string", required: false}
+          - {label: "Press Kit URL", name: "pressKitUrl", widget: "string", required: false}
+          - {label: "Booking CTA - Show", name: "bookingShow", widget: "boolean", default: true}
+          - {label: "Booking CTA Heading", name: "bookingHeading", widget: "string"}
+          - {label: "Booking CTA Text", name: "bookingText", widget: "text"}
+          - {label: "Booking CTA Button Label", name: "bookingButtonLabel", widget: "string"}
+          - {label: "Booking CTA Button URL", name: "bookingButtonUrl", widget: "string"}
 
   - name: "settings"
     label: "Site Settings"

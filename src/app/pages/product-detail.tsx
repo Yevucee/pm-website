@@ -5,11 +5,29 @@ import { ChevronLeft, ShoppingCart } from 'lucide-react';
 import { merchProducts } from '@/data/mock-data';
 import { cn } from '@/app/components/ui/utils';
 import { goToStripeLink } from '@/utils/stripe';
+import { getPageContent } from '@/data/pages';
+
+interface MerchPageContent {
+  shippingShow?: boolean;
+  shippingHeading?: string;
+  shippingItems?: { text?: string }[];
+}
 
 export function ProductDetailPage() {
   const { id } = useParams();
   const product = merchProducts.find((p) => p.id === id);
   const [selectedSize, setSelectedSize] = useState(product?.sizes[0] || '');
+  const merchPage = getPageContent<MerchPageContent>('merch', {});
+  
+  const defaultShippingItems = [
+    'UK Shipping: 3-5 working days',
+    'International Shipping: 7-14 working days',
+    'Free UK returns within 30 days',
+    'All items dispatched from London',
+  ];
+  const shippingItems = (merchPage.shippingItems && merchPage.shippingItems.length > 0)
+    ? merchPage.shippingItems.map(item => item.text || '').filter(Boolean)
+    : defaultShippingItems;
 
   if (!product) {
     return (
@@ -108,17 +126,18 @@ export function ProductDetailPage() {
                 </div>
               </details>
 
-              <details className="bg-surface border border-border rounded-xl overflow-hidden">
-                <summary className="p-4 sm:p-6 cursor-pointer font-heading text-base sm:text-lg hover:bg-accent/5 transition-colors">
-                  SHIPPING & RETURNS
-                </summary>
-                <div className="px-4 sm:px-6 pb-6 text-muted-foreground space-y-2">
-                  <p>• UK Shipping: 3-5 working days</p>
-                  <p>• International Shipping: 7-14 working days</p>
-                  <p>• Free UK returns within 30 days</p>
-                  <p>• All items dispatched from London</p>
-                </div>
-              </details>
+              {merchPage.shippingShow !== false && (
+                <details className="bg-surface border border-border rounded-xl overflow-hidden">
+                  <summary className="p-4 sm:p-6 cursor-pointer font-heading text-base sm:text-lg hover:bg-accent/5 transition-colors">
+                    {merchPage.shippingHeading || 'SHIPPING & RETURNS'}
+                  </summary>
+                  <div className="px-4 sm:px-6 pb-6 text-muted-foreground space-y-2">
+                    {shippingItems.map((item, index) => (
+                      <p key={index}>• {item}</p>
+                    ))}
+                  </div>
+                </details>
+              )}
 
               <details className="bg-surface border border-border rounded-xl overflow-hidden">
                 <summary className="p-4 sm:p-6 cursor-pointer font-heading text-base sm:text-lg hover:bg-accent/5 transition-colors">

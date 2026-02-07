@@ -4,5 +4,13 @@
   "heroSubtitle": "",
   "introText": "Official The PM merchandise - Limited editions and classics",
   "productsHeading": "",
-  "paymentNote": "Pay securely with Stripe • Apple Pay • Google Pay"
+  "paymentNote": "Pay securely with Stripe • Apple Pay • Google Pay",
+  "shippingShow": true,
+  "shippingHeading": "SHIPPING & RETURNS",
+  "shippingItems": [
+    { "text": "UK Shipping: 3-5 working days" },
+    { "text": "International Shipping: 7-14 working days" },
+    { "text": "Free UK returns within 30 days" },
+    { "text": "All items dispatched from London" }
+  ]
 }

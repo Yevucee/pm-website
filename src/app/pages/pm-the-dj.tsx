@@ -11,28 +11,34 @@ interface PmDjContent {
   heroImage?: string;
   bioHeading?: string;
   bioText?: string;
+  featuresShow?: boolean;
+  features?: { title?: string; text?: string }[];
   highlightsHeading?: string;
   highlights?: string[];
   bookingHeading?: string;
   bookingIntro?: string;
+  genreOptionsShow?: boolean;
+  genreOptions?: { genre?: string }[];
 }
-
-const GENRE_OPTIONS = [
-  'Afrobeats',
-  'Amapiano',
-  'Hip-Hop',
-  'R&B',
-  'Old School',
-  'Dancehall',
-  'House',
-  'Mixed vibes',
-];
 
 export function PmTheDjPage() {
   const page = getPageContent<PmDjContent>('pm-the-dj', {});
   const heroImage = resolvePublicAsset(page.heroImage);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  
+  const defaultFeatures = [
+    { title: 'All-genre flexibility', text: 'Afrobeats, Amapiano, Hip-Hop, R&B, Old School, Dancehall, House.' },
+    { title: 'Crowd-first approach', text: 'Reads the room and builds momentum throughout the night.' },
+    { title: 'Broadcast pedigree', text: 'Rainbow Radio International host with years of live mix experience.' },
+    { title: 'Signature energy', text: 'High-impact transitions and iconic moments for your event.' },
+  ];
+  const features = (page.features && page.features.length > 0) ? page.features : defaultFeatures;
+  
+  const defaultGenres = ['Afrobeats', 'Amapiano', 'Hip-Hop', 'R&B', 'Old School', 'Dancehall', 'House', 'Mixed vibes'];
+  const genreOptions = (page.genreOptions && page.genreOptions.length > 0) 
+    ? page.genreOptions.map(g => g.genre || '').filter(Boolean)
+    : defaultGenres;
 
   const toggleGenre = (genre: string) => {
     setSelectedGenres((prev) =>
@@ -110,20 +116,21 @@ export function PmTheDjPage() {
               {page.bioText ||
                 'A former Rainbow Radio star DJ and trusted selector across London’s nightlife scene, PM brings deep musical knowledge and crowd control to every set. From intimate celebrations to packed club nights, he curates unforgettable experiences across all genres.'}
             </p>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                { icon: Music2, title: 'All-genre flexibility', text: 'Afrobeats, Amapiano, Hip-Hop, R&B, Old School, Dancehall, House.' },
-                { icon: Sparkles, title: 'Crowd-first approach', text: 'Reads the room and builds momentum throughout the night.' },
-                { icon: Radio, title: 'Broadcast pedigree', text: 'Rainbow Radio International host with years of live mix experience.' },
-                { icon: Star, title: 'Signature energy', text: 'High-impact transitions and iconic moments for your event.' },
-              ].map((item) => (
-                <div key={item.title} className="bg-surface border border-border rounded-xl p-5">
-                  <item.icon size={22} className="text-accent mb-3" />
-                  <h3 className="font-heading text-lg mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.text}</p>
-                </div>
-              ))}
-            </div>
+            {page.featuresShow !== false && (
+              <div className="grid sm:grid-cols-2 gap-4">
+                {features.map((item, index) => {
+                  const icons = [Music2, Sparkles, Radio, Star];
+                  const Icon = icons[index % icons.length];
+                  return (
+                    <div key={item.title || index} className="bg-surface border border-border rounded-xl p-5">
+                      <Icon size={22} className="text-accent mb-3" />
+                      <h3 className="font-heading text-lg mb-2">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">{item.text}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           <div className="bg-surface border border-border rounded-2xl p-6 sm:p-8">
@@ -217,25 +224,27 @@ export function PmTheDjPage() {
                 />
               </div>
 
-              <div>
-                <label className="block font-heading text-sm mb-2">Music Genres (optional)</label>
-                <div className="flex flex-wrap gap-2">
-                  {GENRE_OPTIONS.map((genre) => (
-                    <button
-                      key={genre}
-                      type="button"
-                      onClick={() => toggleGenre(genre)}
-                      className={`px-3 py-2 rounded-full text-xs sm:text-sm border transition-colors ${
-                        selectedGenres.includes(genre)
-                          ? 'bg-accent text-black border-accent'
-                          : 'bg-background border-border text-muted-foreground hover:border-accent'
-                      }`}
-                    >
-                      {genre}
-                    </button>
-                  ))}
+              {page.genreOptionsShow !== false && (
+                <div>
+                  <label className="block font-heading text-sm mb-2">Music Genres (optional)</label>
+                  <div className="flex flex-wrap gap-2">
+                    {genreOptions.map((genre) => (
+                      <button
+                        key={genre}
+                        type="button"
+                        onClick={() => toggleGenre(genre)}
+                        className={`px-3 py-2 rounded-full text-xs sm:text-sm border transition-colors ${
+                          selectedGenres.includes(genre)
+                            ? 'bg-accent text-black border-accent'
+                            : 'bg-background border-border text-muted-foreground hover:border-accent'
+                        }`}
+                      >
+                        {genre}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>

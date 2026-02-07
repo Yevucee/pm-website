@@ -23,7 +23,7 @@ export function Navigation() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/music', label: 'Music', icon: Music },
-    { to: '/events', label: 'Events', icon: Calendar },
+    { to: '/pm-events', label: 'PM Events', icon: Calendar },
     { to: '/merch', label: 'Merch', icon: ShoppingBag },
     { to: '/media', label: 'Media', icon: Image },
     { to: '/about', label: 'About', icon: User },
@@ -124,14 +124,14 @@ export function MobileBottomBar() {
   const location = useLocation();
 
   // Only show on specific pages
-  const showOnPages = ['/', '/events', '/merch'];
+  const showOnPages = ['/', '/pm-events', '/merch'];
   if (!showOnPages.includes(location.pathname)) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-card border-t border-border shadow-2xl">
       <div className="flex items-center justify-around p-4 gap-3">
         <Link
-          to="/events"
+          to="/pm-events"
           className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 px-6 py-3 rounded-md text-center font-medium shadow-[0_0_15px_rgba(0,229,255,0.3)]"
         >
           Buy Tickets

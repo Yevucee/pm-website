@@ -102,7 +102,7 @@ export function HomePage() {
                   </Button>
                 </a>
               ) : (
-                <Link to={home.heroSecondaryCtaUrl || '/events'} className="w-full sm:w-auto">
+                <Link to={home.heroSecondaryCtaUrl || '/pm-events'} className="w-full sm:w-auto">
                   <Button variant="outline" size="lg" className="w-full sm:w-auto">
                     <Ticket size={20} className="mr-2" />
                     {home.heroSecondaryCtaLabel}
@@ -221,7 +221,7 @@ export function HomePage() {
               {home.eventsHeading || 'UPCOMING EVENTS'}
             </h2>
             {home.eventsLinkLabel && (
-              <Link to={home.eventsLinkUrl || '/events'} className="text-accent hover:text-accent-hover transition-colors text-sm sm:text-base">
+              <Link to={home.eventsLinkUrl || '/pm-events'} className="text-accent hover:text-accent-hover transition-colors text-sm sm:text-base">
                 {home.eventsLinkLabel}
               </Link>
             )}
