@@ -34,9 +34,9 @@ export function Footer() {
   ].filter((item) => Boolean(item.href));
 
   const quickLinks = [
-    { label: 'Events', path: '/events' },
     { label: 'PM the DJ', path: '/pm-the-dj' },
     { label: 'PM the Artist', path: '/music' },
+    { label: 'Events', path: '/events' },
     { label: 'Merch', path: '/merch' },
     { label: 'Media', path: '/media' },
     { label: 'Admin Login', path: '/admin', external: true }

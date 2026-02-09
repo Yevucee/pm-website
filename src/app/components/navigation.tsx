@@ -22,9 +22,9 @@ export function Navigation() {
 
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/events', label: 'Events', icon: Calendar },
     { to: '/pm-the-dj', label: 'PM the DJ', icon: Music },
     { to: '/music', label: 'PM the Artist', icon: Music },
+    { to: '/events', label: 'Events', icon: Calendar },
     { to: '/merch', label: 'Merch', icon: ShoppingBag },
     { to: '/media', label: 'Media', icon: Image },
     { to: '/about', label: 'About', icon: User },
