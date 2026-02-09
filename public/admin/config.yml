@@ -299,24 +299,6 @@ collections:
           - {label: "Upcoming Heading", name: "upcomingHeading", widget: "string"}
           - {label: "Past - Show", name: "pastShow", widget: "boolean", default: true}
           - {label: "Past Heading", name: "pastHeading", widget: "string", required: false}
-
-      - label: "PM Events"
-        name: "pm-events"
-        file: "content/pages/pm-events.json"
-        fields:
-          - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
-          - {label: "Hero - Title", name: "heroTitle", widget: "string"}
-          - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
-          - {label: "Intro Text", name: "introText", widget: "text", required: false}
-          - {label: "Signature Section - Show", name: "signatureShow", widget: "boolean", default: true}
-          - {label: "Signature Badge", name: "signatureBadge", widget: "string", required: false}
-          - {label: "Signature Heading", name: "signatureHeading", widget: "string", required: false}
-          - {label: "Signature Text", name: "signatureText", widget: "text", required: false}
-          - {label: "Signature Subtext", name: "signatureSubtext", widget: "text", required: false}
-          - {label: "Upcoming - Show", name: "upcomingShow", widget: "boolean", default: true}
-          - {label: "Upcoming Heading", name: "upcomingHeading", widget: "string"}
-          - {label: "Past - Show", name: "pastShow", widget: "boolean", default: true}
-          - {label: "Past Heading", name: "pastHeading", widget: "string", required: false}
       - label: "PM the DJ"
         name: "pm-the-dj"
         file: "content/pages/pm-the-dj.json"

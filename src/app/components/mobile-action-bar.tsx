@@ -21,7 +21,7 @@ export function MobileActionBar() {
             <span className="ml-2">Listen</span>
           </Button>
         </a>
-        <Link to="/pm-events" className="flex-1">
+        <Link to="/events" className="flex-1">
           <Button variant="primary" className="w-full" size="md">
             <Ticket size={20} className="mr-2" />
             Tickets
