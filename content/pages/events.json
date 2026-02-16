@@ -1,15 +1,15 @@
 {
-  "heroShow": true,
-  "heroTitle": "EVENTS",
-  "heroSubtitle": "",
-  "introText": "Boat parties, club nights, and festival appearances",
-  "signatureShow": true,
-  "signatureBadge": "Signature Event",
-  "signatureHeading": "ANNUAL BOAT PARTY",
-  "signatureText": "PM hosts one of London's most successful annual boat parties, combining Afrobeats, hip-hop, dancehall, and global urban sounds on the water.",
-  "signatureSubtext": "The event attracts a diverse international crowd and has become a staple of London's Afro-urban social calendar.",
-  "upcomingShow": true,
+  "signatureText": "PM hosts one of London's most successful annual boat parties, combining Afrobeats, hip-hop, dancehall, and global urban sounds on water.",
   "upcomingHeading": "UPCOMING",
+  "signatureHeading": "THE ANNUAL AFROBOAT PARTY",
+  "signatureBadge": "Signature Event",
   "pastShow": true,
-  "pastHeading": "PAST EVENTS"
+  "pastHeading": "PAST EVENTS",
+  "heroSubtitle": "",
+  "signatureSubtext": "The event attracts a diverse international crowd and has become a staple of London's Afro-urban social calendar.",
+  "signatureShow": true,
+  "heroShow": true,
+  "introText": "Boat parties, club nights, and festivals",
+  "upcomingShow": true,
+  "heroTitle": "EVENTS"
 }
