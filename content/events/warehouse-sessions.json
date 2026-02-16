@@ -5,18 +5,6 @@
       "price": 20,
       "available": true,
       "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
-    },
-    {
-      "name": "General Admission",
-      "price": 20,
-      "available": true,
-      "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
-    },
-    {
-      "name": "VIP Table",
-      "price": 150,
-      "available": true,
-      "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
     }
   ],
   "city": "Newport Pagnell, MILTON KEYNES",
