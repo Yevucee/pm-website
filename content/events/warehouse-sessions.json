@@ -1,16 +1,34 @@
 {
-  "title": "Warehouse Sessions",
-  "type": "club-night",
-  "date": "2025-02-21",
-  "time": "22:00",
-  "venue": "Fabric",
-  "city": "London",
-  "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200",
-  "description": "Deep underground vibes in Londons most iconic club space.",
-  "lineup": ["The PM", "Resident DJ", "B2B Session"],
   "ticketTiers": [
-    { "name": "Early Bird", "price": 15, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" },
-    { "name": "General Admission", "price": 20, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" },
-    { "name": "VIP Table", "price": 150, "available": true, "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400" }
-  ]
+    {
+      "name": "Early Bird",
+      "price": 20,
+      "available": true,
+      "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
+    },
+    {
+      "name": "General Admission",
+      "price": 20,
+      "available": true,
+      "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
+    },
+    {
+      "name": "VIP Table",
+      "price": 150,
+      "available": false,
+      "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
+    }
+  ],
+  "city": "Newport Pagnell, MILTON KEYNES",
+  "time": "20:00 - 01:00",
+  "date": "2025-03-07",
+  "lineup": [
+    "The PM"
+  ],
+  "venue": "Harben Suite, 3rd Floor Harben House, Tickford Street, Newport Pagnell, MK16 9EY",
+  "title": "The Ghana Independence Cocktail Party (Milton Keynes)",
+  "type": "club-night",
+  "image": "/pm-website/uploads/photo-output-5.heic",
+  "comingSoon": true,
+  "description": "A night, celebrating Ghana's 69th Independence Celebration, with Brother's Band playing live music and DJs The PM, DJ Kudjo and DJ Rexy playing hits old and new. MC: Pacman."
 }
