@@ -15,7 +15,7 @@
     {
       "name": "VIP Table",
       "price": 150,
-      "available": false,
+      "available": true,
       "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
     }
   ],
@@ -29,6 +29,6 @@
   "title": "The Ghana Independence Cocktail Party (Milton Keynes)",
   "type": "club-night",
   "image": "/pm-website/uploads/photo-output-5.heic",
-  "comingSoon": true,
+  "comingSoon": false,
   "description": "A night, celebrating Ghana's 69th Independence Celebration, with Brother's Band playing live music and DJs The PM, DJ Kudjo and DJ Rexy playing hits old and new. MC: Pacman."
 }
