@@ -14,25 +14,25 @@ const otherUpcomingEvents = upcomingEvents.filter((e) => e.type !== 'boat-party'
 function SignatureEventSection({ event }: { event: Event }) {
   const [modalOpen, setModalOpen] = useState(false);
   return (
-    <section className="mb-12 sm:mb-16">
+    <section className="mb-8 sm:mb-10">
       <div className="flex flex-col items-center">
-        <span className="px-3 py-1 bg-accent text-black rounded uppercase text-sm font-heading inline-block mb-4">
+        <span className="px-3 py-1 bg-accent text-black rounded uppercase text-sm font-heading inline-block mb-3">
           Signature Event
         </span>
         <button
           type="button"
           onClick={() => setModalOpen(true)}
-          className="block w-full max-w-lg rounded-xl overflow-hidden border border-border hover:border-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
+          className="block w-full max-w-md rounded-xl overflow-hidden border border-border hover:border-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
         >
           <img
             src={event.image}
             alt={event.title}
-            className="w-full h-auto object-contain"
+            className="w-full h-auto object-contain max-h-[280px] sm:max-h-[320px]"
           />
         </button>
         <Button
           variant="primary"
-          className="mt-6"
+          className="mt-4"
           onClick={() => setModalOpen(true)}
         >
           {event.comingSoon ? 'View Details' : 'Get Tickets'}
