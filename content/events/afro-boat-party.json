@@ -1,0 +1,22 @@
+{
+  "title": "The Afro BOAT PARTY (Black and White edition)",
+  "type": "boat-party",
+  "date": "2026-08-30",
+  "time": "8PM – 3AM",
+  "venue": "Tereza Joanna Boat, King George V Dock",
+  "venueName": "Tereza Joanna Boat",
+  "city": "London E16 2JU",
+  "image": "/uploads/afro-boat-party-2026.png",
+  "description": "Join us for the iconic Afro Boat Party – Black and White edition. BBQ, DJs, African drummers and vibes on the water at King George V Dock.\n\nTickets out soon.",
+  "comingSoon": true,
+  "lineup": ["The PM"],
+  "ticketTiers": [
+    {
+      "name": "General Admission",
+      "price": 0,
+      "available": false,
+      "stripeLink": ""
+    }
+  ],
+  "soldOut": false
+}
