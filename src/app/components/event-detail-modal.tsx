@@ -58,7 +58,7 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
           <img
             src={event.image}
             alt={event.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain bg-surface"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
           <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6">

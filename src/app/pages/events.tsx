@@ -1,10 +1,47 @@
+import { useState } from 'react';
 import { EventCard } from '@/app/components/event-card';
-import { upcomingEvents, pastEvents } from '@/data/mock-data';
+import { EventDetailModal } from '@/app/components/event-detail-modal';
+import { Event, upcomingEvents, pastEvents } from '@/data/mock-data';
 import { MobileActionBar } from '@/app/components/mobile-action-bar';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
 import { generalSettings } from '@/data/settings';
 import { Button } from '@/app/components/button';
 import logo from '@/assets/partiesbythepm-logo.png';
+
+const signatureEvent = upcomingEvents.find((e) => e.type === 'boat-party');
+const otherUpcomingEvents = upcomingEvents.filter((e) => e.type !== 'boat-party');
+
+function SignatureEventSection({ event }: { event: Event }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  return (
+    <section className="mb-12 sm:mb-16">
+      <div className="flex flex-col items-center">
+        <span className="px-3 py-1 bg-accent text-black rounded uppercase text-sm font-heading inline-block mb-4">
+          Signature Event
+        </span>
+        <button
+          type="button"
+          onClick={() => setModalOpen(true)}
+          className="block w-full max-w-lg rounded-xl overflow-hidden border border-border hover:border-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
+        >
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-auto object-contain"
+          />
+        </button>
+        <Button
+          variant="primary"
+          className="mt-6"
+          onClick={() => setModalOpen(true)}
+        >
+          {event.comingSoon ? 'View Details' : 'Get Tickets'}
+        </Button>
+      </div>
+      <EventDetailModal event={event} open={modalOpen} onOpenChange={setModalOpen} />
+    </section>
+  );
+}
 
 interface EventsPageContent {
   heroShow?: boolean;
@@ -67,47 +104,9 @@ export function EventsPage() {
           </section>
         )}
 
-        {/* Annual Boat Party Feature */}
-        {eventsPage.signatureShow !== false && (
-          <section className="mb-12 sm:mb-16 bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/30 rounded-2xl p-6 sm:p-12">
-            <div className="max-w-3xl">
-              <span className="px-3 py-1 bg-accent text-black rounded uppercase text-sm font-heading inline-block mb-4">
-                {eventsPage.signatureBadge || 'Signature Event'}
-              </span>
-              <h2 className="font-heading text-3xl sm:text-5xl mb-4 sm:mb-6">
-                {eventsPage.signatureHeading || 'ANNUAL BOAT PARTY'}
-              </h2>
-              {eventsPage.signatureNextDate && (
-                <p className="text-accent font-semibold mt-2 mb-4">
-                  Next date: {eventsPage.signatureNextDate}
-                </p>
-              )}
-              <p className="text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                {eventsPage.signatureText ||
-                  "PM hosts one of London's most successful annual boat parties, combining Afrobeats, hip-hop, dancehall, and global urban sounds on the water."}
-              </p>
-              <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
-                {eventsPage.signatureSubtext ||
-                  "The event attracts a diverse international crowd and has become a staple of London's Afro-urban social calendar."}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {eventsPage.signatureTicketLink && (
-                  <a
-                    href={eventsPage.signatureTicketLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="bg-accent text-black hover:bg-accent/90">
-                      Buy Tickets
-                    </Button>
-                  </a>
-                )}
-                <Button variant="outline" className="border-accent text-accent hover:bg-accent/10">
-                  Find Out More
-                </Button>
-              </div>
-            </div>
-          </section>
+        {/* Signature Event – Boat Party */}
+        {eventsPage.signatureShow !== false && signatureEvent && (
+          <SignatureEventSection event={signatureEvent} />
         )}
 
         <hr className="border-border my-12" />
@@ -118,9 +117,9 @@ export function EventsPage() {
             <h2 className="font-heading text-3xl font-bold mb-6">
               {eventsPage.upcomingHeading || 'UPCOMING'}
             </h2>
-            {upcomingEvents.length > 0 ? (
+            {otherUpcomingEvents.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {upcomingEvents.map((event) => (
+                {otherUpcomingEvents.map((event) => (
                   <EventCard key={event.id} event={event} />
                 ))}
               </div>

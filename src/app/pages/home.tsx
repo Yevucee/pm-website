@@ -72,7 +72,7 @@ const instagramUsername = (generalSettings.instagram?.match(/instagram\.com\/([^
 export function HomePage() {
   const home = getPageContent<HomePageContent>('home', {});
   const latestRelease = releases[0];
-  const featuredEvents = upcomingEvents.slice(0, 3);
+  const featuredEvents = upcomingEvents.filter((e) => e.type !== 'boat-party').slice(0, 3);
   const heroImageSrc = resolvePublicAsset(home.heroImage) || 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1200';
   const isExternal = (url?: string) => Boolean(url && /^https?:\/\//i.test(url));
 

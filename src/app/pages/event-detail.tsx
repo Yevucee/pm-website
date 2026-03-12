@@ -64,7 +64,7 @@ export function EventDetailPage() {
           <img
             src={event.image}
             alt={event.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain bg-surface"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
           <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8">

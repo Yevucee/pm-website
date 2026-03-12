@@ -26,7 +26,7 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
       <img
         src={event.image}
         alt={event.title}
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 bg-surface"
       />
       <div className="absolute top-4 left-4 bg-accent text-black px-3 py-1 rounded-lg font-heading text-sm">
         {eventTypeLabel}
