@@ -67,12 +67,14 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
       {!event.soldOut && availableTier && (
         <div className="flex items-center justify-between pt-4 border-t border-border">
           <div>
-            <p className="text-sm text-muted-foreground">From</p>
-            <p className="font-heading text-2xl text-accent">£{availableTier.price}</p>
+            <p className="text-sm text-muted-foreground">{availableTier.price === 0 ? '' : 'From'}</p>
+            <p className="font-heading text-2xl text-accent">
+              {availableTier.price === 0 ? 'Free' : `£${availableTier.price}`}
+            </p>
           </div>
           <Link to={`/events/${event.id}`}>
             <Button variant="primary">
-              Buy Tickets
+              {availableTier.price === 0 ? 'Get Tickets' : 'Buy Tickets'}
             </Button>
           </Link>
         </div>

@@ -236,7 +236,9 @@ export function EventDetailPage() {
                       >
                         <div className="flex justify-between items-center mb-2">
                           <span className="font-heading">{tier.name}</span>
-                          <span className="text-accent text-xl">£{tier.price}</span>
+                          <span className="text-accent text-xl">
+                            {tier.price === 0 ? 'Free' : `£${tier.price}`}
+                          </span>
                         </div>
                         {!tier.available && (
                           <p className="text-sm text-error">Sold Out</p>
@@ -246,9 +248,16 @@ export function EventDetailPage() {
                             variant="primary"
                             size="sm"
                             className="w-full mt-2"
-                            onClick={() => goToStripeLink(tier.stripeLink)}
+                            onClick={() => {
+                              const link = tier.stripeLink || '';
+                              if (/^https?:\/\//i.test(link)) {
+                                window.open(link, '_blank', 'noopener,noreferrer');
+                              } else {
+                                goToStripeLink(tier.stripeLink);
+                              }
+                            }}
                           >
-                            Buy Now
+                            {tier.price === 0 ? 'Get Tickets' : 'Buy Now'}
                           </Button>
                         )}
                       </div>
@@ -256,7 +265,7 @@ export function EventDetailPage() {
                   </div>
                 )}
 
-                {!event.comingSoon && (
+                {!event.comingSoon && event.ticketTiers.some((t) => t.price > 0) && (
                   <div className="mt-6 pt-6 border-t border-border text-sm text-muted-foreground text-center">
                     <p>Secure checkout via Stripe</p>
                     <p className="mt-1">Apple Pay • Google Pay accepted</p>

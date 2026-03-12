@@ -1,0 +1,22 @@
+{
+  "title": "Afrobeats in the Garden – Easter Special",
+  "type": "festival",
+  "date": "2026-04-05",
+  "time": "15:00 – 22:00",
+  "venue": "The Garden Vauxhall, South Lambeth Road",
+  "venueName": "The Garden Vauxhall",
+  "city": "London SW8 1RT",
+  "image": "/uploads/afrobeats-easter.png",
+  "description": "Celebrate Easter Sunday at Afrobeats in the Garden, a vibrant Afrobeats party at The Garden Vauxhall. Enjoy the best Afrobeats, Amapiano and Afro-fusion from The PM and friends in a huge outdoor beer garden with food stalls, cocktails and great community vibes.\n\nLimited free tickets at thegardenvauxhall.co.uk",
+  "comingSoon": false,
+  "lineup": ["The PM"],
+  "ticketTiers": [
+    {
+      "name": "Free Ticket",
+      "price": 0,
+      "available": true,
+      "stripeLink": "https://www.thegardenvauxhall.co.uk"
+    }
+  ],
+  "soldOut": false
+}
