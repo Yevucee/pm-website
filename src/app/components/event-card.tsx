@@ -19,7 +19,7 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
   const imageBlock = (
     <div className={cn(
       'overflow-hidden relative flex-shrink-0',
-      variant === 'horizontal' ? 'sm:w-80 h-48 sm:h-full' : 'aspect-[16/9]'
+      variant === 'horizontal' ? 'w-full sm:w-52 h-48 sm:h-full' : 'aspect-[16/9]'
     )}>
       <img
         src={event.image}

@@ -4,6 +4,7 @@ import { MobileActionBar } from '@/app/components/mobile-action-bar';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
 import { generalSettings } from '@/data/settings';
 import { Button } from '@/app/components/button';
+import logo from '@/assets/partiesbythepm-logo.png';
 
 interface EventsPageContent {
   heroShow?: boolean;
@@ -32,27 +33,36 @@ export function EventsPage() {
       ? eventsPage.heroBackgroundImage.startsWith('http')
         ? eventsPage.heroBackgroundImage
         : resolvePublicAsset(eventsPage.heroBackgroundImage)
-      : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200';
+      : resolvePublicAsset('/uploads/pm.jpg');
 
   return (
     <div className="min-h-screen pt-28 sm:pt-32 pb-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero section */}
         {eventsPage.heroShow !== false && (
-          <section className="relative h-64 sm:h-80 flex items-end pb-10 px-6 overflow-hidden rounded-2xl mb-12">
+          <section className="relative h-64 sm:h-80 flex items-center px-6 sm:px-10 overflow-hidden rounded-2xl mb-12">
             <img
               src={heroBgSrc}
               alt="Events"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-            <div className="relative z-10">
-              <h1 className="font-heading text-5xl sm:text-7xl font-bold text-white">
-                {eventsPage.heroTitle || 'EVENTS'}
-              </h1>
-              <p className="text-muted-foreground mt-1">
-                {eventsPage.introText || 'Boat parties, club nights, and festivals'}
-              </p>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20" />
+            <div className="relative z-10 flex items-center gap-6 sm:gap-8 w-full">
+              <img
+                src={logo}
+                alt="Parties by the PM"
+                className="w-28 h-28 sm:w-36 sm:h-36 object-contain flex-shrink-0"
+              />
+              <div className="h-20 sm:h-24 w-px bg-accent flex-shrink-0" />
+              <div>
+                <p className="text-accent text-sm sm:text-base font-medium mb-1">Events by</p>
+                <h1 className="font-heading text-5xl sm:text-6xl font-bold text-white tracking-tight">
+                  PARTIESBYTHEPM
+                </h1>
+                <p className="text-muted-foreground mt-1 text-sm sm:text-base">
+                  Boat parties · Club nights · Festivals
+                </p>
+              </div>
             </div>
           </section>
         )}
