@@ -29,7 +29,6 @@ export function Header() {
     { label: 'PM the DJ', path: '/pm-the-dj' },
     { label: 'PM the Artist', path: '/music' },
     { label: 'Events', path: '/events' },
-    { label: 'Merch', path: '/merch' },
     { label: 'Media', path: '/media' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' }
