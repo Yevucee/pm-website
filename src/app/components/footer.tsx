@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Instagram, Youtube } from 'lucide-react';
-import logoWhite from '@/assets/90895916a69a9114996bd02b90cd9a69f7af6594.png';
+import logo from '@/assets/partiesbythepm-logo.png';
 import { generalSettings } from '@/data/settings';
 import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
 
@@ -49,7 +49,7 @@ export function Footer() {
           {/* Brand */}
           <div className="text-center md:text-left">
             <img 
-              src={logoWhite} 
+              src={logo} 
               alt={generalSettings.artistName} 
               className="h-14 sm:h-16 w-auto mb-4 mx-auto md:mx-0"
             />

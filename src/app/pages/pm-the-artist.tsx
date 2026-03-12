@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/app/components/button';
 import { Download, Music, Mic, Award } from 'lucide-react';
-import logoGold from '@/assets/b65c8f29dae3829d7417c5d59754cec48cabc03e.png';
+import logo from '@/assets/partiesbythepm-logo.png';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
 
 interface PmArtistContent {
@@ -50,7 +50,7 @@ export function PmTheArtistPage() {
           <div>
             <div className="mb-8">
               <img 
-                src={logoGold} 
+                src={logo} 
                 alt="The PM - The Prhyme Minister" 
                 className="h-24 w-auto"
               />

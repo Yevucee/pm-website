@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/app/components/ui/utils';
 import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
-import logoWhite from '@/assets/90895916a69a9114996bd02b90cd9a69f7af6594.png';
+import logo from '@/assets/partiesbythepm-logo.png';
 import { generalSettings } from '@/data/settings';
 import { Sheet, SheetContent, SheetTrigger } from '@/app/components/ui/sheet';
 
@@ -67,7 +67,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
-              src={logoWhite} 
+              src={logo} 
               alt={generalSettings.artistName} 
               className="h-10 sm:h-12 w-auto"
             />
