@@ -1,14 +1,32 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/app/components/button';
 import { ReleaseCard } from '@/app/components/release-card';
 import { EventCard } from '@/app/components/event-card';
-import { ProductCard } from '@/app/components/product-card';
-import { Ticket, ShoppingBag, Play } from 'lucide-react';
-import { upcomingEvents, merchProducts } from '@/data/mock-data';
+import { Ticket, Instagram } from 'lucide-react';
+import { upcomingEvents } from '@/data/mock-data';
 import { releases } from '@/data/releases';
 import { MobileActionBar } from '@/app/components/mobile-action-bar';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
+import { generalSettings } from '@/data/settings';
 import { AppleMusicIcon, SpotifyIcon, YouTubeIcon } from '@/app/components/streaming-icons';
+
+function InstagramElfsightWidget({ widgetId }: { widgetId: string }) {
+  useEffect(() => {
+    if (document.querySelector('script[src*="elfsight.com"]')) return;
+    const script = document.createElement('script');
+    script.src = 'https://static.elfsight.com/platform/platform.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
+
+  return (
+    <div className="min-h-[400px]">
+      <div className="elfsight-app" data-elfsight-app-id={widgetId} />
+    </div>
+  );
+}
 
 interface HomePageContent {
   heroShow?: boolean;
@@ -37,16 +55,21 @@ interface HomePageContent {
   merchHeading?: string;
   merchLinkLabel?: string;
   merchLinkUrl?: string;
+  instagramShow?: boolean;
+  instagramHeading?: string;
+  instagramWidgetId?: string;
+  instagramEmbedUrl?: string;
   socialProofShow?: boolean;
   socialProofHeading?: string;
   socialProofLogos?: { name?: string; image?: string }[];
 }
 
+const instagramUsername = (generalSettings.instagram?.match(/instagram\.com\/([^/?]+)/) || [null, '_thepm_'])[1];
+
 export function HomePage() {
   const home = getPageContent<HomePageContent>('home', {});
   const latestRelease = releases[0];
   const featuredEvents = upcomingEvents.slice(0, 3);
-  const featuredProducts = merchProducts.slice(0, 3);
   const heroImageSrc = resolvePublicAsset(home.heroImage) || 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1200';
   const isExternal = (url?: string) => Boolean(url && /^https?:\/\//i.test(url));
 
@@ -106,22 +129,6 @@ export function HomePage() {
                   <Button variant="outline" size="lg" className="w-full sm:w-auto">
                     <Ticket size={20} className="mr-2" />
                     {home.heroSecondaryCtaLabel}
-                  </Button>
-                </Link>
-              ))}
-            {home.heroTertiaryCtaLabel &&
-              (isExternal(home.heroTertiaryCtaUrl) ? (
-                <a href={home.heroTertiaryCtaUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-black">
-                    <ShoppingBag size={20} className="mr-2" />
-                    {home.heroTertiaryCtaLabel}
-                  </Button>
-                </a>
-              ) : (
-                <Link to={home.heroTertiaryCtaUrl || '/merch'} className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-black">
-                    <ShoppingBag size={20} className="mr-2" />
-                    {home.heroTertiaryCtaLabel}
                   </Button>
                 </Link>
               ))}
@@ -244,26 +251,62 @@ export function HomePage() {
       </section>
       )}
 
-      {/* Merch Highlights */}
-      {home.merchShow !== false && (
+      {/* Instagram Feed */}
+      {home.instagramShow !== false && (
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
             <h2 className="font-heading text-3xl sm:text-5xl">
-              {home.merchHeading || 'MERCH'}
+              {home.instagramHeading || 'LATEST FROM INSTAGRAM'}
             </h2>
-            {home.merchLinkLabel && (
-              <Link to={home.merchLinkUrl || '/merch'} className="text-accent hover:text-accent-hover transition-colors text-sm sm:text-base">
-                {home.merchLinkLabel}
-              </Link>
+            {generalSettings.instagram && (
+              <a
+                href={generalSettings.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent-hover transition-colors text-sm sm:text-base inline-flex items-center gap-2"
+              >
+                <Instagram size={18} />
+                Follow @{instagramUsername}
+              </a>
             )}
           </div>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+
+          {home.instagramWidgetId ? (
+            <InstagramElfsightWidget widgetId={home.instagramWidgetId} />
+          ) : home.instagramEmbedUrl ? (
+            <div className="rounded-xl overflow-hidden border border-border bg-surface">
+              <iframe
+                src={home.instagramEmbedUrl}
+                title="Instagram feed"
+                className="w-full min-h-[400px] sm:min-h-[500px]"
+                style={{ border: 0 }}
+              />
+            </div>
+          ) : (
+            <a
+              href={generalSettings.instagram || 'https://www.instagram.com/_thepm_/'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-xl overflow-hidden border border-border bg-surface hover:border-accent transition-colors group"
+            >
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 sm:gap-2 p-2 sm:p-4">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="aspect-square bg-surface/80 group-hover:bg-surface flex items-center justify-center"
+                  >
+                    <Instagram className="h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground group-hover:text-accent transition-colors" />
+                  </div>
+                ))}
+              </div>
+              <div className="p-4 sm:p-6 text-center border-t border-border">
+                <p className="text-muted-foreground group-hover:text-accent transition-colors">
+                  Follow @{instagramUsername} on Instagram for the latest
+                </p>
+              </div>
+            </a>
+          )}
         </div>
       </section>
       )}

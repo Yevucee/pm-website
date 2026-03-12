@@ -129,10 +129,14 @@ collections:
           - {label: "Upcoming Events - Heading", name: "eventsHeading", widget: "string"}
           - {label: "Upcoming Events - Link Label", name: "eventsLinkLabel", widget: "string", required: false}
           - {label: "Upcoming Events - Link URL", name: "eventsLinkUrl", widget: "string", required: false}
-          - {label: "Merch - Show", name: "merchShow", widget: "boolean", default: true}
+          - {label: "Merch - Show", name: "merchShow", widget: "boolean", default: false}
           - {label: "Merch - Heading", name: "merchHeading", widget: "string"}
           - {label: "Merch - Link Label", name: "merchLinkLabel", widget: "string", required: false}
           - {label: "Merch - Link URL", name: "merchLinkUrl", widget: "string", required: false}
+          - {label: "Instagram - Show", name: "instagramShow", widget: "boolean", default: true}
+          - {label: "Instagram - Heading", name: "instagramHeading", widget: "string", required: false}
+          - {label: "Instagram - Elfsight Widget ID", name: "instagramWidgetId", widget: "string", required: false, hint: "From elfsight.com free Instagram widget"}
+          - {label: "Instagram - Embed URL (iframe)", name: "instagramEmbedUrl", widget: "string", required: false, hint: "Alternative: iframe src from Juicer, EmbedSocial, etc."}
           - {label: "Social Proof - Show", name: "socialProofShow", widget: "boolean", default: true}
           - {label: "Social Proof - Heading", name: "socialProofHeading", widget: "string"}
           - label: "Social Proof - Logos"
