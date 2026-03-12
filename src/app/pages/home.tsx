@@ -13,17 +13,20 @@ import { AppleMusicIcon, SpotifyIcon, YouTubeIcon } from '@/app/components/strea
 
 function InstagramElfsightWidget({ widgetId }: { widgetId: string }) {
   useEffect(() => {
-    if (document.querySelector('script[src*="elfsight.com"]')) return;
+    if (document.querySelector('script[src*="elfsight"]')) return;
     const script = document.createElement('script');
-    script.src = 'https://static.elfsight.com/platform/platform.js';
+    script.src = 'https://elfsightcdn.com/platform.js';
     script.async = true;
-    script.defer = true;
     document.body.appendChild(script);
   }, []);
 
   return (
     <div className="min-h-[400px]">
-      <div className="elfsight-app" data-elfsight-app-id={widgetId} />
+      <div
+        className={`elfsight-app-${widgetId}`}
+        data-elfsight-app-id={widgetId}
+        data-elfsight-app-lazy
+      />
     </div>
   );
 }
