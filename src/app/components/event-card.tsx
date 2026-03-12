@@ -21,18 +21,18 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
   const imageBlock = (
     <div className={cn(
       'overflow-hidden relative flex-shrink-0',
-      variant === 'horizontal' ? 'w-full sm:w-52 h-48 sm:h-full' : 'aspect-[16/9]'
+      variant === 'horizontal' ? 'w-full sm:w-72 h-48 sm:h-full min-w-[14rem]' : 'aspect-[16/9]'
     )}>
       <img
         src={event.image}
         alt={event.title}
         className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 bg-surface"
       />
-      <div className="absolute top-4 left-4 bg-accent text-black px-3 py-1 rounded-lg font-heading text-sm">
+      <div className="absolute top-4 left-4 bg-accent text-black px-3 py-1 rounded-lg font-heading text-sm whitespace-nowrap z-10">
         {eventTypeLabel}
       </div>
       {event.soldOut && (
-        <div className="absolute top-4 right-4 bg-error text-white px-3 py-1 rounded-lg font-heading text-sm">
+        <div className="absolute top-4 right-4 bg-error text-white px-3 py-1 rounded-lg font-heading text-sm whitespace-nowrap z-10">
           SOLD OUT
         </div>
       )}
@@ -45,9 +45,9 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
   );
 
   const contentBlock = (
-    <div className="p-5 sm:p-6 flex flex-col justify-between flex-1">
+    <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 min-w-0">
       <div>
-        <h3 className="font-heading text-xl sm:text-2xl mb-3 group-hover:text-accent transition-colors">
+        <h3 className="font-heading text-xl sm:text-2xl mb-3 group-hover:text-accent transition-colors break-words">
           {event.title}
         </h3>
         <div className="space-y-2 mb-4 text-muted-foreground">
@@ -84,7 +84,7 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
         </div>
       )}
 
-      {event.soldOut && !event.comingSoon && (
+      {event.soldOut && !event.comingSoon && variant !== 'horizontal' && (
         <div className="pt-4 border-t border-border">
           <span className="text-muted-foreground text-sm">Sold Out</span>
         </div>
