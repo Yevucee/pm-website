@@ -54,7 +54,7 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 gap-0">
-        <div className="relative aspect-[21/9] overflow-hidden rounded-t-lg">
+        <div className="relative aspect-[3/1] sm:aspect-[21/9] overflow-hidden rounded-t-lg flex-shrink-0">
           <img
             src={event.image}
             alt={event.title}
@@ -73,7 +73,7 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
           </div>
         </div>
 
-        <div className="p-4 sm:p-6 space-y-6">
+        <div className="p-4 pt-6 sm:p-6 sm:pt-8 space-y-6">
           {/* Details */}
           <div className="space-y-3">
             <div className="flex items-center gap-3">
