@@ -289,6 +289,7 @@ collections:
           - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
           - {label: "Hero - Title", name: "heroTitle", widget: "string"}
           - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
+          - {label: "Hero - Image (partiesbythepm logo)", name: "heroImage", widget: "image", required: false}
           - {label: "Intro Text", name: "introText", widget: "text", required: false}
           - {label: "Signature Section - Show", name: "signatureShow", widget: "boolean", default: true}
           - {label: "Signature Badge", name: "signatureBadge", widget: "string", required: false}

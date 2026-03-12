@@ -1,12 +1,13 @@
 import { EventCard } from '@/app/components/event-card';
 import { upcomingEvents, pastEvents } from '@/data/mock-data';
 import { MobileActionBar } from '@/app/components/mobile-action-bar';
-import { getPageContent } from '@/data/pages';
+import { getPageContent, resolvePublicAsset } from '@/data/pages';
 
 interface EventsPageContent {
   heroShow?: boolean;
   heroTitle?: string;
   heroSubtitle?: string;
+  heroImage?: string;
   introText?: string;
   signatureShow?: boolean;
   signatureBadge?: string;
@@ -22,9 +23,21 @@ interface EventsPageContent {
 export function EventsPage() {
   const eventsPage = getPageContent<EventsPageContent>('events', {});
 
+  const heroImageSrc = eventsPage.heroImage ? resolvePublicAsset(eventsPage.heroImage) : null;
+
   return (
     <div className="min-h-screen pt-28 sm:pt-32 pb-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+        {/* REVERT: Remove heroImage block and heroImage field from events.json to restore text-only hero */}
+        {heroImageSrc && (
+          <div className="mb-8 flex justify-center">
+            <img
+              src={heroImageSrc}
+              alt="Parties by the PM"
+              className="max-w-64 sm:max-w-80 md:max-w-96 h-auto"
+            />
+          </div>
+        )}
         {eventsPage.heroShow !== false && (
           <h1 className="font-heading text-4xl sm:text-6xl mb-4">
             {eventsPage.heroTitle || 'EVENTS'}
