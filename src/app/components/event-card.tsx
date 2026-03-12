@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { Calendar, MapPin, Clock } from 'lucide-react';
 import { Event } from '@/data/mock-data';
 import { Button } from './button';
 import { cn } from '@/app/components/ui/utils';
+import { EventDetailModal } from './event-detail-modal';
 
 interface EventCardProps {
   event: Event;
@@ -10,6 +11,7 @@ interface EventCardProps {
 }
 
 export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
+  const [modalOpen, setModalOpen] = useState(false);
   const date = new Date(event.date);
   const availableTier = event.comingSoon ? undefined : event.ticketTiers.find((tier) => tier.available);
   const eventTypeLabel =
@@ -72,52 +74,51 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
               {availableTier.price === 0 ? 'Free' : `£${availableTier.price}`}
             </p>
           </div>
-          <Link to={`/events/${event.id}`}>
-            <Button variant="primary">
-              {availableTier.price === 0 ? 'Get Tickets' : 'Buy Tickets'}
-            </Button>
-          </Link>
+          <span className="text-accent text-sm font-medium">View details →</span>
         </div>
       )}
 
       {event.comingSoon && (
         <div className="pt-4 border-t border-border">
-          <Link to={`/events/${event.id}`}>
-            <Button variant="outline" className="w-full">
-              Register Interest
-            </Button>
-          </Link>
+          <span className="text-accent text-sm font-medium">View details →</span>
         </div>
       )}
 
       {event.soldOut && !event.comingSoon && (
         <div className="pt-4 border-t border-border">
-          <Button variant="secondary" className="w-full" disabled>
-            Sold Out
-          </Button>
+          <span className="text-muted-foreground text-sm">Sold Out</span>
         </div>
       )}
     </div>
   );
 
   return (
-    <div
-      className={cn(
-        'group bg-surface border border-border rounded-xl overflow-hidden hover:border-accent transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] w-full',
-        variant === 'horizontal' && 'flex flex-col sm:flex-row'
-      )}
-    >
-      {variant === 'horizontal' ? (
-        <>
-          {imageBlock}
-          {contentBlock}
-        </>
-      ) : (
-        <>
-          {imageBlock}
-          {contentBlock}
-        </>
-      )}
-    </div>
+    <>
+      <button
+        type="button"
+        onClick={() => setModalOpen(true)}
+        className={cn(
+          'group bg-surface border border-border rounded-xl overflow-hidden hover:border-accent transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] w-full text-left cursor-pointer',
+          variant === 'horizontal' && 'flex flex-col sm:flex-row'
+        )}
+      >
+        {variant === 'horizontal' ? (
+          <>
+            {imageBlock}
+            {contentBlock}
+          </>
+        ) : (
+          <>
+            {imageBlock}
+            {contentBlock}
+          </>
+        )}
+      </button>
+      <EventDetailModal
+        event={event}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
+    </>
   );
 }
