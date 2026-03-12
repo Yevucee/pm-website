@@ -5,6 +5,7 @@ export interface Event {
   date: string;
   time: string;
   venue: string;
+  venueName?: string;
   city: string;
   image: string;
   description: string;
@@ -37,6 +38,7 @@ interface EventContent {
   date?: string;
   time?: string;
   venue?: string;
+  venueName?: string;
   city?: string;
   image?: string;
   description?: string;
@@ -124,6 +126,7 @@ const parseEvent = (path: string, data: EventContent): Event | null => {
   const date = data.date?.trim() || '';
   const time = data.time?.trim() || '';
   const venue = data.venue?.trim() || '';
+  const venueName = data.venueName?.trim() || venue.split(',')[0]?.trim() || venue;
   const city = data.city?.trim() || '';
   const image = resolvePublicAsset(data.image);
   const description = data.description?.trim() || '';
@@ -149,6 +152,7 @@ const parseEvent = (path: string, data: EventContent): Event | null => {
     date,
     time,
     venue,
+    venueName,
     city,
     image,
     description,

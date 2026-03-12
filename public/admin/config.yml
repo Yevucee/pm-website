@@ -50,7 +50,8 @@ collections:
         date_format: "YYYY-MM-DD"
         time_format: false
       - {label: "Time", name: "time", widget: "string"}
-      - {label: "Venue", name: "venue", widget: "string"}
+      - {label: "Venue (full address)", name: "venue", widget: "string"}
+      - {label: "Venue Name (short, e.g. Harben Suite)", name: "venueName", widget: "string", required: false}
       - {label: "City", name: "city", widget: "string"}
       - {label: "Image", name: "image", widget: "image"}
       - {label: "Description", name: "description", widget: "text"}
@@ -289,13 +290,15 @@ collections:
           - {label: "Hero - Show", name: "heroShow", widget: "boolean", default: true}
           - {label: "Hero - Title", name: "heroTitle", widget: "string"}
           - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
-          - {label: "Hero - Image (partiesbythepm logo)", name: "heroImage", widget: "image", required: false}
+          - {label: "Hero - Background Image", name: "heroBackgroundImage", widget: "string", required: false, hint: "URL or path to event photo (e.g. /uploads/events-hero.jpg)"}
           - {label: "Intro Text", name: "introText", widget: "text", required: false}
           - {label: "Signature Section - Show", name: "signatureShow", widget: "boolean", default: true}
           - {label: "Signature Badge", name: "signatureBadge", widget: "string", required: false}
           - {label: "Signature Heading", name: "signatureHeading", widget: "string", required: false}
           - {label: "Signature Text", name: "signatureText", widget: "text", required: false}
           - {label: "Signature Subtext", name: "signatureSubtext", widget: "text", required: false}
+          - {label: "Signature - Ticket Link", name: "signatureTicketLink", widget: "string", required: false}
+          - {label: "Signature - Next Date", name: "signatureNextDate", widget: "string", required: false}
           - {label: "Upcoming - Show", name: "upcomingShow", widget: "boolean", default: true}
           - {label: "Upcoming Heading", name: "upcomingHeading", widget: "string"}
           - {label: "Past - Show", name: "pastShow", widget: "boolean", default: true}

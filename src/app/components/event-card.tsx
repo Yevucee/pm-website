@@ -6,41 +6,48 @@ import { cn } from '@/app/components/ui/utils';
 
 interface EventCardProps {
   event: Event;
+  variant?: 'vertical' | 'horizontal';
 }
 
-export function EventCard({ event }: EventCardProps) {
+export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
   const date = new Date(event.date);
   const availableTier = event.comingSoon ? undefined : event.ticketTiers.find((tier) => tier.available);
   const eventTypeLabel =
     event.type === 'boat-party' ? 'BOAT PARTY' : event.type === 'festival' ? 'FESTIVAL' : 'CLUB NIGHT';
+  const venueDisplay = event.venueName ? `${event.venueName} · ${event.city}` : `${event.venue}, ${event.city}`;
 
-  return (
-    <div className="group bg-surface border border-border rounded-xl overflow-hidden hover:border-accent transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
-      <div className="aspect-[16/9] overflow-hidden relative">
-        <img
-          src={event.image}
-          alt={event.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
-        <div className="absolute top-4 left-4 bg-accent text-black px-3 py-1 rounded-lg font-heading">
-          {eventTypeLabel}
-        </div>
-        {event.soldOut && (
-          <div className="absolute top-4 right-4 bg-error text-white px-3 py-1 rounded-lg font-heading">
-            SOLD OUT
-          </div>
-        )}
-        {event.comingSoon && (
-          <div className="absolute top-4 right-4 bg-accent text-black px-3 py-1 rounded-lg font-heading">
-            COMING SOON
-          </div>
-        )}
+  const imageBlock = (
+    <div className={cn(
+      'overflow-hidden relative flex-shrink-0',
+      variant === 'horizontal' ? 'sm:w-80 h-48 sm:h-full' : 'aspect-[16/9]'
+    )}>
+      <img
+        src={event.image}
+        alt={event.title}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div className="absolute top-4 left-4 bg-accent text-black px-3 py-1 rounded-lg font-heading text-sm">
+        {eventTypeLabel}
       </div>
-      <div className="p-5 sm:p-6">
+      {event.soldOut && (
+        <div className="absolute top-4 right-4 bg-error text-white px-3 py-1 rounded-lg font-heading text-sm">
+          SOLD OUT
+        </div>
+      )}
+      {event.comingSoon && (
+        <div className="absolute top-4 right-4 bg-accent text-black px-3 py-1 rounded-lg font-heading text-sm">
+          COMING SOON
+        </div>
+      )}
+    </div>
+  );
+
+  const contentBlock = (
+    <div className="p-5 sm:p-6 flex flex-col justify-between flex-1">
+      <div>
         <h3 className="font-heading text-xl sm:text-2xl mb-3 group-hover:text-accent transition-colors">
           {event.title}
         </h3>
-        
         <div className="space-y-2 mb-4 text-muted-foreground">
           <div className="flex items-center gap-2">
             <Calendar size={16} />
@@ -52,42 +59,63 @@ export function EventCard({ event }: EventCardProps) {
           </div>
           <div className="flex items-center gap-2">
             <MapPin size={16} />
-            <span>{event.venue}, {event.city}</span>
+            <span>{venueDisplay}</span>
           </div>
         </div>
-
-        {!event.soldOut && availableTier && (
-          <div className="flex items-center justify-between pt-4 border-t border-border">
-            <div>
-              <p className="text-sm text-muted-foreground">From</p>
-              <p className="font-heading text-2xl text-accent">£{availableTier.price}</p>
-            </div>
-            <Link to={`/events/${event.id}`}>
-              <Button variant="primary">
-                Buy Tickets
-              </Button>
-            </Link>
-          </div>
-        )}
-
-        {event.comingSoon && (
-          <div className="pt-4 border-t border-border">
-            <Link to={`/events/${event.id}`}>
-              <Button variant="outline" className="w-full">
-                Register Interest
-              </Button>
-            </Link>
-          </div>
-        )}
-
-        {event.soldOut && !event.comingSoon && (
-          <div className="pt-4 border-t border-border">
-            <Button variant="secondary" className="w-full" disabled>
-              Sold Out
-            </Button>
-          </div>
-        )}
       </div>
+
+      {!event.soldOut && availableTier && (
+        <div className="flex items-center justify-between pt-4 border-t border-border">
+          <div>
+            <p className="text-sm text-muted-foreground">From</p>
+            <p className="font-heading text-2xl text-accent">£{availableTier.price}</p>
+          </div>
+          <Link to={`/events/${event.id}`}>
+            <Button variant="primary">
+              Buy Tickets
+            </Button>
+          </Link>
+        </div>
+      )}
+
+      {event.comingSoon && (
+        <div className="pt-4 border-t border-border">
+          <Link to={`/events/${event.id}`}>
+            <Button variant="outline" className="w-full">
+              Register Interest
+            </Button>
+          </Link>
+        </div>
+      )}
+
+      {event.soldOut && !event.comingSoon && (
+        <div className="pt-4 border-t border-border">
+          <Button variant="secondary" className="w-full" disabled>
+            Sold Out
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div
+      className={cn(
+        'group bg-surface border border-border rounded-xl overflow-hidden hover:border-accent transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] w-full',
+        variant === 'horizontal' && 'flex flex-col sm:flex-row'
+      )}
+    >
+      {variant === 'horizontal' ? (
+        <>
+          {imageBlock}
+          {contentBlock}
+        </>
+      ) : (
+        <>
+          {imageBlock}
+          {contentBlock}
+        </>
+      )}
     </div>
   );
 }

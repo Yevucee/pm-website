@@ -1,5 +1,5 @@
 {
-  "heroImage": "/uploads/partiesbythepm-logo.png",
+  "heroBackgroundImage": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200",
   "signatureText": "PM hosts one of London's most successful annual boat parties, combining Afrobeats, hip-hop, dancehall, and global urban sounds on water.",
   "upcomingHeading": "UPCOMING",
   "signatureHeading": "THE ANNUAL AFROBOAT PARTY",
@@ -8,6 +8,8 @@
   "pastHeading": "PAST EVENTS",
   "heroSubtitle": "",
   "signatureSubtext": "The event attracts a diverse international crowd and has become a staple of London's Afro-urban social calendar.",
+  "signatureTicketLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400",
+  "signatureNextDate": "TBC 2026",
   "signatureShow": true,
   "heroShow": true,
   "introText": "Boat parties, club nights, and festivals",
