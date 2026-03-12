@@ -1,0 +1,22 @@
+{
+  "title": "Ghana Independence Cocktail Party (Milton Keynes)",
+  "type": "club-night",
+  "date": "2026-03-07",
+  "time": "8PM – 1AM",
+  "venue": "Harben Suite, Harben House, Tickford Street, Newport Pagnell",
+  "venueName": "Harben Suite",
+  "city": "Milton Keynes MK16 9EY",
+  "image": "/uploads/ghana-independence-cocktail-2026.png",
+  "description": "Ghana Independence Cocktail Party in Milton Keynes. Featuring The PM, DJ Rexy, DJ Kudjo, and Brothers Band. A celebration of Ghanaian independence with great music and vibes.",
+  "comingSoon": false,
+  "lineup": ["The PM", "DJ Rexy", "DJ Kudjo", "Brothers Band"],
+  "ticketTiers": [
+    {
+      "name": "General Admission",
+      "price": 20,
+      "available": false,
+      "stripeLink": "https://www.fixr.co"
+    }
+  ],
+  "soldOut": true
+}
