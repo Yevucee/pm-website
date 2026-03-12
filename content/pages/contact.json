@@ -34,8 +34,11 @@
   ],
   "socialHeading": "SOCIAL MEDIA",
   "socialLinks": [
-    { "label": "Instagram", "url": "#" },
-    { "label": "Twitter", "url": "#" }
+    { "label": "Instagram", "url": "https://www.instagram.com/_thepm_" },
+    { "label": "X", "url": "https://x.com/_thepm_" },
+    { "label": "YouTube", "url": "https://www.youtube.com/@thepm" },
+    { "label": "Spotify", "url": "https://open.spotify.com/album/3Ym3xOwfN2rByjWBiLnNqu" },
+    { "label": "TikTok", "url": "https://www.tiktok.com/@_thepm_" }
   ],
   "promoterHeading": "FOR PROMOTERS",
   "promoterText": "Response time: Within 48 hours",

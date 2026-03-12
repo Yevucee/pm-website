@@ -63,11 +63,22 @@ export function EventsPage() {
             <h2 className="font-heading text-3xl mb-8">
               {eventsPage.upcomingHeading || 'UPCOMING'}
             </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {upcomingEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
+            {upcomingEvents.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {upcomingEvents.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+            ) : (
+              <div className="py-16 text-center bg-surface/50 border border-border rounded-xl">
+                <p className="text-muted-foreground text-lg mb-4">
+                  No upcoming events at the moment.
+                </p>
+                <p className="text-muted-foreground text-sm">
+                  Follow us on social media to be the first to know when new dates are announced.
+                </p>
+              </div>
+            )}
           </section>
         )}
 

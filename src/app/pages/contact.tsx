@@ -1,6 +1,30 @@
 import { Button } from '@/app/components/button';
-import { Mail, Phone, Instagram, Twitter } from 'lucide-react';
+import { Mail, Phone, Instagram, Youtube } from 'lucide-react';
 import { getPageContent } from '@/data/pages';
+import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
+
+const XIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={className || 'h-5 w-5'}>
+    <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.493 11.24h-6.64l-5.2-6.8-5.94 6.8H1.73l7.73-8.84L1.4 2.25h6.81l4.7 6.2 5.334-6.2z" />
+  </svg>
+);
+
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={className || 'h-5 w-5'}>
+    <path fill="currentColor" d="M16.62 2c.33 2.13 1.98 3.8 4.11 4.12v3.07c-1.88.01-3.65-.61-5.11-1.67v6.14c0 3.46-2.8 6.27-6.25 6.27-3.45 0-6.25-2.8-6.25-6.27 0-3.46 2.8-6.27 6.25-6.27.33 0 .65.03.97.08v3.15a3.15 3.15 0 0 0-.97-.15 3.12 3.12 0 0 0-3.12 3.12 3.12 3.12 0 1 0 6.24 0V2h4.13z" />
+  </svg>
+);
+
+const getSocialIcon = (label: string) => {
+  const l = label?.toLowerCase() || '';
+  if (l.includes('instagram')) return Instagram;
+  if (l.includes('youtube')) return Youtube;
+  if (l.includes('spotify')) return SpotifyIcon;
+  if (l.includes('apple')) return AppleMusicIcon;
+  if (l.includes('tiktok')) return TikTokIcon;
+  if (l.includes('x') || l.includes('twitter')) return XIcon;
+  return Instagram;
+};
 
 interface ContactPageContent {
   heroShow?: boolean;
@@ -205,21 +229,22 @@ export function ContactPage() {
               <h3 className="font-heading text-xl mb-4">
                 {contact.socialHeading || 'SOCIAL MEDIA'}
               </h3>
-              <div className="flex gap-3">
-                {(contact.socialLinks || []).map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.url || '#'}
-                    className="w-12 h-12 bg-background border border-border rounded-lg flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
-                    aria-label={social.label}
-                  >
-                    {social.label?.toLowerCase().includes('instagram') ? (
-                      <Instagram size={20} />
-                    ) : (
-                      <Twitter size={20} />
-                    )}
-                  </a>
-                ))}
+              <div className="flex flex-wrap gap-3">
+                {(contact.socialLinks || []).map((social) => {
+                  const Icon = getSocialIcon(social.label || '');
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.url || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 bg-background border border-border rounded-lg flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
+                      aria-label={social.label}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
 

@@ -14,6 +14,8 @@ import { ContactPage } from '@/app/pages/contact';
 import { DesignSystemPage } from '@/app/pages/design-system';
 import { PmTheDjPage } from '@/app/pages/pm-the-dj';
 import { PmTheArtistPage } from '@/app/pages/pm-the-artist';
+import { PrivacyPage } from '@/app/pages/privacy';
+import { TermsPage } from '@/app/pages/terms';
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
             <Route path="/pm-the-dj" element={<PmTheDjPage />} />
             <Route path="/pm-the-artist" element={<PmTheArtistPage />} />
             <Route path="/design-system" element={<DesignSystemPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
           </Routes>
         </main>
         <Footer />

@@ -47,7 +47,7 @@ export function HomePage() {
   const latestRelease = releases[0];
   const featuredEvents = upcomingEvents.slice(0, 3);
   const featuredProducts = merchProducts.slice(0, 3);
-  const heroImageSrc = resolvePublicAsset(home.heroImage) || resolvePublicAsset('/uploads/stuck_indoors.jpg');
+  const heroImageSrc = resolvePublicAsset(home.heroImage) || 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1200';
   const isExternal = (url?: string) => Boolean(url && /^https?:\/\//i.test(url));
 
   return (
@@ -112,14 +112,14 @@ export function HomePage() {
             {home.heroTertiaryCtaLabel &&
               (isExternal(home.heroTertiaryCtaUrl) ? (
                 <a href={home.heroTertiaryCtaUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                  <Button variant="ghost" size="lg" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-black">
                     <ShoppingBag size={20} className="mr-2" />
                     {home.heroTertiaryCtaLabel}
                   </Button>
                 </a>
               ) : (
                 <Link to={home.heroTertiaryCtaUrl || '/merch'} className="w-full sm:w-auto">
-                  <Button variant="ghost" size="lg" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white text-white hover:bg-white hover:text-black">
                     <ShoppingBag size={20} className="mr-2" />
                     {home.heroTertiaryCtaLabel}
                   </Button>
@@ -227,11 +227,19 @@ export function HomePage() {
             )}
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {featuredEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
+          {featuredEvents.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {featuredEvents.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          ) : (
+            <div className="py-12 text-center bg-surface/30 border border-border rounded-xl">
+              <p className="text-muted-foreground">
+                No upcoming events at the moment. Follow us on social media for announcements.
+              </p>
+            </div>
+          )}
         </div>
       </section>
       )}
@@ -270,12 +278,15 @@ export function HomePage() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center">
             {(home.socialProofLogos || []).map((venue) => (
-              <div key={venue.name} className="grayscale hover:grayscale-0 transition-all opacity-50 hover:opacity-100">
+              <div key={venue.name} className="flex flex-col items-center gap-2 grayscale hover:grayscale-0 transition-all opacity-50 hover:opacity-100">
                 <img
                   src={resolvePublicAsset(venue.image)}
                   alt={venue.name || 'Venue'}
                   className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg"
                 />
+                <span className="font-heading text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">
+                  {venue.name || 'Venue'}
+                </span>
               </div>
             ))}
           </div>

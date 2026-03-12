@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Youtube, Music } from 'lucide-react';
+import { Instagram, Youtube } from 'lucide-react';
 import logoWhite from '@/assets/90895916a69a9114996bd02b90cd9a69f7af6594.png';
 import { generalSettings } from '@/data/settings';
+import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
 
 const XIcon = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
@@ -29,8 +30,8 @@ export function Footer() {
     { icon: TikTokIcon, href: generalSettings.tiktok, label: 'TikTok' },
     { icon: XIcon, href: generalSettings.twitter, label: 'X' },
     { icon: Youtube, href: generalSettings.youtube, label: 'YouTube' },
-    { icon: Music, href: generalSettings.spotify, label: 'Spotify' },
-    { icon: Music, href: generalSettings.appleMusic, label: 'Apple Music' }
+    { icon: SpotifyIcon, href: generalSettings.spotify, label: 'Spotify' },
+    { icon: AppleMusicIcon, href: generalSettings.appleMusic, label: 'Apple Music' }
   ].filter((item) => Boolean(item.href));
 
   const quickLinks = [
@@ -38,11 +39,8 @@ export function Footer() {
     { label: 'PM the Artist', path: '/music' },
     { label: 'Events', path: '/events' },
     { label: 'Merch', path: '/merch' },
-    { label: 'Media', path: '/media' },
-    { label: 'Admin Login', path: '/admin', external: true }
+    { label: 'Media', path: '/media' }
   ];
-
-  const adminUrl = `${import.meta.env.BASE_URL || '/'}admin/`;
 
   return (
     <footer className="bg-surface border-t border-border mt-auto">
@@ -65,23 +63,13 @@ export function Footer() {
             <h4 className="font-heading text-xl mb-4">QUICK LINKS</h4>
             <nav className="flex flex-col gap-2">
               {quickLinks.map((link) => (
-                link.external ? (
-                  <a
-                    key={link.path}
-                    href={adminUrl}
-                    className="inline-flex min-h-[44px] items-center justify-center md:justify-start py-2 text-muted-foreground hover:text-accent transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className="inline-flex min-h-[44px] items-center justify-center md:justify-start py-2 text-muted-foreground hover:text-accent transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                )
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="inline-flex min-h-[44px] items-center justify-center md:justify-start py-2 text-muted-foreground hover:text-accent transition-colors"
+                >
+                  {link.label}
+                </Link>
               ))}
             </nav>
           </div>
@@ -101,7 +89,7 @@ export function Footer() {
                     className="w-10 h-10 flex items-center justify-center bg-background border border-border rounded-lg hover:border-accent hover:text-accent transition-colors"
                     aria-label={social.label}
                   >
-                    <Icon size={20} />
+                    <Icon className="h-5 w-5" />
                   </a>
                 );
               })}

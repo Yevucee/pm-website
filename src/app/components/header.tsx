@@ -1,12 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/app/components/ui/utils';
 import { useEffect, useState } from 'react';
+import { Menu } from 'lucide-react';
 import logoWhite from '@/assets/90895916a69a9114996bd02b90cd9a69f7af6594.png';
 import { generalSettings } from '@/data/settings';
+import { Sheet, SheetContent, SheetTrigger } from '@/app/components/ui/sheet';
 
 export function Header() {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +19,10 @@ export function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
 
   const navItems = [
     { label: 'Home', path: '/' },
@@ -27,6 +34,26 @@ export function Header() {
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' }
   ];
+
+  const NavLinks = () => (
+    <>
+      {navItems.map((item) => {
+        const isActive = location.pathname === item.path;
+        return (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={cn(
+              'min-h-[44px] px-3 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-xs sm:text-sm flex items-center',
+              isActive ? 'text-accent' : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            {item.label}
+          </Link>
+        );
+      })}
+    </>
+  );
 
   return (
     <header
@@ -46,25 +73,30 @@ export function Header() {
             />
           </Link>
 
-          {/* Navigation */}
-          <nav className="flex flex-1 items-center justify-center gap-1 sm:gap-2 overflow-x-auto lg:overflow-visible">
-            {navItems.map((item) => {
-              const isActive = location.pathname === item.path;
-              
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={cn(
-                    'min-h-[44px] px-3 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-xs sm:text-sm',
-                    isActive ? 'text-accent' : 'text-muted-foreground hover:text-foreground'
-                  )}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex flex-1 items-center justify-center gap-1 sm:gap-2">
+            <NavLinks />
           </nav>
+
+          {/* Mobile Hamburger + Drawer */}
+          <div className="flex-1 lg:hidden flex justify-end">
+            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+              <SheetTrigger asChild>
+                <button
+                  type="button"
+                  className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg text-foreground hover:bg-surface transition-colors"
+                  aria-label="Open menu"
+                >
+                  <Menu className="h-6 w-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-72 pt-12">
+                <nav className="flex flex-col gap-1">
+                  <NavLinks />
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
