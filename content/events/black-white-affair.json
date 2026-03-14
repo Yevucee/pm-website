@@ -15,19 +15,19 @@
       "name": "Early Bird",
       "price": 10,
       "available": true,
-      "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
+      "stripeLink": "https://buy.stripe.com/aFa7sMgoj8LKcMs3dB5c401"
     },
     {
       "name": "General Admission",
       "price": 20,
       "available": true,
-      "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
+      "stripeLink": "https://buy.stripe.com/aFa7sMgoj8LKcMs3dB5c401"
     },
     {
       "name": "Table (from £150)",
       "price": 150,
       "available": true,
-      "stripeLink": "https://buy.stripe.com/fZu14ob3Z7HGeUAeWj5c400"
+      "stripeLink": "https://buy.stripe.com/aFa7sMgoj8LKcMs3dB5c401"
     }
   ],
   "soldOut": false
