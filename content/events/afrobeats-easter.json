@@ -12,10 +12,10 @@
   "lineup": ["The PM"],
   "ticketTiers": [
     {
-      "name": "Free Ticket",
+      "name": "Get Tickets",
       "price": 0,
       "available": true,
-      "stripeLink": "https://www.thegardenvauxhall.co.uk"
+      "stripeLink": "https://www.skiddle.com/whats-on/London/Vauxhall-Food-And-Beer-Garden/Afrobeats-in-the-Garden---Easter-Special/42251965/"
     }
   ],
   "soldOut": false
