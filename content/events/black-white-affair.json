@@ -21,13 +21,13 @@
       "name": "General Admission",
       "price": 20,
       "available": true,
-      "stripeLink": "https://buy.stripe.com/aFa7sMgoj8LKcMs3dB5c401"
+      "stripeLink": "https://buy.stripe.com/28EbJ25JFe64eUA3dB5c404"
     },
     {
-      "name": "Table (from £150)",
-      "price": 150,
+      "name": "Tables from £200",
+      "price": 200,
       "available": true,
-      "stripeLink": "https://buy.stripe.com/aFa7sMgoj8LKcMs3dB5c401"
+      "stripeLink": "https://buy.stripe.com/aFa7sMc83gec9AgeWj5c403"
     }
   ],
   "soldOut": false
