@@ -28,9 +28,8 @@
   "links": [],
   "directContactHeading": "DIRECT CONTACT",
   "directContacts": [
-    { "label": "BOOKINGS", "value": "bookings@thepm.uk", "link": "mailto:bookings@thepm.uk" },
-    { "label": "MANAGEMENT", "value": "management@thepm.uk", "link": "mailto:management@thepm.uk" },
-    { "label": "PHONE", "value": "+44 7700 900000", "link": "tel:+447700900000" }
+    { "label": "BOOKINGS", "value": "theonlypm@gmail.com", "link": "mailto:theonlypm@gmail.com" },
+    { "label": "WHATSAPP", "value": "+44 7364 164585", "link": "https://wa.me/447364164585" }
   ],
   "socialHeading": "SOCIAL MEDIA",
   "socialLinks": [

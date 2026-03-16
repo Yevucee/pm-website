@@ -1,5 +1,5 @@
 import { Button } from '@/app/components/button';
-import { Mail, Phone, Instagram, Youtube } from 'lucide-react';
+import { Mail, Phone, Instagram, Youtube, MessageCircle } from 'lucide-react';
 import { getPageContent } from '@/data/pages';
 import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
 
@@ -208,7 +208,9 @@ export function ContactPage() {
               {(contact.directContacts || []).map((item) => (
                 <div key={item.label} className="bg-surface border border-border rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-2">
-                    {item.link?.startsWith('tel:') ? (
+                    {item.link?.includes('wa.me') ? (
+                      <MessageCircle size={20} className="text-accent" />
+                    ) : item.link?.startsWith('tel:') ? (
                       <Phone size={20} className="text-accent" />
                     ) : (
                       <Mail size={20} className="text-accent" />
@@ -217,6 +219,8 @@ export function ContactPage() {
                   </div>
                   <a
                     href={item.link || '#'}
+                    target={item.link?.includes('wa.me') ? '_blank' : undefined}
+                    rel={item.link?.includes('wa.me') ? 'noopener noreferrer' : undefined}
                     className="text-muted-foreground hover:text-accent transition-colors"
                   >
                     {item.value}

@@ -4,8 +4,7 @@ export interface GeneralSettings {
   artistName: string;
   tagline: string;
   bookingEmail: string;
-  managementEmail: string;
-  phone: string;
+  whatsapp?: string;
   instagram: string;
   twitter: string;
   spotify: string;
@@ -16,10 +15,9 @@ export interface GeneralSettings {
 
 const fallback: GeneralSettings = {
   artistName: 'The PM',
-  tagline: 'UK Rapper · DJ · Event Organiser',
+  tagline: 'Artist · DJ · Event Organiser',
   bookingEmail: 'theonlypm@gmail.com',
-  managementEmail: 'theonlypm@gmail.com',
-  phone: '+44 7700 900000',
+  whatsapp: '+447364164585',
   instagram: 'https://www.instagram.com/_thepm_',
   twitter: 'https://x.com/_thepm_',
   spotify: 'https://open.spotify.com/album/3Ym3xOwfN2rByjWBiLnNqu',

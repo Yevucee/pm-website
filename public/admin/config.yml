@@ -393,8 +393,7 @@ collections:
           - {label: "Artist Name", name: "artistName", widget: "string"}
           - {label: "Tagline", name: "tagline", widget: "string"}
           - {label: "Booking Email", name: "bookingEmail", widget: "string"}
-          - {label: "Management Email", name: "managementEmail", widget: "string"}
-          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "WhatsApp (e.g. +447700900000)", name: "whatsapp", widget: "string"}
           - {label: "Instagram URL", name: "instagram", widget: "string"}
           - {label: "Twitter URL", name: "twitter", widget: "string"}
           - {label: "Spotify URL", name: "spotify", widget: "string"}

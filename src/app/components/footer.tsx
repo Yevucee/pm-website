@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Youtube } from 'lucide-react';
+import { Instagram, Youtube, MessageCircle } from 'lucide-react';
 import logo from '@/assets/partiesbythepm-logo.png';
 import { generalSettings } from '@/data/settings';
 import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
@@ -93,11 +93,27 @@ export function Footer() {
                 );
               })}
             </div>
-            <p className="text-muted-foreground text-sm">
-              Bookings:{' '}
-              <a href={`mailto:${generalSettings.bookingEmail}`} className="text-accent hover:underline">
-                {generalSettings.bookingEmail}
-              </a>
+            <p className="text-muted-foreground text-sm space-y-1">
+              <span className="block">
+                Bookings:{' '}
+                <a href={`mailto:${generalSettings.bookingEmail}`} className="text-accent hover:underline">
+                  {generalSettings.bookingEmail}
+                </a>
+              </span>
+              {generalSettings.whatsapp && (
+                <span className="block">
+                  WhatsApp:{' '}
+                  <a
+                    href={`https://wa.me/${generalSettings.whatsapp.replace(/\D/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent hover:underline inline-flex items-center gap-1"
+                  >
+                    <MessageCircle size={14} />
+                    {generalSettings.whatsapp}
+                  </a>
+                </span>
+              )}
             </p>
           </div>
         </div>
