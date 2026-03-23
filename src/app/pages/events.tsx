@@ -6,7 +6,7 @@ import { MobileActionBar } from '@/app/components/mobile-action-bar';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
 import { generalSettings } from '@/data/settings';
 import { Button } from '@/app/components/button';
-import logo from '@/assets/pm-logo.png';
+import logo from '@/assets/partiesbythepm-logo.png';
 
 const nextEvent = upcomingEvents[0];
 const otherUpcomingEvents = upcomingEvents.slice(1);
