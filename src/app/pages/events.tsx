@@ -6,18 +6,18 @@ import { MobileActionBar } from '@/app/components/mobile-action-bar';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
 import { generalSettings } from '@/data/settings';
 import { Button } from '@/app/components/button';
-import logo from '@/assets/partiesbythepm-logo.png';
+import logo from '@/assets/pm-logo.png';
 
-const signatureEvent = upcomingEvents.find((e) => e.type === 'boat-party');
-const otherUpcomingEvents = upcomingEvents.filter((e) => e.type !== 'boat-party');
+const nextEvent = upcomingEvents[0];
+const otherUpcomingEvents = upcomingEvents.slice(1);
 
-function SignatureEventSection({ event }: { event: Event }) {
+function NextEventSection({ event }: { event: Event }) {
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <section className="mb-8 sm:mb-10">
       <div className="flex flex-col items-center">
         <span className="px-3 py-1 bg-accent text-black rounded uppercase text-sm font-heading inline-block mb-3">
-          Signature Event
+          Next Event
         </span>
         <button
           type="button"
@@ -104,9 +104,9 @@ export function EventsPage() {
           </section>
         )}
 
-        {/* Signature Event – Boat Party */}
-        {eventsPage.signatureShow !== false && signatureEvent && (
-          <SignatureEventSection event={signatureEvent} />
+        {/* Next Event – soonest upcoming */}
+        {eventsPage.signatureShow !== false && nextEvent && (
+          <NextEventSection event={nextEvent} />
         )}
 
         <hr className="border-border my-12" />

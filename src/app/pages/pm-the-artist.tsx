@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/app/components/button';
 import { Download, Music, Mic, Award } from 'lucide-react';
-import logo from '@/assets/partiesbythepm-logo.png';
+import logo from '@/assets/pm-logo.png';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
 
 interface PmArtistContent {

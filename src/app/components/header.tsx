@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/app/components/ui/utils';
 import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
-import logo from '@/assets/partiesbythepm-logo.png';
+import logo from '@/assets/pm-logo.png';
 import { generalSettings } from '@/data/settings';
 import { Sheet, SheetContent, SheetTrigger } from '@/app/components/ui/sheet';
 

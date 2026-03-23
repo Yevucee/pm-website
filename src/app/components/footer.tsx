@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Instagram, Youtube, MessageCircle } from 'lucide-react';
-import logo from '@/assets/partiesbythepm-logo.png';
+import logo from '@/assets/pm-logo.png';
 import { generalSettings } from '@/data/settings';
 import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
 
