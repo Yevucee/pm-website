@@ -1,9 +1,8 @@
 {
   "heroShow": true,
   "heroTitle": "MEDIA",
-  "heroSubtitle": "Photos, videos and press materials",
+  "heroSubtitle": "Photo albums from events",
   "introText": "",
-  "galleryHeading": "",
   "epkButtonLabel": "Download EPK",
   "epkButtonUrl": "#"
 }
