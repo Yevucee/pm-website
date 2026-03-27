@@ -93,6 +93,7 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Type", name: "type", widget: "select", options: ["photo", "video"]}
       - {label: "Image/Thumbnail", name: "image", widget: "image"}
+      - {label: "Google Photos / album link (opens in new tab)", name: "albumUrl", widget: "string", required: false}
       - {label: "Video URL", name: "videoUrl", widget: "string", required: false}
       - label: "Date"
         name: "date"
@@ -170,16 +171,6 @@ collections:
             fields:
               - {label: "Year", name: "year", widget: "string"}
               - {label: "Event", name: "event", widget: "string"}
-          - {label: "Press - Show", name: "pressShow", widget: "boolean", default: true}
-          - {label: "Press Heading", name: "pressHeading", widget: "string"}
-          - label: "Press Quotes"
-            name: "pressQuotes"
-            widget: "list"
-            fields:
-              - {label: "Quote", name: "quote", widget: "text"}
-              - {label: "Source", name: "source", widget: "string"}
-          - {label: "Press Kit Label", name: "pressKitLabel", widget: "string", required: false}
-          - {label: "Press Kit URL", name: "pressKitUrl", widget: "string", required: false}
           - {label: "Booking CTA - Show", name: "bookingShow", widget: "boolean", default: true}
           - {label: "Booking CTA Heading", name: "bookingHeading", widget: "string"}
           - {label: "Booking CTA Text", name: "bookingText", widget: "text"}
@@ -367,16 +358,6 @@ collections:
             fields:
               - {label: "Year", name: "year", widget: "string"}
               - {label: "Event", name: "event", widget: "string"}
-          - {label: "Press - Show", name: "pressShow", widget: "boolean", default: true}
-          - {label: "Press Heading", name: "pressHeading", widget: "string"}
-          - label: "Press Quotes"
-            name: "pressQuotes"
-            widget: "list"
-            fields:
-              - {label: "Quote", name: "quote", widget: "text"}
-              - {label: "Source", name: "source", widget: "string"}
-          - {label: "Press Kit Label", name: "pressKitLabel", widget: "string", required: false}
-          - {label: "Press Kit URL", name: "pressKitUrl", widget: "string", required: false}
           - {label: "Booking CTA - Show", name: "bookingShow", widget: "boolean", default: true}
           - {label: "Booking CTA Heading", name: "bookingHeading", widget: "string"}
           - {label: "Booking CTA Text", name: "bookingText", widget: "text"}

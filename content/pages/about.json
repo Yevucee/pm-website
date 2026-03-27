@@ -20,15 +20,6 @@
     { "year": "2012-2024", "event": "Award-winning radio show host on Rainbow Radio International for 12+ years" },
     { "year": "Early 2010s", "event": "Pioneer of Pidgin rap style in the UK" }
   ],
-  "pressShow": true,
-  "pressHeading": "PRESS",
-  "pressQuotes": [
-    { "quote": "The PM is bringing a fresh energy to the UK underground scene.", "source": "Mixmag" },
-    { "quote": "One of the most exciting new talents in UK rap and electronic music.", "source": "DJ Mag" },
-    { "quote": "The Thames boat parties are legendary. A must-attend event.", "source": "Time Out London" }
-  ],
-  "pressKitLabel": "Download Press Kit",
-  "pressKitUrl": "#",
   "bookingShow": true,
   "bookingHeading": "BOOK THE PM",
   "bookingText": "Available for club nights, festivals, private events and collaborations",

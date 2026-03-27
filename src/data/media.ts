@@ -7,6 +7,7 @@ export interface MediaItem {
   image: string;
   videoUrl?: string;
   date?: string;
+  albumUrl?: string;
 }
 
 interface MediaContent {
@@ -15,6 +16,7 @@ interface MediaContent {
   image?: string;
   videoUrl?: string;
   date?: string;
+  albumUrl?: string;
 }
 
 const resolvePublicAsset = (value?: string) => {
@@ -65,13 +67,18 @@ const parseMedia = (path: string, data: MediaContent): MediaItem | null => {
     return null;
   }
 
+  const albumUrl = data.albumUrl?.trim();
+  const safeAlbum =
+    albumUrl && /^https?:\/\//i.test(albumUrl) ? albumUrl : undefined;
+
   return {
     id,
     title,
     type: normalizeMediaType(data.type),
     image,
     videoUrl: data.videoUrl?.trim() || undefined,
-    date: data.date?.trim() || undefined
+    date: data.date?.trim() || undefined,
+    albumUrl: safeAlbum
   };
 };
 

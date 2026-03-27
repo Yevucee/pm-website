@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/app/components/button';
-import { Download, Music, Mic, Award } from 'lucide-react';
+import { Music, Mic, Award } from 'lucide-react';
 import logo from '@/assets/pm-logo.png';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
 
@@ -16,11 +16,6 @@ interface PmArtistContent {
   timelineShow?: boolean;
   timelineHeading?: string;
   timeline?: { year?: string; event?: string }[];
-  pressShow?: boolean;
-  pressHeading?: string;
-  pressQuotes?: { quote?: string; source?: string }[];
-  pressKitLabel?: string;
-  pressKitUrl?: string;
   bookingShow?: boolean;
   bookingHeading?: string;
   bookingText?: string;
@@ -67,16 +62,6 @@ export function PmTheArtistPage() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-            <div className="mt-8">
-              {page.pressKitLabel && (
-                <a href={page.pressKitUrl || '#'} download>
-                  <Button variant="primary">
-                    <Download size={18} className="mr-2" />
-                    {page.pressKitLabel}
-                  </Button>
-                </a>
-              )}
-            </div>
           </div>
         </div>
         )}
@@ -113,26 +98,6 @@ export function PmTheArtistPage() {
                     {item.year}
                   </span>
                   <p className="text-lg">{item.event}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Press Quotes */}
-        {page.pressShow !== false && page.pressQuotes && page.pressQuotes.length > 0 && (
-          <div className="mb-20">
-            <h2 className="font-heading text-4xl mb-8">
-              {page.pressHeading || 'PRESS'}
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {page.pressQuotes.map((item, index) => (
-                <div
-                  key={`${item.source}-${index}`}
-                  className="bg-surface border border-border rounded-xl p-6"
-                >
-                  <p className="text-lg mb-4 italic">"{item.quote}"</p>
-                  <p className="text-accent font-heading">— {item.source}</p>
                 </div>
               ))}
             </div>

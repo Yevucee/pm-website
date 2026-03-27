@@ -76,7 +76,7 @@ export function ContactPage() {
         </p>
         <p className="text-foreground/80 text-base mb-12 max-w-2xl">
           {contact.introText ||
-            'Get in touch for DJ bookings, event curation, collaborations, or press enquiries'}
+            'Get in touch for DJ bookings, event curation, or collaborations'}
         </p>
         {contact.subText && (
           <p className="text-foreground/80 text-base mb-12 max-w-2xl">
