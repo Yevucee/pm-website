@@ -68,7 +68,7 @@ export function Header() {
             <img 
               src={logo} 
               alt={generalSettings.artistName} 
-              className="h-10 sm:h-12 w-auto"
+              className="h-11 sm:h-[3.25rem] w-auto"
             />
           </Link>
 

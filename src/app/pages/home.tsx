@@ -103,7 +103,7 @@ export function HomePage() {
           </div>
           <p className="text-sm sm:text-lg text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-lg leading-relaxed">
             {home.heroDescription ||
-              "Award-winning DJ, Pidgin rap pioneer, and curator of London's most successful annual boat party."}
+              "Award-winning DJ; early 2000s pioneer of Pidgin rap and one half of Hiplife group KgPM. Curator of London's most successful annual boat party."}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {home.heroPrimaryCtaLabel && (
@@ -146,7 +146,7 @@ export function HomePage() {
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-lg sm:text-xl text-foreground/90 leading-relaxed">
             {home.bioText ||
-              "The Prhyme Minister (PM) is one of London's leading DJs, an award-winning radio host, rapper, and event promoter. A pioneer of Pidgin rap and a respected cultural curator, PM blends music, nightlife, and community to deliver unforgettable experiences on and off the stage."}
+              "The Prhyme Minister (PM) is one of London's leading DJs, an award-winning radio host, rapper, and event promoter. Early 2000s – a pioneer of Pidgin rap style – one half of the legendary Hiplife group, KgPM. A respected cultural curator, PM blends music, nightlife, and community to deliver unforgettable experiences on and off the stage."}
           </p>
           {home.bioButtonLabel && (
             <Link to={home.bioButtonUrl || '/about'} className="inline-flex w-full sm:w-auto">

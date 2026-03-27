@@ -3,11 +3,11 @@
   "heroTitle": "PM THE ARTIST",
   "heroSubtitle": "",
   "heroImage": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=800",
-  "introText": "The Prhyme Minister (PM) is a pioneering rapper who helped establish Pidgin rap as a distinct style in the UK music scene, blending African rhythms with classic hip-hop storytelling.",
-  "body": "PM rose to prominence as one of the pioneers of Pidgin rap, a style that later gained widespread popularity across African and diaspora music scenes. Known for his witty lyricism and cultural storytelling, PM's music bridges the gap between UK urban culture and African musical traditions.\n\nHis distinctive flow and clever wordplay have made him a respected voice in the UK rap landscape. PM is currently working on his solo album, featuring the singles \"Yee-Titi-Yee\" and \"Make Your Mind Dey,\" which showcase his unique blend of humour, social commentary, and infectious beats.\n\nAs an artist, PM uses his platform to tell stories that resonate with both African diaspora communities and wider UK audiences, creating music that's both culturally authentic and universally relatable.",
+  "introText": "Early 2000s – a pioneer of Pidgin rap style – one half of the legendary Hiplife group, KgPM. The Prhyme Minister (PM) blends African rhythms with classic hip-hop storytelling.",
+  "body": "Early 2000s – a pioneer of Pidgin rap style – one half of the legendary Hiplife group, KgPM. A style that later gained widespread popularity across African and diaspora music scenes. Known for his witty lyricism and cultural storytelling, PM's music bridges the gap between UK urban culture and African musical traditions.\n\nHis distinctive flow and clever wordplay have made him a respected voice in the UK rap landscape. PM is currently working on his solo album, featuring the singles \"Yee-Titi-Yee\" and \"Make Your Mind Dey,\" which showcase his unique blend of humour, social commentary, and infectious beats.\n\nAs an artist, PM uses his platform to tell stories that resonate with both African diaspora communities and wider UK audiences, creating music that's both culturally authentic and universally relatable.",
   "statsShow": true,
   "stats": [
-    { "label": "Pidgin Rap Pioneer", "value": "UK" },
+    { "label": "Hiplife group", "value": "KgPM" },
     { "label": "Singles Released", "value": "2+" },
     { "label": "Album Status", "value": "In Progress" }
   ],
@@ -15,7 +15,7 @@
   "timelineHeading": "MUSIC CAREER HIGHLIGHTS",
   "timeline": [
     { "year": "2024", "event": "Released singles \"Yee-Titi-Yee\" and \"Make Your Mind Dey\"" },
-    { "year": "Early 2010s", "event": "Pioneer of Pidgin rap style in the UK" },
+    { "year": "Early 2000s", "event": "Pioneer of Pidgin rap style; one half of the legendary Hiplife group, KgPM" },
     { "year": "Ongoing", "event": "Working on debut solo album" }
   ],
   "bookingShow": true,

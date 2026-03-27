@@ -32,7 +32,7 @@ export function MusicPage() {
         )}
         <p className="text-muted-foreground text-base sm:text-xl mb-8 max-w-3xl leading-relaxed">
           {music.introText ||
-            'From pioneering Pidgin rap to global Afro-urban sounds, PM blends humour, storytelling, and classic hip-hop influences with African-infused beats.'}
+            'Early 2000s – a pioneer of Pidgin rap style – one half of the legendary Hiplife group, KgPM. Today PM blends humour, storytelling, and global Afro-urban sounds with African-infused beats.'}
         </p>
 
         {/* Filter Chips */}
