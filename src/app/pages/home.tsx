@@ -54,6 +54,9 @@ interface HomePageContent {
   eventsHeading?: string;
   eventsLinkLabel?: string;
   eventsLinkUrl?: string;
+  eventsMailingListCtaShow?: boolean;
+  eventsMailingListCtaLabel?: string;
+  eventsMailingListCtaUrl?: string;
   merchShow?: boolean;
   merchHeading?: string;
   merchLinkLabel?: string;
@@ -249,6 +252,16 @@ export function HomePage() {
                 No upcoming events at the moment. Follow us on social media for announcements.
               </p>
             </div>
+          )}
+          {home.eventsMailingListCtaShow !== false && (
+            <p className="text-center mt-8">
+              <Link
+                to={home.eventsMailingListCtaUrl || '/contact#mailing-list'}
+                className="text-accent hover:text-accent-hover font-heading text-sm sm:text-base underline-offset-4 hover:underline"
+              >
+                {home.eventsMailingListCtaLabel || 'Get updates & mailing list →'}
+              </Link>
+            </p>
           )}
         </div>
       </section>

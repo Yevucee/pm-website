@@ -45,6 +45,9 @@
   "instagramHeading": "LATEST FROM INSTAGRAM",
   "instagramWidgetId": "6831800d-f6ba-4c3d-ac6e-739d1031dee4",
   "eventsLinkUrl": "/events",
+  "eventsMailingListCtaShow": true,
+  "eventsMailingListCtaLabel": "Get updates & mailing list →",
+  "eventsMailingListCtaUrl": "/contact#mailing-list",
   "latestReleaseShow": true,
   "heroTitle": "THE PRHYME MINISTER (PM)",
   "heroSecondaryCtaLabel": "Buy Tickets"

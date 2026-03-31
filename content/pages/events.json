@@ -14,5 +14,9 @@
   "heroShow": true,
   "introText": "Boat parties, club nights, and festivals",
   "upcomingShow": true,
-  "heroTitle": "EVENTS"
+  "heroTitle": "EVENTS",
+  "mailingListCtaShow": true,
+  "mailingListCtaIntro": "Want announcements straight to your inbox or phone?",
+  "mailingListCtaLabel": "Sign up for updates",
+  "mailingListCtaUrl": "/contact#mailing-list"
 }

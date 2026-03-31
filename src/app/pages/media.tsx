@@ -1,5 +1,4 @@
-import { Button } from '@/app/components/button';
-import { Download, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { getPageContent } from '@/data/pages';
 import { mediaItems } from '@/data/media';
 
@@ -8,8 +7,6 @@ interface MediaPageContent {
   heroTitle?: string;
   heroSubtitle?: string;
   introText?: string;
-  epkButtonLabel?: string;
-  epkButtonUrl?: string;
 }
 
 function byDateDesc(a: { date?: string }, b: { date?: string }) {
@@ -28,27 +25,17 @@ export function MediaPage() {
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-          <div>
-            {mediaPage.heroShow !== false && (
-              <h1 className="font-heading text-5xl sm:text-6xl mb-2">
-                {mediaPage.heroTitle || 'MEDIA'}
-              </h1>
-            )}
-            <p className="text-muted-foreground text-xl">
-              {mediaPage.heroSubtitle || 'Photo albums from events'}
-            </p>
-            {mediaPage.introText && (
-              <p className="text-muted-foreground mt-2">{mediaPage.introText}</p>
-            )}
-          </div>
-          {mediaPage.epkButtonLabel && (
-            <a href={mediaPage.epkButtonUrl || '#'} download>
-              <Button variant="outline">
-                <Download size={18} className="mr-2" />
-                {mediaPage.epkButtonLabel}
-              </Button>
-            </a>
+        <div className="mb-8">
+          {mediaPage.heroShow !== false && (
+            <h1 className="font-heading text-5xl sm:text-6xl mb-2">
+              {mediaPage.heroTitle || 'MEDIA'}
+            </h1>
+          )}
+          <p className="text-muted-foreground text-xl">
+            {mediaPage.heroSubtitle || 'Photo albums from events'}
+          </p>
+          {mediaPage.introText && (
+            <p className="text-muted-foreground mt-2">{mediaPage.introText}</p>
           )}
         </div>
 

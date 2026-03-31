@@ -10,6 +10,9 @@ import { Calendar, MapPin, Clock, Music } from 'lucide-react';
 import { Event } from '@/data/mock-data';
 import { cn } from '@/app/components/ui/utils';
 import { goToStripeLink } from '@/utils/stripe';
+import { submitGoogleWebApp } from '@/utils/googleWebAppSubmit';
+import { combineDialAndNational } from '@/utils/phoneCountryCodes';
+import { PhoneWithCountryFields } from '@/app/components/phone-with-country-fields';
 
 interface EventDetailModalProps {
   event: Event | null;
@@ -17,32 +20,29 @@ interface EventDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const interestEndpoint =
-  'https://script.google.com/macros/s/AKfycbwi6dZZkeBbSxprzpaa4bLxf8ys8X_MsMzRy14ZmsUcFO9xmjXCH1je0Z3hPZBO1NP5RQ/exec';
-
 export function EventDetailModal({ event, open, onOpenChange }: EventDetailModalProps) {
   const [interestStatus, setInterestStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleInterestSubmit = async (formData: FormData) => {
     if (!event) return;
     setInterestStatus('sending');
-    try {
-      await fetch(interestEndpoint, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.get('name'),
-          email: formData.get('email'),
-          phone: formData.get('phone'),
-          message: formData.get('message'),
-          event: event.title,
-        }),
-      });
-      setInterestStatus('success');
-    } catch {
-      setInterestStatus('error');
-    }
+    const combinedPhone = combineDialAndNational(
+      String(formData.get('modal-interest-phone-cc') || '44'),
+      String(formData.get('modal-interest-phone-national') || '')
+    );
+    const result = await submitGoogleWebApp({
+      source: 'event_interest',
+      event_title: event.title,
+      event_id: event.id,
+      event_date: event.date,
+      time_start: event.time || '',
+      time_end: '',
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      phone: combinedPhone,
+      message: String(formData.get('message') || ''),
+    });
+    setInterestStatus(result.ok ? 'success' : 'error');
   };
 
   if (!event) return null;
@@ -158,9 +158,24 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
                       placeholder="Email"
                       className="w-full rounded-lg bg-surface border border-border px-4 py-2 text-sm"
                     />
-                    <input
-                      name="phone"
-                      placeholder="Phone (optional)"
+                    <div>
+                      <span className="block text-xs text-muted-foreground mb-1.5">
+                        Phone (optional) — country + number, no leading 0
+                      </span>
+                      <PhoneWithCountryFields
+                        countrySelectName="modal-interest-phone-cc"
+                        nationalInputName="modal-interest-phone-national"
+                        countrySelectId="modal-interest-phone-cc"
+                        nationalInputId="modal-interest-phone-national"
+                        nationalPlaceholder="7xxx xxxxxx"
+                        fieldClassName="w-full rounded-lg bg-surface border border-border px-4 py-2 text-sm focus:border-accent focus:outline-none transition-colors"
+                        selectClassName="w-full rounded-lg bg-surface border border-border px-4 py-2 text-sm focus:border-accent focus:outline-none transition-colors"
+                      />
+                    </div>
+                    <textarea
+                      name="message"
+                      rows={2}
+                      placeholder="Message (optional)"
                       className="w-full rounded-lg bg-surface border border-border px-4 py-2 text-sm"
                     />
                     {interestStatus === 'error' && (

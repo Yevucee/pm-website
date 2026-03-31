@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Button } from '@/app/components/button';
 import { Music2, Radio, Sparkles, Star } from 'lucide-react';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
+import { submitGoogleWebApp } from '@/utils/googleWebAppSubmit';
+import { combineDialAndNational } from '@/utils/phoneCountryCodes';
+import { PhoneWithCountryFields } from '@/app/components/phone-with-country-fields';
 
 interface PmDjContent {
   heroShow?: boolean;
@@ -48,34 +51,23 @@ export function PmTheDjPage() {
 
   const handleSubmit = async (formData: FormData) => {
     setStatus('sending');
-    try {
-      const payload = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        occasion: formData.get('occasion'),
-        eventDate: formData.get('eventDate'),
-        location: formData.get('location'),
-        timeWindow: formData.get('timeWindow'),
-        guestCount: formData.get('guestCount'),
-        genres: selectedGenres.join(', '),
-        source: 'pm-the-dj',
-      };
-
-      await fetch(
-        'https://script.google.com/macros/s/AKfycbwi6dZZkeBbSxprzpaa4bLxf8ys8X_MsMzRy14ZmsUcFO9xmjXCH1je0Z3hPZBO1NP5RQ/exec',
-        {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      setStatus('success');
-    } catch {
-      setStatus('error');
-    }
+    const combinedPhone = combineDialAndNational(
+      String(formData.get('dj-phone-cc') || '44'),
+      String(formData.get('dj-phone-national') || '')
+    );
+    const result = await submitGoogleWebApp({
+      source: 'pm-the-dj',
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      phone: combinedPhone,
+      occasion: String(formData.get('occasion') || ''),
+      eventDate: String(formData.get('eventDate') || ''),
+      location: String(formData.get('location') || ''),
+      timeWindow: String(formData.get('timeWindow') || ''),
+      guestCount: String(formData.get('guestCount') || ''),
+      genres: selectedGenres.join(', '),
+    });
+    setStatus(result.ok ? 'success' : 'error');
   };
 
   return (
@@ -259,14 +251,18 @@ export function PmTheDjPage() {
                   />
                 </div>
                 <div>
-                  <label className="block font-heading text-sm mb-2" htmlFor="phone">
-                    Phone *
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    required
-                    className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                  <span className="block font-heading text-sm mb-2">Phone *</span>
+                  <p className="text-xs text-muted-foreground mb-2">
+                    Country code, then mobile (no leading 0).
+                  </p>
+                  <PhoneWithCountryFields
+                    countrySelectName="dj-phone-cc"
+                    nationalInputName="dj-phone-national"
+                    countrySelectId="dj-phone-cc"
+                    nationalInputId="dj-phone-national"
+                    nationalPlaceholder="7xxx xxxxxx"
+                    nationalRequired
+                    fieldClassName="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
                   />
                 </div>
               </div>

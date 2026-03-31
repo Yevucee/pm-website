@@ -130,6 +130,9 @@ collections:
           - {label: "Upcoming Events - Heading", name: "eventsHeading", widget: "string"}
           - {label: "Upcoming Events - Link Label", name: "eventsLinkLabel", widget: "string", required: false}
           - {label: "Upcoming Events - Link URL", name: "eventsLinkUrl", widget: "string", required: false}
+          - {label: "Events - Mailing List CTA Show", name: "eventsMailingListCtaShow", widget: "boolean", default: true}
+          - {label: "Events - Mailing List CTA Label", name: "eventsMailingListCtaLabel", widget: "string", required: false}
+          - {label: "Events - Mailing List CTA URL", name: "eventsMailingListCtaUrl", widget: "string", required: false}
           - {label: "Merch - Show", name: "merchShow", widget: "boolean", default: false}
           - {label: "Merch - Heading", name: "merchHeading", widget: "string"}
           - {label: "Merch - Link Label", name: "merchLinkLabel", widget: "string", required: false}
@@ -185,6 +188,21 @@ collections:
           - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
           - {label: "Intro Text", name: "introText", widget: "text"}
           - {label: "Sub Text", name: "subText", widget: "text", required: false}
+          - {label: "Mailing List - Show", name: "mailingListShow", widget: "boolean", default: true}
+          - {label: "Mailing List - Heading", name: "mailingListHeading", widget: "string", required: false}
+          - {label: "Mailing List - Description", name: "mailingListDescription", widget: "text", required: false}
+          - {label: "Mailing List - Name Label", name: "mailingListNameLabel", widget: "string", required: false}
+          - {label: "Mailing List - Name Placeholder", name: "mailingListNamePlaceholder", widget: "string", required: false}
+          - {label: "Mailing List - Email Label", name: "mailingListEmailLabel", widget: "string", required: false}
+          - {label: "Mailing List - Email Placeholder", name: "mailingListEmailPlaceholder", widget: "string", required: false}
+          - {label: "Mailing List - WhatsApp Label", name: "mailingListWhatsAppLabel", widget: "string", required: false}
+          - {label: "Mailing List - WhatsApp Placeholder", name: "mailingListWhatsAppPlaceholder", widget: "string", required: false}
+          - {label: "Mailing List - Consent Label", name: "mailingListConsentLabel", widget: "text", required: false}
+          - {label: "Mailing List - Submit Label", name: "mailingListSubmitLabel", widget: "string", required: false}
+          - {label: "WhatsApp Group - URL", name: "whatsappGroupUrl", widget: "string", required: false, hint: "e.g. WhatsApp community invite link"}
+          - {label: "WhatsApp Group - Heading", name: "whatsappGroupLabel", widget: "string", required: false}
+          - {label: "WhatsApp Group - Description", name: "whatsappGroupDescription", widget: "text", required: false}
+          - {label: "WhatsApp Group - Button Label", name: "whatsappGroupButtonLabel", widget: "string", required: false}
           - {label: "Form - Show", name: "formShow", widget: "boolean", default: true}
           - {label: "Form - Heading", name: "formHeading", widget: "string", required: false}
           - {label: "Form - Description", name: "formDescription", widget: "text", required: false}
@@ -258,8 +276,6 @@ collections:
           - {label: "Hero - Subtitle", name: "heroSubtitle", widget: "string", required: false}
           - {label: "Intro Text", name: "introText", widget: "text", required: false}
           - {label: "Gallery Heading", name: "galleryHeading", widget: "string", required: false}
-          - {label: "EPK Button Label", name: "epkButtonLabel", widget: "string", required: false}
-          - {label: "EPK Button URL", name: "epkButtonUrl", widget: "string", required: false}
       - label: "Merch"
         name: "merch"
         file: "content/pages/merch.json"
@@ -298,6 +314,10 @@ collections:
           - {label: "Upcoming Heading", name: "upcomingHeading", widget: "string"}
           - {label: "Past - Show", name: "pastShow", widget: "boolean", default: true}
           - {label: "Past Heading", name: "pastHeading", widget: "string", required: false}
+          - {label: "Mailing List CTA - Show", name: "mailingListCtaShow", widget: "boolean", default: true}
+          - {label: "Mailing List CTA - Intro", name: "mailingListCtaIntro", widget: "string", required: false}
+          - {label: "Mailing List CTA - Label", name: "mailingListCtaLabel", widget: "string", required: false}
+          - {label: "Mailing List CTA - URL", name: "mailingListCtaUrl", widget: "string", required: false, hint: "Usually /contact#mailing-list"}
       - label: "PM the DJ"
         name: "pm-the-dj"
         file: "content/pages/pm-the-dj.json"

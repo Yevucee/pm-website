@@ -2,7 +2,5 @@
   "heroShow": true,
   "heroTitle": "MEDIA",
   "heroSubtitle": "Photo albums from events",
-  "introText": "",
-  "epkButtonLabel": "Download EPK",
-  "epkButtonUrl": "#"
+  "introText": ""
 }

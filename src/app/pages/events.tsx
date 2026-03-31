@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { EventCard } from '@/app/components/event-card';
 import { EventDetailModal } from '@/app/components/event-detail-modal';
 import { Event, upcomingEvents, pastEvents } from '@/data/mock-data';
@@ -60,6 +61,10 @@ interface EventsPageContent {
   upcomingHeading?: string;
   pastShow?: boolean;
   pastHeading?: string;
+  mailingListCtaShow?: boolean;
+  mailingListCtaIntro?: string;
+  mailingListCtaLabel?: string;
+  mailingListCtaUrl?: string;
 }
 
 export function EventsPage() {
@@ -118,11 +123,27 @@ export function EventsPage() {
               {eventsPage.upcomingHeading || 'UPCOMING'}
             </h2>
             {otherUpcomingEvents.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {otherUpcomingEvents.map((event) => (
-                  <EventCard key={event.id} event={event} />
-                ))}
-              </div>
+              <>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {otherUpcomingEvents.map((event) => (
+                    <EventCard key={event.id} event={event} />
+                  ))}
+                </div>
+                {eventsPage.mailingListCtaShow !== false && (
+                  <div className="mt-10 text-center border border-border rounded-xl py-8 px-4 bg-surface/30">
+                    <p className="text-muted-foreground mb-3">
+                      {eventsPage.mailingListCtaIntro ||
+                        'Want announcements straight to your inbox or phone?'}
+                    </p>
+                    <Link
+                      to={eventsPage.mailingListCtaUrl || '/contact#mailing-list'}
+                      className="text-accent hover:text-accent-hover font-heading text-sm sm:text-base underline-offset-4 hover:underline"
+                    >
+                      {eventsPage.mailingListCtaLabel || 'Sign up for updates'}
+                    </Link>
+                  </div>
+                )}
+              </>
             ) : (
               <div className="py-16 text-center bg-surface/50 border border-border rounded-xl">
                 <p className="text-muted-foreground text-lg mb-4">
@@ -163,22 +184,19 @@ export function EventsPage() {
                     </a>
                   )}
                 </div>
-                <form
-                  className="flex gap-2 mt-4 max-w-sm mx-auto"
-                  onSubmit={(e) => e.preventDefault()}
-                >
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="flex-1 px-4 py-2 rounded-lg bg-surface border border-border text-sm"
-                  />
-                  <Button type="submit" size="sm">
-                    Notify Me
-                  </Button>
-                </form>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Get notified when new dates drop.
-                </p>
+                {eventsPage.mailingListCtaShow !== false && (
+                  <div className="mt-6">
+                    <Link to={eventsPage.mailingListCtaUrl || '/contact#mailing-list'}>
+                      <Button variant="primary" size="sm">
+                        {eventsPage.mailingListCtaLabel || 'Sign up for updates'}
+                      </Button>
+                    </Link>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {eventsPage.mailingListCtaIntro ||
+                        'Join the mailing list for email and WhatsApp updates.'}
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </section>

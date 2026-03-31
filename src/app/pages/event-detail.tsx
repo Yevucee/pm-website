@@ -5,6 +5,9 @@ import { Calendar, MapPin, Clock, ChevronLeft, Users, Music } from 'lucide-react
 import { upcomingEvents, pastEvents } from '@/data/mock-data';
 import { cn } from '@/app/components/ui/utils';
 import { goToStripeLink } from '@/utils/stripe';
+import { submitGoogleWebApp } from '@/utils/googleWebAppSubmit';
+import { combineDialAndNational } from '@/utils/phoneCountryCodes';
+import { PhoneWithCountryFields } from '@/app/components/phone-with-country-fields';
 
 export function EventDetailPage() {
   const { id } = useParams();
@@ -25,30 +28,25 @@ export function EventDetailPage() {
   }
 
   const date = new Date(event.date);
-  const interestEndpoint = 'https://script.google.com/macros/s/AKfycbwi6dZZkeBbSxprzpaa4bLxf8ys8X_MsMzRy14ZmsUcFO9xmjXCH1je0Z3hPZBO1NP5RQ/exec';
-
   const handleInterestSubmit = async (formData: FormData) => {
     setInterestStatus('sending');
-    try {
-      const payload = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        message: formData.get('message'),
-        event: event.title
-      };
-
-      await fetch(interestEndpoint, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      setInterestStatus('success');
-    } catch (error) {
-      setInterestStatus('error');
-    }
+    const combinedPhone = combineDialAndNational(
+      String(formData.get('interest-phone-cc') || '44'),
+      String(formData.get('interest-phone-national') || '')
+    );
+    const result = await submitGoogleWebApp({
+      source: 'event_interest',
+      event_title: event.title,
+      event_id: event.id,
+      event_date: event.date,
+      time_start: event.time || '',
+      time_end: '',
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      phone: combinedPhone,
+      message: String(formData.get('message') || ''),
+    });
+    setInterestStatus(result.ok ? 'success' : 'error');
   };
 
   return (
@@ -200,11 +198,20 @@ export function EventDetailPage() {
                           placeholder="Email address"
                           className="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm"
                         />
-                        <input
-                          name="phone"
-                          placeholder="Phone (optional)"
-                          className="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm"
-                        />
+                        <div>
+                          <span className="block text-xs text-muted-foreground mb-1.5">
+                            Phone (optional) — country + number, no leading 0
+                          </span>
+                          <PhoneWithCountryFields
+                            countrySelectName="interest-phone-cc"
+                            nationalInputName="interest-phone-national"
+                            countrySelectId="interest-phone-cc"
+                            nationalInputId="interest-phone-national"
+                            nationalPlaceholder="7xxx xxxxxx"
+                            fieldClassName="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm focus:border-accent focus:outline-none transition-colors"
+                            selectClassName="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm focus:border-accent focus:outline-none transition-colors"
+                          />
+                        </div>
                         <textarea
                           name="message"
                           rows={3}

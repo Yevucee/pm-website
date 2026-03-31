@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { Button } from '@/app/components/button';
-import { Mail, Phone, Instagram, Youtube, MessageCircle } from 'lucide-react';
+import { Mail, Phone, Instagram, Youtube, MessageCircle, ExternalLink } from 'lucide-react';
 import { getPageContent } from '@/data/pages';
 import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
+import { submitGoogleWebApp } from '@/utils/googleWebAppSubmit';
+import { combineDialAndNational } from '@/utils/phoneCountryCodes';
+import { PhoneWithCountryFields } from '@/app/components/phone-with-country-fields';
 
 const XIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" aria-hidden="true" className={className || 'h-5 w-5'}>
@@ -32,6 +36,21 @@ interface ContactPageContent {
   heroSubtitle?: string;
   introText?: string;
   subText?: string;
+  mailingListShow?: boolean;
+  mailingListHeading?: string;
+  mailingListDescription?: string;
+  mailingListNameLabel?: string;
+  mailingListNamePlaceholder?: string;
+  mailingListEmailLabel?: string;
+  mailingListEmailPlaceholder?: string;
+  mailingListWhatsAppLabel?: string;
+  mailingListWhatsAppPlaceholder?: string;
+  mailingListConsentLabel?: string;
+  mailingListSubmitLabel?: string;
+  whatsappGroupUrl?: string;
+  whatsappGroupLabel?: string;
+  whatsappGroupDescription?: string;
+  whatsappGroupButtonLabel?: string;
   formShow?: boolean;
   formHeading?: string;
   formDescription?: string;
@@ -61,6 +80,51 @@ interface ContactPageContent {
 
 export function ContactPage() {
   const contact = getPageContent<ContactPageContent>('contact', {});
+  const [mailingStatus, setMailingStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [bookingStatus, setBookingStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const handleMailingSubmit = async (formData: FormData) => {
+    setMailingStatus('sending');
+    const consent = formData.get('ml-consent') === 'on';
+    const combinedPhone = combineDialAndNational(
+      String(formData.get('ml-phone-cc') || '44'),
+      String(formData.get('ml-phone-national') || '')
+    );
+    const result = await submitGoogleWebApp({
+      source: 'mailing_list',
+      name: String(formData.get('ml-name') || ''),
+      email: String(formData.get('ml-email') || ''),
+      whatsapp: combinedPhone,
+      marketing_opt_in: consent,
+    });
+    if (result.ok) {
+      setMailingStatus('success');
+    } else {
+      setMailingStatus('error');
+    }
+  };
+
+  const handleBookingSubmit = async (formData: FormData) => {
+    setBookingStatus('sending');
+    const result = await submitGoogleWebApp({
+      source: 'contact_booking',
+      name: String(formData.get('booking-name') || ''),
+      email: String(formData.get('booking-email') || ''),
+      enquiry_type: String(formData.get('booking-type') || ''),
+      event_date: String(formData.get('booking-date') || ''),
+      time_start: String(formData.get('booking-time-start') || ''),
+      time_end: String(formData.get('booking-time-end') || ''),
+      message: String(formData.get('booking-message') || ''),
+    });
+    if (result.ok) {
+      setBookingStatus('success');
+    } else {
+      setBookingStatus('error');
+    }
+  };
+
+  const showMailing = contact.mailingListShow !== false;
+  const showWhatsappGroup = Boolean(contact.whatsappGroupUrl?.trim());
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8">
@@ -85,125 +149,269 @@ export function ContactPage() {
         )}
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          {contact.formShow !== false && (
-          <div>
-            <h2 className="font-heading text-3xl mb-6">
-              {contact.formHeading || 'SEND A MESSAGE'}
-            </h2>
-            {contact.formDescription && (
-              <p className="text-muted-foreground mb-6">{contact.formDescription}</p>
+          <div className="space-y-12">
+            {showMailing && (
+              <div id="mailing-list" className="scroll-mt-28">
+                <h2 className="font-heading text-3xl mb-2">
+                  {contact.mailingListHeading || 'MAILING LIST & UPDATES'}
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  {contact.mailingListDescription ||
+                    'Sign up for email and WhatsApp updates about parties, tickets and announcements.'}
+                </p>
+                {mailingStatus === 'success' ? (
+                  <div className="bg-accent/10 border border-accent rounded-xl p-6 text-center">
+                    <p className="font-heading text-accent">
+                      Thanks — you&apos;re on the list.
+                    </p>
+                  </div>
+                ) : (
+                  <form
+                    className="space-y-6"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      void handleMailingSubmit(new FormData(e.currentTarget));
+                    }}
+                  >
+                    <div>
+                      <label htmlFor="ml-name" className="block font-heading text-sm mb-2">
+                        {contact.mailingListNameLabel || 'NAME *'}
+                      </label>
+                      <input
+                        type="text"
+                        id="ml-name"
+                        name="ml-name"
+                        required
+                        className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                        placeholder={contact.mailingListNamePlaceholder || 'Your name'}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="ml-email" className="block font-heading text-sm mb-2">
+                        {contact.mailingListEmailLabel || 'EMAIL *'}
+                      </label>
+                      <input
+                        type="email"
+                        id="ml-email"
+                        name="ml-email"
+                        required
+                        className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                        placeholder={
+                          contact.mailingListEmailPlaceholder || 'your@email.com'
+                        }
+                      />
+                    </div>
+                    <div>
+                      <span className="block font-heading text-sm mb-2">
+                        {contact.mailingListWhatsAppLabel || 'PHONE / WHATSAPP'}
+                      </span>
+                      <p className="text-xs text-muted-foreground mb-2">
+                        Choose country code, then your mobile number only (skip the leading 0).
+                      </p>
+                      <PhoneWithCountryFields
+                        countrySelectName="ml-phone-cc"
+                        nationalInputName="ml-phone-national"
+                        countrySelectId="ml-phone-cc"
+                        nationalInputId="ml-phone-national"
+                        nationalPlaceholder={
+                          contact.mailingListWhatsAppPlaceholder || 'e.g. 7900 123456'
+                        }
+                        fieldClassName="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                      />
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id="ml-consent"
+                        name="ml-consent"
+                        required
+                        className="mt-1 rounded border-border"
+                      />
+                      <label htmlFor="ml-consent" className="text-sm text-muted-foreground leading-snug">
+                        {contact.mailingListConsentLabel ||
+                          'I agree to receive updates about events and releases. You can opt out anytime.'}
+                      </label>
+                    </div>
+                    {mailingStatus === 'error' && (
+                      <p className="text-sm text-error">
+                        Something went wrong. Check the form URL is configured, or try again.
+                      </p>
+                    )}
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      size="lg"
+                      className="w-full"
+                      disabled={mailingStatus === 'sending'}
+                    >
+                      {mailingStatus === 'sending'
+                        ? 'Sending…'
+                        : contact.mailingListSubmitLabel || 'Join the list'}
+                    </Button>
+                  </form>
+                )}
+              </div>
             )}
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block font-heading text-sm mb-2">
-                  {contact.formNameLabel || 'NAME *'}
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  required
-                  className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
-                  placeholder={contact.formNamePlaceholder || 'Your name'}
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block font-heading text-sm mb-2">
-                  {contact.formEmailLabel || 'EMAIL *'}
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
-                  placeholder={contact.formEmailPlaceholder || 'your@email.com'}
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="type" className="block font-heading text-sm mb-2">
-                  {contact.formEnquiryLabel || 'ENQUIRY TYPE *'}
-                </label>
-                <select
-                  id="type"
-                  required
-                  className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
-                >
-                  <option value="">Select...</option>
-                  {(contact.formEnquiryOptions || []).map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              <div>
-                <label htmlFor="date" className="block font-heading text-sm mb-2">
-                  {contact.formDateLabel || 'EVENT DATE (if applicable)'}
-                </label>
-                <input
-                  type="date"
-                  id="date"
-                  className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
-                />
-              </div>
 
+            {contact.formShow !== false && (
               <div>
-                <label className="block font-heading text-sm mb-2">
-                  {contact.formTimeLabel || 'EVENT TIME (if applicable)'}
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="time-start" className="block text-xs text-muted-foreground mb-2">
-                      {contact.formTimeStartLabel || 'Start time'}
-                    </label>
-                    <input
-                      type="time"
-                      id="time-start"
-                      className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
-                    />
+                <h2 className="font-heading text-3xl mb-6">
+                  {contact.formHeading || 'SEND A MESSAGE'}
+                </h2>
+                {contact.formDescription && (
+                  <p className="text-muted-foreground mb-6">{contact.formDescription}</p>
+                )}
+                {bookingStatus === 'success' ? (
+                  <div className="bg-accent/10 border border-accent rounded-xl p-6 text-center">
+                    <p className="font-heading text-accent">Message sent. We&apos;ll get back to you soon.</p>
                   </div>
-                  <div>
-                    <label htmlFor="time-end" className="block text-xs text-muted-foreground mb-2">
-                      {contact.formTimeEndLabel || 'End time'}
-                    </label>
-                    <input
-                      type="time"
-                      id="time-end"
-                      className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
-                    />
-                  </div>
-                </div>
+                ) : (
+                  <form
+                    className="space-y-6"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      void handleBookingSubmit(new FormData(e.currentTarget));
+                    }}
+                  >
+                    <div>
+                      <label htmlFor="booking-name" className="block font-heading text-sm mb-2">
+                        {contact.formNameLabel || 'NAME *'}
+                      </label>
+                      <input
+                        type="text"
+                        id="booking-name"
+                        name="booking-name"
+                        required
+                        className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                        placeholder={contact.formNamePlaceholder || 'Your name'}
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="booking-email" className="block font-heading text-sm mb-2">
+                        {contact.formEmailLabel || 'EMAIL *'}
+                      </label>
+                      <input
+                        type="email"
+                        id="booking-email"
+                        name="booking-email"
+                        required
+                        className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                        placeholder={contact.formEmailPlaceholder || 'your@email.com'}
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="booking-type" className="block font-heading text-sm mb-2">
+                        {contact.formEnquiryLabel || 'ENQUIRY TYPE *'}
+                      </label>
+                      <select
+                        id="booking-type"
+                        name="booking-type"
+                        required
+                        className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                      >
+                        <option value="">Select...</option>
+                        {(contact.formEnquiryOptions || []).map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="booking-date" className="block font-heading text-sm mb-2">
+                        {contact.formDateLabel || 'EVENT DATE (if applicable)'}
+                      </label>
+                      <input
+                        type="date"
+                        id="booking-date"
+                        name="booking-date"
+                        className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-heading text-sm mb-2">
+                        {contact.formTimeLabel || 'EVENT TIME (if applicable)'}
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label
+                            htmlFor="booking-time-start"
+                            className="block text-xs text-muted-foreground mb-2"
+                          >
+                            {contact.formTimeStartLabel || 'Start time'}
+                          </label>
+                          <input
+                            type="time"
+                            id="booking-time-start"
+                            name="booking-time-start"
+                            className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="booking-time-end"
+                            className="block text-xs text-muted-foreground mb-2"
+                          >
+                            {contact.formTimeEndLabel || 'End time'}
+                          </label>
+                          <input
+                            type="time"
+                            id="booking-time-end"
+                            name="booking-time-end"
+                            className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="booking-message" className="block font-heading text-sm mb-2">
+                        {contact.formMessageLabel || 'MESSAGE *'}
+                      </label>
+                      <textarea
+                        id="booking-message"
+                        name="booking-message"
+                        required
+                        rows={6}
+                        className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors resize-none"
+                        placeholder={
+                          contact.formMessagePlaceholder ||
+                          'Tell us about your event or enquiry...'
+                        }
+                      />
+                    </div>
+
+                    {bookingStatus === 'error' && (
+                      <p className="text-sm text-error">
+                        Something went wrong. Please try again or email us directly.
+                      </p>
+                    )}
+                    <Button
+                      type="submit"
+                      variant="outline"
+                      size="lg"
+                      className="w-full"
+                      disabled={bookingStatus === 'sending'}
+                    >
+                      {bookingStatus === 'sending'
+                        ? 'Sending…'
+                        : contact.formSubmitLabel || 'Send Message'}
+                    </Button>
+                  </form>
+                )}
               </div>
-              
-              <div>
-                <label htmlFor="message" className="block font-heading text-sm mb-2">
-                  {contact.formMessageLabel || 'MESSAGE *'}
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:border-accent focus:outline-none transition-colors resize-none"
-                  placeholder={contact.formMessagePlaceholder || 'Tell us about your event or enquiry...'}
-                />
-              </div>
-              
-              <Button type="submit" variant="primary" size="lg" className="w-full">
-                {contact.formSubmitLabel || 'Send Message'}
-              </Button>
-            </form>
+            )}
           </div>
-          )}
 
-          {/* Contact Information */}
           <div>
             <h2 className="font-heading text-3xl mb-6">
               {contact.directContactHeading || 'DIRECT CONTACT'}
             </h2>
-            
+
             <div className="space-y-6 mb-12">
               {(contact.directContacts || []).map((item) => (
                 <div key={item.label} className="bg-surface border border-border rounded-xl p-6">
@@ -228,6 +436,31 @@ export function ContactPage() {
                 </div>
               ))}
             </div>
+
+            {showWhatsappGroup && (
+              <div className="mb-8 p-6 bg-accent/10 border border-accent rounded-xl">
+                <div className="flex items-center gap-2 mb-2">
+                  <MessageCircle size={22} className="text-accent" />
+                  <h3 className="font-heading text-lg">
+                    {contact.whatsappGroupLabel || 'WhatsApp community'}
+                  </h3>
+                </div>
+                {contact.whatsappGroupDescription && (
+                  <p className="text-muted-foreground text-sm mb-4">{contact.whatsappGroupDescription}</p>
+                )}
+                <a
+                  href={contact.whatsappGroupUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex"
+                >
+                  <Button variant="primary" size="sm" className="gap-2">
+                    {contact.whatsappGroupButtonLabel || 'Join WhatsApp group'}
+                    <ExternalLink size={16} />
+                  </Button>
+                </a>
+              </div>
+            )}
 
             <div className="bg-surface border border-border rounded-xl p-6">
               <h3 className="font-heading text-xl mb-4">
