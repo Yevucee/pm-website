@@ -13,6 +13,8 @@ export function EventDetailPage() {
   const { id } = useParams();
   const event = [...upcomingEvents, ...pastEvents].find((e) => e.id === id);
   const [interestStatus, setInterestStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [interestVerified, setInterestVerified] = useState(true);
+  const [interestError, setInterestError] = useState('');
 
   if (!event) {
     return (
@@ -30,6 +32,7 @@ export function EventDetailPage() {
   const date = new Date(event.date);
   const handleInterestSubmit = async (formData: FormData) => {
     setInterestStatus('sending');
+    setInterestError('');
     const combinedPhone = combineDialAndNational(
       String(formData.get('interest-phone-cc') || '44'),
       String(formData.get('interest-phone-national') || '')
@@ -46,7 +49,13 @@ export function EventDetailPage() {
       phone: combinedPhone,
       message: String(formData.get('message') || ''),
     });
-    setInterestStatus(result.ok ? 'success' : 'error');
+    if (result.ok) {
+      setInterestVerified(result.verified);
+      setInterestStatus('success');
+    } else {
+      setInterestError(result.error);
+      setInterestStatus('error');
+    }
   };
 
   return (
@@ -174,8 +183,13 @@ export function EventDetailPage() {
                       Tickets are not on sale yet. Register your interest and we will notify you.
                     </p>
                     {interestStatus === 'success' ? (
-                      <div className="bg-accent/10 border border-accent rounded-lg p-4 text-center">
+                      <div className="bg-accent/10 border border-accent rounded-lg p-4 text-center space-y-2">
                         <p className="font-heading text-accent">Thanks! We will be in touch.</p>
+                        {!interestVerified && (
+                          <p className="text-xs text-muted-foreground">
+                            We could not confirm the server reply. Open Apps Script → Executions for errors, or try the Contact page. A row may still appear shortly.
+                          </p>
+                        )}
                       </div>
                     ) : (
                       <form
@@ -219,7 +233,9 @@ export function EventDetailPage() {
                           className="w-full rounded-lg bg-background border border-border px-4 py-3 text-sm"
                         />
                         {interestStatus === 'error' && (
-                          <p className="text-sm text-error">Something went wrong. Please try again.</p>
+                          <p className="text-sm text-error">
+                            {interestError || 'Something went wrong. Please try again.'}
+                          </p>
                         )}
                         <Button variant="primary" size="sm" className="w-full" disabled={interestStatus === 'sending'}>
                           {interestStatus === 'sending' ? 'Sending...' : 'Register Interest'}

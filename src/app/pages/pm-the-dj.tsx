@@ -28,6 +28,8 @@ export function PmTheDjPage() {
   const page = getPageContent<PmDjContent>('pm-the-dj', {});
   const heroImage = resolvePublicAsset(page.heroImage);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [submitVerified, setSubmitVerified] = useState(true);
+  const [submitError, setSubmitError] = useState('');
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   
   const defaultFeatures = [
@@ -51,6 +53,7 @@ export function PmTheDjPage() {
 
   const handleSubmit = async (formData: FormData) => {
     setStatus('sending');
+    setSubmitError('');
     const combinedPhone = combineDialAndNational(
       String(formData.get('dj-phone-cc') || '44'),
       String(formData.get('dj-phone-national') || '')
@@ -67,7 +70,13 @@ export function PmTheDjPage() {
       guestCount: String(formData.get('guestCount') || ''),
       genres: selectedGenres.join(', '),
     });
-    setStatus(result.ok ? 'success' : 'error');
+    if (result.ok) {
+      setSubmitVerified(result.verified);
+      setStatus('success');
+    } else {
+      setSubmitError(result.error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -281,8 +290,13 @@ export function PmTheDjPage() {
               </div>
 
               {status === 'success' ? (
-                <div className="bg-accent/10 border border-accent rounded-lg p-4 text-center">
+                <div className="bg-accent/10 border border-accent rounded-lg p-4 text-center space-y-2">
                   <p className="font-heading text-accent">Thanks! We’ll be in touch shortly.</p>
+                  {!submitVerified && (
+                    <p className="text-xs text-muted-foreground">
+                      We could not confirm the server reply. Check your sheet or Apps Script → Executions.
+                    </p>
+                  )}
                 </div>
               ) : (
                 <Button type="submit" variant="primary" size="lg" className="w-full" disabled={status === 'sending'}>
@@ -291,7 +305,9 @@ export function PmTheDjPage() {
               )}
 
               {status === 'error' && (
-                <p className="text-sm text-error text-center">Something went wrong. Please try again.</p>
+                <p className="text-sm text-error text-center">
+                  {submitError || 'Something went wrong. Please try again.'}
+                </p>
               )}
             </form>
           </div>

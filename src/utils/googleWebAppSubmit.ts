@@ -1,7 +1,8 @@
 import { getFormSubmitSecret, getFormSubmitUrl } from '@/config';
 
 export type GoogleWebAppResult =
-  | { ok: true }
+  | { ok: true; verified: true }
+  | { ok: true; verified: false }
   | { ok: false; error: string };
 
 const CONTENT_TYPE = 'application/x-www-form-urlencoded';
@@ -22,8 +23,16 @@ function parseGoogleResponse(text: string): { ok: boolean; error?: string } {
   if (!text) {
     return { ok: false, error: 'Empty response from server' };
   }
+  const trimmed = text.trim();
+  if (trimmed.startsWith('<') || trimmed.startsWith('<!')) {
+    return {
+      ok: false,
+      error:
+        'Server returned HTML instead of JSON. Redeploy the Apps Script web app (New deployment), confirm doPost returns JSON, and that the script is bound to the correct spreadsheet.',
+    };
+  }
   try {
-    const data = JSON.parse(text) as { ok?: boolean; error?: string };
+    const data = JSON.parse(trimmed) as { ok?: boolean; error?: string };
     if (data.ok === false) {
       return { ok: false, error: data.error || 'Request failed' };
     }
@@ -33,13 +42,13 @@ function parseGoogleResponse(text: string): { ok: boolean; error?: string } {
   } catch {
     // non-JSON body
   }
-  return { ok: false, error: 'Invalid response from server' };
+  return { ok: false, error: 'Invalid response from server (not JSON).' };
 }
 
 /**
  * POST to a Google Apps Script web app using the static-site CORS pattern:
  * body is x-www-form-urlencoded with a single key `json` whose value is JSON.stringify(payload).
- * Retries with mode no-cors if the first request throws (opaque response / redirect chain).
+ * If CORS fails, retries with no-cors — response is opaque then, so verified:false.
  */
 export async function submitGoogleWebApp(
   payload: Record<string, unknown>
@@ -60,30 +69,51 @@ export async function submitGoogleWebApp(
       headers: { 'Content-Type': CONTENT_TYPE },
       body,
       mode: 'cors',
+      credentials: 'omit',
+      cache: 'no-store',
     });
     const text = (await res.text()).trim();
     const parsed = parseGoogleResponse(text);
+    if (res.ok && !parsed.ok) {
+      console.warn('[submitGoogleWebApp] Expected JSON { ok: true }, got:', text.slice(0, 500));
+    }
+    if (import.meta.env.DEV && !res.ok) {
+      console.warn('[submitGoogleWebApp]', res.status, text.slice(0, 400));
+    }
     if (!res.ok) {
       return { ok: false, error: parsed.error || `Request failed (${res.status})` };
     }
     if (!parsed.ok) {
-      return { ok: false, error: parsed.error || 'Request failed' };
+      return {
+        ok: false,
+        error: parsed.error || 'Request failed',
+      };
     }
-    return { ok: true };
-  } catch {
-    // Some browsers treat Apps Script redirects as CORS failure even when the row was written.
+    return { ok: true, verified: true };
+  } catch (e) {
+    if (import.meta.env.DEV) {
+      console.warn('[submitGoogleWebApp] CORS fetch failed, retrying no-cors', e);
+    }
     try {
       await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': CONTENT_TYPE },
         body,
         mode: 'no-cors',
+        credentials: 'omit',
+        cache: 'no-store',
       });
-      // Cannot read response body; assume success if no throw.
-      return { ok: true };
-    } catch (e) {
-      const message = e instanceof Error ? e.message : 'Network error';
-      return { ok: false, error: message };
+      // Request was sent but response is opaque — cannot confirm { ok: true } from script.
+      return {
+        ok: true,
+        verified: false,
+      };
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Network error';
+      return {
+        ok: false,
+        error: `${message}. Check the web app URL, blockers, and Apps Script Executions log.`,
+      };
     }
   }
 }

@@ -81,10 +81,15 @@ interface ContactPageContent {
 export function ContactPage() {
   const contact = getPageContent<ContactPageContent>('contact', {});
   const [mailingStatus, setMailingStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [mailingVerified, setMailingVerified] = useState(true);
+  const [mailingError, setMailingError] = useState('');
   const [bookingStatus, setBookingStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [bookingVerified, setBookingVerified] = useState(true);
+  const [bookingError, setBookingError] = useState('');
 
   const handleMailingSubmit = async (formData: FormData) => {
     setMailingStatus('sending');
+    setMailingError('');
     const consent = formData.get('ml-consent') === 'on';
     const combinedPhone = combineDialAndNational(
       String(formData.get('ml-phone-cc') || '44'),
@@ -98,14 +103,17 @@ export function ContactPage() {
       marketing_opt_in: consent,
     });
     if (result.ok) {
+      setMailingVerified(result.verified);
       setMailingStatus('success');
     } else {
+      setMailingError(result.error);
       setMailingStatus('error');
     }
   };
 
   const handleBookingSubmit = async (formData: FormData) => {
     setBookingStatus('sending');
+    setBookingError('');
     const result = await submitGoogleWebApp({
       source: 'contact_booking',
       name: String(formData.get('booking-name') || ''),
@@ -117,8 +125,10 @@ export function ContactPage() {
       message: String(formData.get('booking-message') || ''),
     });
     if (result.ok) {
+      setBookingVerified(result.verified);
       setBookingStatus('success');
     } else {
+      setBookingError(result.error);
       setBookingStatus('error');
     }
   };
@@ -160,10 +170,15 @@ export function ContactPage() {
                     'Sign up for email and WhatsApp updates about parties, tickets and announcements.'}
                 </p>
                 {mailingStatus === 'success' ? (
-                  <div className="bg-accent/10 border border-accent rounded-xl p-6 text-center">
+                  <div className="bg-accent/10 border border-accent rounded-xl p-6 text-center space-y-2">
                     <p className="font-heading text-accent">
                       Thanks — you&apos;re on the list.
                     </p>
+                    {!mailingVerified && (
+                      <p className="text-xs text-muted-foreground">
+                        We could not confirm the server reply (browser/network). Check the sheet in a minute or use email/WhatsApp on this page if nothing appears.
+                      </p>
+                    )}
                   </div>
                 ) : (
                   <form
@@ -234,7 +249,7 @@ export function ContactPage() {
                     </div>
                     {mailingStatus === 'error' && (
                       <p className="text-sm text-error">
-                        Something went wrong. Check the form URL is configured, or try again.
+                        {mailingError || 'Something went wrong. Try again.'}
                       </p>
                     )}
                     <Button
@@ -262,8 +277,13 @@ export function ContactPage() {
                   <p className="text-muted-foreground mb-6">{contact.formDescription}</p>
                 )}
                 {bookingStatus === 'success' ? (
-                  <div className="bg-accent/10 border border-accent rounded-xl p-6 text-center">
+                  <div className="bg-accent/10 border border-accent rounded-xl p-6 text-center space-y-2">
                     <p className="font-heading text-accent">Message sent. We&apos;ll get back to you soon.</p>
+                    {!bookingVerified && (
+                      <p className="text-xs text-muted-foreground">
+                        We could not confirm the server reply. Check your sheet or contact us directly if needed.
+                      </p>
+                    )}
                   </div>
                 ) : (
                   <form
@@ -387,7 +407,7 @@ export function ContactPage() {
 
                     {bookingStatus === 'error' && (
                       <p className="text-sm text-error">
-                        Something went wrong. Please try again or email us directly.
+                        {bookingError || 'Something went wrong. Please try again or email us directly.'}
                       </p>
                     )}
                     <Button

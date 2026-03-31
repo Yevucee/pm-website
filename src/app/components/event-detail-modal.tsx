@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -22,10 +22,21 @@ interface EventDetailModalProps {
 
 export function EventDetailModal({ event, open, onOpenChange }: EventDetailModalProps) {
   const [interestStatus, setInterestStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [interestVerified, setInterestVerified] = useState(true);
+  const [interestError, setInterestError] = useState('');
+
+  useEffect(() => {
+    if (!open) {
+      setInterestStatus('idle');
+      setInterestVerified(true);
+      setInterestError('');
+    }
+  }, [open]);
 
   const handleInterestSubmit = async (formData: FormData) => {
     if (!event) return;
     setInterestStatus('sending');
+    setInterestError('');
     const combinedPhone = combineDialAndNational(
       String(formData.get('modal-interest-phone-cc') || '44'),
       String(formData.get('modal-interest-phone-national') || '')
@@ -42,7 +53,13 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
       phone: combinedPhone,
       message: String(formData.get('message') || ''),
     });
-    setInterestStatus(result.ok ? 'success' : 'error');
+    if (result.ok) {
+      setInterestVerified(result.verified);
+      setInterestStatus('success');
+    } else {
+      setInterestError(result.error);
+      setInterestStatus('error');
+    }
   };
 
   if (!event) return null;
@@ -134,8 +151,13 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
                   Register your interest and we will notify you.
                 </p>
                 {interestStatus === 'success' ? (
-                  <div className="bg-accent/10 border border-accent rounded-lg p-4 text-center">
+                  <div className="bg-accent/10 border border-accent rounded-lg p-4 text-center space-y-2">
                     <p className="font-heading text-accent text-sm">Thanks! We will be in touch.</p>
+                    {!interestVerified && (
+                      <p className="text-xs text-muted-foreground">
+                        We could not confirm the server reply. Check Apps Script → Executions, or try Contact. A row may still appear shortly.
+                      </p>
+                    )}
                   </div>
                 ) : (
                   <form
@@ -179,7 +201,9 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
                       className="w-full rounded-lg bg-surface border border-border px-4 py-2 text-sm"
                     />
                     {interestStatus === 'error' && (
-                      <p className="text-sm text-error">Something went wrong. Try again.</p>
+                      <p className="text-sm text-error">
+                        {interestError || 'Something went wrong. Try again.'}
+                      </p>
                     )}
                     <Button type="submit" size="sm" className="w-full" disabled={interestStatus === 'sending'}>
                       {interestStatus === 'sending' ? 'Sending...' : 'Register Interest'}
