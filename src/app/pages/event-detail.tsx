@@ -187,7 +187,7 @@ export function EventDetailPage() {
                         <p className="font-heading text-accent">Thanks! We will be in touch.</p>
                         {!interestVerified && (
                           <p className="text-xs text-muted-foreground">
-                            We could not confirm the server reply. Open Apps Script → Executions for errors, or try the Contact page. A row may still appear shortly.
+                            Often 403/CORS: redeploy Web app as Who has access Anyone, update the /exec URL in GitHub secrets, then check Apps Script → Executions.
                           </p>
                         )}
                       </div>

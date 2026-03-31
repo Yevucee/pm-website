@@ -48,7 +48,10 @@ function parseGoogleResponse(text: string): { ok: boolean; error?: string } {
 /**
  * POST to a Google Apps Script web app using the static-site CORS pattern:
  * body is x-www-form-urlencoded with a single key `json` whose value is JSON.stringify(payload).
- * If CORS fails, retries with no-cors — response is opaque then, so verified:false.
+ *
+ * If the browser blocks reading the response (CORS), we retry with no-cors — the response is
+ * then opaque, so verified:false. A 403 from Google often omits CORS headers; fix deploy
+ * (Web app → Who has access: Anyone) so the first request returns JSON the browser can read.
  */
 export async function submitGoogleWebApp(
   payload: Record<string, unknown>
@@ -103,7 +106,6 @@ export async function submitGoogleWebApp(
         credentials: 'omit',
         cache: 'no-store',
       });
-      // Request was sent but response is opaque — cannot confirm { ok: true } from script.
       return {
         ok: true,
         verified: false,

@@ -155,7 +155,12 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
                     <p className="font-heading text-accent text-sm">Thanks! We will be in touch.</p>
                     {!interestVerified && (
                       <p className="text-xs text-muted-foreground">
-                        We could not confirm the server reply. Check Apps Script → Executions, or try Contact. A row may still appear shortly.
+                        <>
+                          Often caused by Google blocking the response (403/CORS). Redeploy the Web app with{' '}
+                          <span className="text-foreground font-medium">Who has access: Anyone</span>, update the{' '}
+                          <span className="font-mono text-xs">/exec</span> URL in GitHub secrets, then check Apps Script →{' '}
+                          <span className="text-foreground font-medium">Executions</span>.
+                        </>
                       </p>
                     )}
                   </div>
