@@ -116,6 +116,7 @@ const normalizeCategory = (value?: string): Product['category'] => {
   return 'apparel';
 };
 
+/** Event JSON shape and asset rules: content/events/README.md — card layout is shared (EventCard). */
 const parseEvent = (path: string, data: EventContent): Event | null => {
   if (!data || typeof data !== 'object') {
     return null;

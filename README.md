@@ -43,6 +43,8 @@ The site includes Decap CMS (formerly Netlify CMS) for easy content management v
 
 All content is stored as markdown/JSON files in the `content/` folder and committed to your Git repository.
 
+**Events (posters + JSON):** every event uses the same on-site card layout. Follow **`content/events/README.md`** (16∶9 images, Fixr/Stripe tiers, `comingSoon`) so new uploads stay aligned with no code changes.
+
 ## Tech Stack
 - **React 18** with TypeScript
 - **React Router** for navigation

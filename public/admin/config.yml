@@ -36,6 +36,7 @@ collections:
 
   - name: "events"
     label: "Events"
+    description: "Card layout is automatic (same for every event). Use 16:9 poster images (e.g. 1920×1080). See content/events/README.md."
     folder: "content/events"
     create: true
     slug: "{{slug}}"
@@ -53,17 +54,34 @@ collections:
       - {label: "Venue (full address)", name: "venue", widget: "string"}
       - {label: "Venue Name (short, e.g. Harben Suite)", name: "venueName", widget: "string", required: false}
       - {label: "City", name: "city", widget: "string"}
-      - {label: "Image", name: "image", widget: "image"}
+      - {
+          label: "Image",
+          name: "image",
+          widget: "image",
+          hint: "16:9 landscape (e.g. 1920×1080). Saved under /uploads/ — all event cards use the same layout."
+        }
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Coming Soon", name: "comingSoon", widget: "boolean", default: false}
+      - {
+          label: "Coming Soon",
+          name: "comingSoon",
+          widget: "boolean",
+          default: false,
+          hint: "If true, card shows Tickets/TBC (same alignment as From/£). Turn off when Fixr/Stripe is live and a tier is available."
+        }
       - {label: "Lineup", name: "lineup", widget: "list", required: false}
       - label: "Ticket Tiers"
         name: "ticketTiers"
         widget: "list"
         fields:
-          - {label: "Name", name: "name", widget: "string"}
+          - {label: "Name", name: "name", widget: "string", hint: "e.g. Buy Tickets, General Admission"}
           - {label: "Price (£)", name: "price", widget: "number"}
-          - {label: "Stripe Payment Link", name: "stripeLink", widget: "string", required: false}
+          - {
+              label: "Payment link (Fixr, Stripe, etc.)",
+              name: "stripeLink",
+              widget: "string",
+              required: false,
+              hint: "Full https URL. Shown in the modal; the card uses the first available tier for From/£."
+            }
           - {label: "Available", name: "available", widget: "boolean", default: true}
       - {label: "Sold Out", name: "soldOut", widget: "boolean", default: false, required: false}
 
