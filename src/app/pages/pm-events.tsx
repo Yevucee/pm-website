@@ -63,9 +63,11 @@ export function PmEventsPage() {
             <h2 className="font-heading text-3xl mb-8">
               {page.upcomingHeading || 'UPCOMING'}
             </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 [&>div]:min-h-0">
               {upcomingEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
+                <div key={event.id} className="flex h-full min-h-0">
+                  <EventCard event={event} />
+                </div>
               ))}
             </div>
           </section>
@@ -77,9 +79,11 @@ export function PmEventsPage() {
             <h2 className="font-heading text-3xl mb-8">
               {page.pastHeading || 'PAST EVENTS'}
             </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 [&>div]:min-h-0">
               {pastEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
+                <div key={event.id} className="flex h-full min-h-0">
+                  <EventCard event={event} />
+                </div>
               ))}
             </div>
           </section>

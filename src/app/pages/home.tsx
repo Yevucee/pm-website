@@ -241,9 +241,11 @@ export function HomePage() {
           </div>
           
           {featuredEvents.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 [&>div]:min-h-0">
               {featuredEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
+                <div key={event.id} className="flex h-full min-h-0">
+                  <EventCard event={event} />
+                </div>
               ))}
             </div>
           ) : (

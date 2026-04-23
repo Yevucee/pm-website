@@ -29,7 +29,7 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
       <img
         src={event.image}
         alt={event.title}
-        className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+        className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
       />
       <div className="absolute left-4 top-4 z-10 whitespace-nowrap rounded-lg bg-accent px-3 py-1 font-heading text-sm text-black">
         {eventTypeLabel}
@@ -43,12 +43,12 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
   );
 
   const contentBlock = (
-    <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-between p-5 sm:p-6">
-      <div>
-        <h3 className="mb-3 break-words font-heading text-xl text-foreground sm:text-2xl transition-colors group-hover:text-accent">
+    <div className="flex min-h-0 min-w-0 flex-1 flex-col p-5 sm:p-6">
+      <div className="min-h-0 flex-1">
+        <h3 className="line-clamp-3 min-h-[4.5rem] text-balance break-words font-heading text-xl text-foreground sm:min-h-[5.5rem] sm:text-2xl transition-colors group-hover:text-accent">
           {event.title}
         </h3>
-        <div className="mb-4 space-y-2 text-muted-foreground">
+        <div className="mb-0 mt-3 space-y-2 text-muted-foreground sm:mb-0">
           <div className="flex items-center gap-2">
             <Calendar size={16} />
             <span>{date.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
@@ -65,24 +65,28 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
       </div>
 
       {showTicketFooter && (
-        <div className="flex items-end justify-between gap-4 border-t border-border pt-4">
-          <div className="flex min-h-[3.25rem] flex-col justify-end">
+        <div className="grid w-full grid-cols-[1fr_auto] items-end gap-4 border-t border-border pt-4">
+          <div className="flex h-14 flex-col justify-end">
             {availableTier && (
               <>
-                <p className="text-sm text-muted-foreground">{availableTier.price === 0 ? '' : 'From'}</p>
-                <p className="font-heading text-2xl leading-tight text-accent">
+                <p className="text-sm leading-none text-muted-foreground">
+                  {availableTier.price === 0 ? '\u00a0' : 'From'}
+                </p>
+                <p className="mt-0.5 font-heading text-2xl leading-none text-accent">
                   {availableTier.price === 0 ? 'Free' : `£${availableTier.price}`}
                 </p>
               </>
             )}
             {event.comingSoon && !availableTier && (
               <>
-                <p className="text-sm text-muted-foreground">Tickets</p>
-                <p className="font-heading text-2xl leading-tight text-muted-foreground">TBC</p>
+                <p className="text-sm leading-none text-muted-foreground">Tickets</p>
+                <p className="mt-0.5 font-heading text-2xl leading-none text-muted-foreground">TBC</p>
               </>
             )}
           </div>
-          <span className="shrink-0 self-end pb-0.5 text-sm font-medium text-accent">View details →</span>
+          <div className="flex h-14 min-w-0 items-end">
+            <span className="text-sm font-medium leading-none text-accent">View details →</span>
+          </div>
         </div>
       )}
 
@@ -100,11 +104,11 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
         type="button"
         onClick={() => setModalOpen(true)}
         className={cn(
-          'group w-full cursor-pointer text-left',
-          'rounded-xl border border-border bg-surface',
-          'overflow-hidden transition-all duration-300',
+          'group flex h-full w-full cursor-pointer text-left',
+          'flex-col overflow-hidden rounded-xl border border-border bg-surface',
+          'transition-all duration-300',
           'hover:border-accent hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]',
-          variant === 'horizontal' && 'flex flex-col sm:flex-row'
+          variant === 'horizontal' && 'sm:flex-row'
         )}
       >
         {variant === 'horizontal' ? (

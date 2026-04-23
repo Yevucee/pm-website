@@ -124,9 +124,11 @@ export function EventsPage() {
             </h2>
             {otherUpcomingEvents.length > 0 ? (
               <>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 [&>div]:min-h-0">
                   {otherUpcomingEvents.map((event) => (
-                    <EventCard key={event.id} event={event} />
+                    <div key={event.id} className="flex h-full min-h-0">
+                      <EventCard event={event} />
+                    </div>
                   ))}
                 </div>
                 {eventsPage.mailingListCtaShow !== false && (
@@ -210,9 +212,11 @@ export function EventsPage() {
             <h2 className="font-heading text-2xl font-bold text-muted-foreground mb-6">
               {eventsPage.pastHeading || 'PAST EVENTS'}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 [&>div]:min-h-0">
               {pastEvents.map((event) => (
-                <EventCard key={event.id} event={event} variant="vertical" />
+                <div key={event.id} className="flex h-full min-h-0">
+                  <EventCard event={event} variant="vertical" />
+                </div>
               ))}
             </div>
           </section>
