@@ -1,0 +1,21 @@
+{
+  "title": "World Cup Viewing Party — Ghana vs Croatia",
+  "type": "club-night",
+  "date": "2026-06-27",
+  "time": "6PM – 1AM",
+  "venue": "GB10 Sports, 177 Footscray Road, Eltham",
+  "venueName": "GB10 Sports",
+  "city": "London SE9 2SZ",
+  "image": "/uploads/world-cup-viewing-party-ghana-vs-croatia-2026.png",
+  "description": "World Cup viewing party: Ghana vs Croatia at GB10 Sports, Eltham. DJs, BBQ, predictions, prizes and multiple screens — Saturday 27 June 2026, 6PM–1AM. Entry £10; secure your place on Fixr.",
+  "comingSoon": false,
+  "ticketTiers": [
+    {
+      "name": "Buy Tickets",
+      "price": 10,
+      "available": true,
+      "stripeLink": "https://fixr.co/event/341467605"
+    }
+  ],
+  "soldOut": false
+}
