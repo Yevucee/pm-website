@@ -1,13 +1,13 @@
 {
   "title": "The Black & White Affair",
   "type": "club-night",
-  "date": "2026-05-03",
+  "date": "2026-05-24",
   "time": "9PM – 3AM",
   "venue": "Riva Lounge, 3–7 Bromley Road, Catford",
   "venueName": "Riva Lounge",
   "city": "London SE6 2TS",
   "image": "/uploads/black-white-affair-2026.png",
-  "description": "Join us for The Black & White Affair, a stylish late-night party at Riva Lounge, Catford. Presented by DJ Rexy & The PM, this exclusive event brings together great music, vibrant energy and a crowd dressed to impress in classic black and white.\n\nExpect the best in Afrobeats, party classics and dancefloor hits from DJ Rexy and The PM, hosted by MC Pacman, keeping the vibes high from start to finish.\n\nDress sharp, bring your crew and experience one of South London's standout party nights.\n\nDress code: Black & White – dress to impress!",
+  "description": "Join us for The Black & White Affair, a stylish late-night party at Riva Lounge, Catford — Sunday 24 May 2026, 9PM–3AM. Presented by DJ Rexy & The PM, this exclusive event brings together great music, vibrant energy and a crowd dressed to impress in classic black and white.\n\nExpect the best in Afrobeats, party classics and dancefloor hits from DJ Rexy and The PM, hosted by MC Pacman, keeping the vibes high from start to finish.\n\nDress sharp, bring your crew and experience one of South London's standout party nights.\n\nDress code: Black & White – dress to impress!",
   "comingSoon": false,
   "lineup": ["DJ Rexy", "The PM", "MC Pacman"],
   "ticketTiers": [
@@ -15,7 +15,7 @@
       "name": "Buy Tickets",
       "price": 20,
       "available": true,
-      "stripeLink": "https://fixr.co/event/the-black-white-affair-tickets-674059540"
+      "stripeLink": "https://fixr.co/event/the-black-white-affair-tickets-816223839"
     }
   ],
   "soldOut": false
