@@ -201,13 +201,17 @@ const cmsMerchProducts = Object.entries(merchModules)
 
 
 const isPastEvent = (dateString: string) => {
-  const eventDate = new Date(dateString);
-  if (Number.isNaN(eventDate.getTime())) {
+  const parts = dateString.trim().split('-').map(Number);
+  if (parts.length !== 3 || parts.some((n) => Number.isNaN(n))) {
     return false;
   }
+  const [y, m, d] = parts;
+  // Compare calendar days in the viewer's local timezone (date-only JSON field).
+  const eventDay = new Date(y, m - 1, d);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  return eventDate < today;
+  eventDay.setHours(0, 0, 0, 0);
+  return eventDay < today;
 };
 
 const splitEvents = (events: Event[]) => {
