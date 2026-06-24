@@ -1,5 +1,5 @@
 {
-  "title": "The Afro Boat Party (Black & White Edition)",
+  "title": "The AfroBoat Party (The Black & White Edition)",
   "type": "boat-party",
   "date": "2026-08-30",
   "time": "8PM – 3AM",
@@ -7,15 +7,15 @@
   "venueName": "Tereza Joanne Boat",
   "city": "London E16 2JU",
   "image": "/uploads/afro-boat-party-2026.png",
-  "description": "Presented by The PM — Sunday 30 August 2026, 8PM–3AM on the Tereza Joanne Boat at King George V Dock, London E16 2JU. BBQ, DJs, African drummers, and vibes on the water. Dress code: strictly black and/or white.\n\nTickets from £20 — keep an eye on theonlypm.com and Fixr for the ticket drop.",
-  "comingSoon": true,
+  "description": "Presented by The PM — Sunday 30 August 2026, 8PM–3AM on the Tereza Joanne Boat at King George V Dock, London E16 2JU. BBQ, DJs, African drummers, and vibes on the water. Dress code: strictly black and/or white.\n\nTickets from £20 — available now on Fixr.",
+  "comingSoon": false,
   "lineup": ["The PM"],
   "ticketTiers": [
     {
-      "name": "General Admission",
+      "name": "Buy Tickets",
       "price": 20,
-      "available": false,
-      "stripeLink": ""
+      "available": true,
+      "stripeLink": "https://fixr.co/event/the-afroboat-party-the-black-white-edition-tickets-743151119"
     }
   ],
   "soldOut": false
