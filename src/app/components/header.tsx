@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 import logo from '@/assets/pm-logo.png';
 import { generalSettings } from '@/data/settings';
+import { withSiteBase } from '@/utils/site-base';
 import { Sheet, SheetContent, SheetTrigger } from '@/app/components/ui/sheet';
 
 export function Header() {
@@ -67,7 +68,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
-              src={logo} 
+              src={withSiteBase(logo)} 
               alt={generalSettings.artistName} 
               className="h-11 sm:h-[3.25rem] w-auto"
             />

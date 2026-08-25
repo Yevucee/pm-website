@@ -3,6 +3,7 @@ import { Button } from '@/app/components/button';
 import { Music, Calendar, Award } from 'lucide-react';
 import logo from '@/assets/pm-logo.png';
 import { getPageContent, resolvePublicAsset } from '@/data/pages';
+import { withSiteBase } from '@/utils/site-base';
 
 interface AboutPageContent {
   heroShow?: boolean;
@@ -45,7 +46,7 @@ export function AboutPage() {
           <div>
             <div className="mb-8">
               <img 
-                src={logo} 
+                src={withSiteBase(logo)} 
                 alt="The PM - The Prhyme Minister" 
                 className="h-24 w-auto"
               />

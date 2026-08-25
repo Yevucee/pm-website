@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Instagram, Youtube, MessageCircle } from 'lucide-react';
 import logo from '@/assets/pm-logo.png';
 import { generalSettings } from '@/data/settings';
+import { withSiteBase } from '@/utils/site-base';
 import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
 
 const XIcon = () => (
@@ -48,7 +49,7 @@ export function Footer() {
           {/* Brand */}
           <div className="text-center md:text-left">
             <img 
-              src={logo} 
+              src={withSiteBase(logo)} 
               alt={generalSettings.artistName} 
               className="h-14 sm:h-16 w-auto mb-4 mx-auto md:mx-0"
             />
