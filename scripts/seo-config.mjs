@@ -105,7 +105,7 @@ export const STATIC_PAGES = [
     id: 'home',
     file: 'index.html',
     locale: 'en',
-    title: 'The PM | The Prhyme Minister',
+    title: 'PM',
     description: truncate(
       home.heroDescription ||
         home.bioText ||
