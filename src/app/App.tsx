@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import type { ReactElement } from 'react';
 import { Header } from '@/app/components/header';
 import { Footer } from '@/app/components/footer';
 import { HomePage } from '@/app/pages/home';
@@ -16,32 +17,48 @@ import { PmTheDjPage } from '@/app/pages/pm-the-dj';
 import { PmTheArtistPage } from '@/app/pages/pm-the-artist';
 import { PrivacyPage } from '@/app/pages/privacy';
 import { TermsPage } from '@/app/pages/terms';
+import { detectSiteBase } from '@/utils/site-base';
 
 function App() {
+  const basename = detectSiteBase() || undefined;
+
+  const pageRoutes: { path: string; element: ReactElement }[] = [
+    { path: '/', element: <HomePage /> },
+    { path: '/music', element: <MusicPage /> },
+    { path: '/music/:id', element: <ReleaseDetailPage /> },
+    { path: '/events', element: <EventsPage /> },
+    { path: '/events/:id', element: <EventDetailPage /> },
+    { path: '/merch', element: <MerchPage /> },
+    { path: '/merch/:id', element: <ProductDetailPage /> },
+    { path: '/media', element: <MediaPage /> },
+    { path: '/about', element: <AboutPage /> },
+    { path: '/contact', element: <ContactPage /> },
+    { path: '/pm-the-dj', element: <PmTheDjPage /> },
+    { path: '/pm-the-artist', element: <PmTheArtistPage /> },
+    { path: '/design-system', element: <DesignSystemPage /> },
+    { path: '/privacy', element: <PrivacyPage /> },
+    { path: '/terms', element: <TermsPage /> },
+  ];
+
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter basename={basename}>
       <div className="flex flex-col min-h-screen bg-background text-foreground">
         <Header />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/music" element={<MusicPage />} />
-            <Route path="/music/:id" element={<ReleaseDetailPage />} />
-            <Route path="/events" element={<EventsPage />} />
-            <Route path="/events/:id" element={<EventDetailPage />} />
-            <Route path="/merch" element={<MerchPage />} />
-            <Route path="/merch/:id" element={<ProductDetailPage />} />
-            <Route path="/media" element={<MediaPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/pm-the-dj" element={<PmTheDjPage />} />
-            <Route path="/pm-the-artist" element={<PmTheArtistPage />} />
-            <Route path="/design-system" element={<DesignSystemPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-          </Routes>
+        <main className="flex-1 flex flex-col">
+          <div className="flex-1">
+            <Routes>
+              {pageRoutes.flatMap(({ path, element }) =>
+                path === '/'
+                  ? [<Route key="/" path="/" element={element} />]
+                  : [
+                      <Route key={path} path={path} element={element} />,
+                      <Route key={`${path}/`} path={`${path}/`} element={element} />,
+                    ]
+              )}
+            </Routes>
+          </div>
+          <Footer />
         </main>
-        <Footer />
       </div>
     </BrowserRouter>
   );

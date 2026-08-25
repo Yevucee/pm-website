@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Instagram, Youtube, MessageCircle } from 'lucide-react';
 import logo from '@/assets/pm-logo.png';
 import { generalSettings } from '@/data/settings';
+import { withSiteBase } from '@/utils/site-base';
 import { SpotifyIcon, AppleMusicIcon } from '@/app/components/streaming-icons';
 
 const XIcon = () => (
@@ -42,13 +43,13 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-surface border-t border-border mt-auto">
+    <footer id="site-footer" className="bg-surface border-t border-border mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 lg:py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
           {/* Brand */}
           <div className="text-center md:text-left">
             <img 
-              src={logo} 
+              src={withSiteBase(logo)} 
               alt={generalSettings.artistName} 
               className="h-14 sm:h-16 w-auto mb-4 mx-auto md:mx-0"
             />

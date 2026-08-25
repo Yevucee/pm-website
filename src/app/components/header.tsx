@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 import logo from '@/assets/pm-logo.png';
 import { generalSettings } from '@/data/settings';
+import { withSiteBase } from '@/utils/site-base';
 import { Sheet, SheetContent, SheetTrigger } from '@/app/components/ui/sheet';
 
 export function Header() {
@@ -56,7 +57,8 @@ export function Header() {
 
   return (
     <header
-      className={cn(
+        id="site-header"
+        className={cn(
         'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
         isScrolled ? 'bg-background/95 backdrop-blur-lg border-b border-border' : 'bg-transparent'
       )}
@@ -66,7 +68,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
-              src={logo} 
+              src={withSiteBase(logo)} 
               alt={generalSettings.artistName} 
               className="h-11 sm:h-[3.25rem] w-auto"
             />

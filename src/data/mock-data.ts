@@ -1,3 +1,5 @@
+import { resolvePublicAsset } from '@/utils/site-base';
+
 export interface Event {
   id: string;
   title: string;
@@ -77,29 +79,6 @@ const merchModules = import.meta.glob<ProductContent>('../../content/merch/*.jso
 const normalizeStripeLink = (value?: string) => {
   const trimmed = value?.trim();
   return trimmed ? trimmed : PLACEHOLDER_STRIPE_LINK;
-};
-
-const resolvePublicAsset = (value?: string) => {
-  const trimmed = value?.trim();
-  if (!trimmed) {
-    return '';
-  }
-
-  if (/^https?:\/\//i.test(trimmed)) {
-    return trimmed;
-  }
-
-  const base = import.meta.env.BASE_URL || '/';
-  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
-  const normalizedPath = trimmed.startsWith('/') ? trimmed.slice(1) : trimmed;
-  const basePrefix = normalizedBase.replace(/^\/|\/$/g, '');
-  const normalizedWithSlash = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
-
-  if (basePrefix && normalizedWithSlash.startsWith(`/${basePrefix}/`)) {
-    return `${window.location.origin}${normalizedWithSlash}`;
-  }
-
-  return `${window.location.origin}${normalizedBase}${normalizedPath}`;
 };
 
 const normalizeEventType = (value?: string): Event['type'] => {

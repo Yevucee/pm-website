@@ -8,6 +8,7 @@ import { getPageContent, resolvePublicAsset } from '@/data/pages';
 import { generalSettings } from '@/data/settings';
 import { Button } from '@/app/components/button';
 import logo from '@/assets/partiesbythepm-logo.png';
+import { withSiteBase } from '@/utils/site-base';
 
 const nextEvent = upcomingEvents[0];
 const otherUpcomingEvents = upcomingEvents.slice(1);
@@ -91,7 +92,7 @@ export function EventsPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20" />
             <div className="relative z-10 flex items-center gap-6 sm:gap-8 w-full">
               <img
-                src={logo}
+                src={withSiteBase(logo)}
                 alt="Parties by the PM"
                 className="w-28 h-28 sm:w-36 sm:h-36 object-contain flex-shrink-0"
               />

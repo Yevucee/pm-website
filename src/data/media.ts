@@ -1,3 +1,5 @@
+import { resolvePublicAsset } from '@/utils/site-base';
+
 export type MediaType = 'photo' | 'video';
 
 export interface MediaItem {
@@ -18,29 +20,6 @@ interface MediaContent {
   date?: string;
   albumUrl?: string;
 }
-
-const resolvePublicAsset = (value?: string) => {
-  const trimmed = value?.trim();
-  if (!trimmed) {
-    return '';
-  }
-
-  if (/^https?:\/\//i.test(trimmed)) {
-    return trimmed;
-  }
-
-  const base = import.meta.env.BASE_URL || '/';
-  const normalizedBase = base.endsWith('/') ? base : `${base}/`;
-  const normalizedPath = trimmed.startsWith('/') ? trimmed.slice(1) : trimmed;
-  const basePrefix = normalizedBase.replace(/^\/|\/$/g, '');
-  const normalizedWithSlash = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
-
-  if (basePrefix && normalizedWithSlash.startsWith(`/${basePrefix}/`)) {
-    return `${window.location.origin}${normalizedWithSlash}`;
-  }
-
-  return `${window.location.origin}${normalizedBase}${normalizedPath}`;
-};
 
 const mediaModules = import.meta.glob<MediaContent>('../../content/media/*.json', {
   eager: true,
