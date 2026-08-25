@@ -3,6 +3,8 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
+// GitHub Pages with custom domain theonlypm.com is served at /.
+// SITE_BASE_PATH is consumed by scripts/seo-config.mjs for preview URL helpers.
 export default defineConfig({
   base: '/',
   plugins: [
