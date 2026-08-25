@@ -16,9 +16,17 @@ export function detectSiteBase(
   hostname = typeof window !== 'undefined' ? window.location.hostname : '',
   pathname = typeof window !== 'undefined' ? window.location.pathname : '/'
 ): string {
+  const first = pathname.split('/').filter(Boolean)[0];
+
   if (hostname.endsWith('.github.io')) {
-    const first = pathname.split('/').filter(Boolean)[0];
     return first ? `/${first}` : `/${REPO_NAME}`;
+  }
+
+  // Local GitHub Pages simulation (e.g. /pm-website/about/ on 127.0.0.1).
+  // Production (theonlypm.com) and prerender (dist served at /) never use
+  // this first-segment — those routes start with about/, music/, etc.
+  if (first === REPO_NAME) {
+    return `/${REPO_NAME}`;
   }
 
   if (hostname) return '';
