@@ -110,7 +110,7 @@ Email: ${SITE.email}
 ${CANONICAL_BASE}/
 
 ## GitHub Pages preview (not canonical)
-https://${SITE.githubUser}.github.io/${SITE.repoName}/
+https://${SITE.githubUser.toLowerCase()}.github.io/${SITE.repoName}/
 
 ## Sitemap
 ${CANONICAL_BASE}/sitemap.xml
