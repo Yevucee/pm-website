@@ -17,8 +17,21 @@ import { PmTheDjPage } from '@/app/pages/pm-the-dj';
 import { PmTheArtistPage } from '@/app/pages/pm-the-artist';
 import { PrivacyPage } from '@/app/pages/privacy';
 import { TermsPage } from '@/app/pages/terms';
+import { InsightsPage } from '@/app/pages/insights';
 import { detectSiteBase } from '@/utils/site-base';
 import { AnalyticsPageView } from '@/app/components/analytics-page-view';
+
+function SiteShell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
+      <Header />
+      <main className="flex-1 flex flex-col">
+        <div className="flex-1">{children}</div>
+        <Footer />
+      </main>
+    </div>
+  );
+}
 
 function App() {
   const basename = detectSiteBase() || undefined;
@@ -44,24 +57,27 @@ function App() {
   return (
     <BrowserRouter basename={basename}>
       <AnalyticsPageView />
-      <div className="flex flex-col min-h-screen bg-background text-foreground">
-        <Header />
-        <main className="flex-1 flex flex-col">
-          <div className="flex-1">
-            <Routes>
-              {pageRoutes.flatMap(({ path, element }) =>
-                path === '/'
-                  ? [<Route key="/" path="/" element={element} />]
-                  : [
-                      <Route key={path} path={path} element={element} />,
-                      <Route key={`${path}/`} path={`${path}/`} element={element} />,
-                    ]
-              )}
-            </Routes>
-          </div>
-          <Footer />
-        </main>
-      </div>
+      <Routes>
+        <Route path="/insights" element={<InsightsPage />} />
+        <Route path="/insights/" element={<InsightsPage />} />
+        <Route
+          path="*"
+          element={
+            <SiteShell>
+              <Routes>
+                {pageRoutes.flatMap(({ path, element }) =>
+                  path === '/'
+                    ? [<Route key="/" path="/" element={element} />]
+                    : [
+                        <Route key={path} path={path} element={element} />,
+                        <Route key={`${path}/`} path={`${path}/`} element={element} />,
+                      ]
+                )}
+              </Routes>
+            </SiteShell>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }

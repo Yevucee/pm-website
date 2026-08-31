@@ -82,6 +82,9 @@ Disallow: /
 User-agent: ClaudeBot
 Disallow: /
 
+# Private stats dashboard (not in sitemap or navigation)
+Disallow: /insights/
+
 Sitemap: ${CANONICAL_BASE}/sitemap.xml
 `;
 }

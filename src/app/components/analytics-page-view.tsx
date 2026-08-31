@@ -12,6 +12,9 @@ export function AnalyticsPageView() {
 
   useEffect(() => {
     const path = `${location.pathname}${location.search}${location.hash}`;
+    if (path.startsWith('/insights')) {
+      return;
+    }
     trackPageView(path);
   }, [location.pathname, location.search, location.hash]);
 
