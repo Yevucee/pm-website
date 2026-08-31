@@ -18,6 +18,7 @@ import { PmTheArtistPage } from '@/app/pages/pm-the-artist';
 import { PrivacyPage } from '@/app/pages/privacy';
 import { TermsPage } from '@/app/pages/terms';
 import { detectSiteBase } from '@/utils/site-base';
+import { AnalyticsPageView } from '@/app/components/analytics-page-view';
 
 function App() {
   const basename = detectSiteBase() || undefined;
@@ -42,6 +43,7 @@ function App() {
 
   return (
     <BrowserRouter basename={basename}>
+      <AnalyticsPageView />
       <div className="flex flex-col min-h-screen bg-background text-foreground">
         <Header />
         <main className="flex-1 flex flex-col">
