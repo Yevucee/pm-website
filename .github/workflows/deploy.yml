@@ -39,6 +39,7 @@ jobs:
         env:
           VITE_FORM_SUBMIT_URL: ${{ secrets.VITE_FORM_SUBMIT_URL }}
           VITE_FORM_SUBMIT_SECRET: ${{ secrets.VITE_FORM_SUBMIT_SECRET }}
+          VITE_GA_MEASUREMENT_ID: ${{ secrets.VITE_GA_MEASUREMENT_ID }}
           CANONICAL_BASE: https://theonlypm.com
           SITE_BASE_PATH: /pm-website
         run: npm run build

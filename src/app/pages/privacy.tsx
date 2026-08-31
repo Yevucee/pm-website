@@ -21,10 +21,11 @@ export function PrivacyPage() {
             We use your information to respond to enquiries, improve our services, and communicate
             with you about events and updates where you have opted in.
           </p>
-          <h2 className="font-heading text-xl text-foreground mt-8">Cookies</h2>
+          <h2 className="font-heading text-xl text-foreground mt-8">Cookies &amp; Analytics</h2>
           <p>
-            This site may use cookies for essential functionality and analytics. You can control
-            cookie preferences through your browser settings.
+            This site uses Google Analytics 4 to understand how visitors use the website (pages viewed,
+            approximate location, device type). Analytics only runs when configured for production builds.
+            You can control cookies through your browser settings.
           </p>
           <h2 className="font-heading text-xl text-foreground mt-8">Contact</h2>
           <p>
