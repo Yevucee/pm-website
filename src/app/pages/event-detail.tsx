@@ -174,10 +174,12 @@ export function EventDetailPage() {
             <div className="md:sticky md:top-32">
               <div className="bg-surface border border-border rounded-xl p-4 sm:p-6">
                 <h3 className="font-heading text-2xl mb-6">
-                  {event.comingSoon ? 'COMING SOON' : 'TICKETS'}
+                  {event.photosComingSoon ? 'PHOTOS' : event.comingSoon ? 'COMING SOON' : 'TICKETS'}
                 </h3>
                 
-                {event.comingSoon ? (
+                {event.photosComingSoon ? (
+                  <p className="text-muted-foreground text-sm">Photos coming soon.</p>
+                ) : event.comingSoon ? (
                   <div className="space-y-4">
                     <p className="text-muted-foreground text-sm">
                       Tickets are not on sale yet. Register your interest and we will notify you.
@@ -288,7 +290,7 @@ export function EventDetailPage() {
                   </div>
                 )}
 
-                {!event.comingSoon && event.ticketTiers.some((t) => t.price > 0) && (
+                {!event.comingSoon && !event.photosComingSoon && event.ticketTiers.some((t) => t.price > 0) && (
                   <div className="mt-6 pt-6 border-t border-border text-sm text-muted-foreground text-center">
                     <p>Secure checkout via Stripe</p>
                     <p className="mt-1">Apple Pay • Google Pay accepted</p>

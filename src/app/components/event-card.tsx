@@ -12,12 +12,13 @@ interface EventCardProps {
 export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const date = new Date(event.date);
-  const availableTier = event.comingSoon ? undefined : event.ticketTiers.find((tier) => tier.available);
+  const availableTier = event.comingSoon || event.photosComingSoon ? undefined : event.ticketTiers.find((tier) => tier.available);
   const eventTypeLabel =
     event.type === 'boat-party' ? 'BOAT PARTY' : event.type === 'festival' ? 'FESTIVAL' : 'CLUB NIGHT';
   const venueDisplay = event.venueName ? `${event.venueName} · ${event.city}` : `${event.venue}, ${event.city}`;
 
-  const showTicketFooter = !event.soldOut && (Boolean(availableTier) || event.comingSoon);
+  const showPhotosComingSoon = Boolean(event.photosComingSoon);
+  const showTicketFooter = !showPhotosComingSoon && !event.soldOut && (Boolean(availableTier) || event.comingSoon);
 
   const imageBlock = (
     <div
@@ -87,6 +88,12 @@ export function EventCard({ event, variant = 'vertical' }: EventCardProps) {
           <div className="flex h-14 min-w-0 items-end">
             <span className="text-sm font-medium leading-none text-accent">View details →</span>
           </div>
+        </div>
+      )}
+
+      {showPhotosComingSoon && (
+        <div className="border-t border-border pt-4">
+          <p className="font-heading text-accent">Photos coming soon</p>
         </div>
       )}
 
