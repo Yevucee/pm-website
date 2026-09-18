@@ -1,0 +1,22 @@
+{
+  "title": "The AfroBOAT Party 2027 – Black & Sparkle Edition",
+  "type": "boat-party",
+  "date": "2027-08-29",
+  "time": "5PM – 3AM",
+  "venue": "Tereza Joanne Boat, King George V Dock",
+  "venueName": "Tereza Joanne Boat",
+  "city": "London E16 2JU",
+  "image": "/uploads/afro-boat-party-2026.png",
+  "description": "The AfroBOAT Party returns for Bank Holiday Sunday, 29th August 2027 — and this year we’re going BLACK & SPARKLE!\n\nJoin us aboard the Tereza Joanne Boat for an unforgettable Bank Holiday Sunday of great music, good people and non-stop party vibes on the water.\n\nDJs playing Afrobeats, Amapiano, R&B, Hip Hop, Bashment & more\nBBQ available\nDress Code: BLACK and/or SPARKLE\n5PM – 3AM\n\nTereza Joanne Boat\nKing George V Dock, London, E16 2JU\n\nSUPER EARLY BIRD TICKETS – ONLY £15\n\nThese are limited, so grab yours early and save!\n\nThe AfroBOAT Party — Bank Holiday Sunday on the water.",
+  "comingSoon": false,
+  "lineup": ["The PM"],
+  "ticketTiers": [
+    {
+      "name": "Super Early Bird",
+      "price": 15,
+      "available": true,
+      "stripeLink": "https://fixr.co/event/the-afroboat-party-the-black-sparkle-edition-tickets-779902509"
+    }
+  ],
+  "soldOut": false
+}

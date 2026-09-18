@@ -68,6 +68,14 @@ collections:
           default: false,
           hint: "If true, card shows Tickets/TBC (same alignment as From/£). Turn off when Fixr/Stripe is live and a tier is available."
         }
+      - {
+          label: "Photos coming soon",
+          name: "photosComingSoon",
+          widget: "boolean",
+          default: false,
+          required: false,
+          hint: "For past events: hide ticket sales and show Photos coming soon on the card and details."
+        }
       - {label: "Lineup", name: "lineup", widget: "list", required: false}
       - label: "Ticket Tiers"
         name: "ticketTiers"

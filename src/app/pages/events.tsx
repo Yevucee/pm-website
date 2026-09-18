@@ -117,91 +117,109 @@ export function EventsPage() {
 
         <hr className="border-border my-12" />
 
-        {/* Upcoming Events */}
-        {eventsPage.upcomingShow !== false && (
+        {/* Upcoming Events — extra dates besides the featured Next Event */}
+        {eventsPage.upcomingShow !== false && otherUpcomingEvents.length > 0 && (
           <section className="mb-12">
             <h2 className="font-heading text-3xl font-bold mb-6">
               {eventsPage.upcomingHeading || 'UPCOMING'}
             </h2>
-            {otherUpcomingEvents.length > 0 ? (
-              <>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 [&>div]:min-h-0">
-                  {otherUpcomingEvents.map((event) => (
-                    <div key={event.id} className="flex h-full min-h-0">
-                      <EventCard event={event} />
-                    </div>
-                  ))}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 [&>div]:min-h-0">
+              {otherUpcomingEvents.map((event) => (
+                <div key={event.id} className="flex h-full min-h-0">
+                  <EventCard event={event} />
                 </div>
-                {eventsPage.mailingListCtaShow !== false && (
-                  <div className="mt-10 text-center border border-border rounded-xl py-8 px-4 bg-surface/30">
-                    <p className="text-muted-foreground mb-3">
-                      {eventsPage.mailingListCtaIntro ||
-                        'Want announcements straight to your inbox or phone?'}
-                    </p>
-                    <Link
-                      to={eventsPage.mailingListCtaUrl || '/contact#mailing-list'}
-                      className="text-accent hover:text-accent-hover font-heading text-sm sm:text-base underline-offset-4 hover:underline"
-                    >
-                      {eventsPage.mailingListCtaLabel || 'Sign up for updates'}
-                    </Link>
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className="py-16 text-center bg-surface/50 border border-border rounded-xl">
-                <p className="text-muted-foreground text-lg mb-4">
-                  No upcoming events at the moment.
+              ))}
+            </div>
+            {eventsPage.mailingListCtaShow !== false && (
+              <div className="mt-10 text-center border border-border rounded-xl py-8 px-4 bg-surface/30">
+                <p className="text-muted-foreground mb-3">
+                  {eventsPage.mailingListCtaIntro ||
+                    'Want announcements straight to your inbox or phone?'}
                 </p>
-                <p className="text-muted-foreground mb-4">
-                  Follow us on social media to be the first to know when new dates are announced.
-                </p>
-                <div className="flex gap-3 justify-center flex-wrap mb-4">
-                  {generalSettings.instagram && (
-                    <a
-                      href={generalSettings.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:underline text-sm"
-                    >
-                      Instagram
-                    </a>
-                  )}
-                  {generalSettings.tiktok && (
-                    <a
-                      href={generalSettings.tiktok}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:underline text-sm"
-                    >
-                      TikTok
-                    </a>
-                  )}
-                  {generalSettings.twitter && (
-                    <a
-                      href={generalSettings.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:underline text-sm"
-                    >
-                      X
-                    </a>
-                  )}
-                </div>
-                {eventsPage.mailingListCtaShow !== false && (
-                  <div className="mt-6">
-                    <Link to={eventsPage.mailingListCtaUrl || '/contact#mailing-list'}>
-                      <Button variant="primary" size="sm">
-                        {eventsPage.mailingListCtaLabel || 'Sign up for updates'}
-                      </Button>
-                    </Link>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      {eventsPage.mailingListCtaIntro ||
-                        'Join the mailing list for email and WhatsApp updates.'}
-                    </p>
-                  </div>
-                )}
+                <Link
+                  to={eventsPage.mailingListCtaUrl || '/contact#mailing-list'}
+                  className="text-accent hover:text-accent-hover font-heading text-sm sm:text-base underline-offset-4 hover:underline"
+                >
+                  {eventsPage.mailingListCtaLabel || 'Sign up for updates'}
+                </Link>
               </div>
             )}
+          </section>
+        )}
+
+        {eventsPage.upcomingShow !== false && otherUpcomingEvents.length === 0 && nextEvent && eventsPage.mailingListCtaShow !== false && (
+          <div className="mb-12 text-center border border-border rounded-xl py-8 px-4 bg-surface/30">
+            <p className="text-muted-foreground mb-3">
+              {eventsPage.mailingListCtaIntro ||
+                'Want announcements straight to your inbox or phone?'}
+            </p>
+            <Link
+              to={eventsPage.mailingListCtaUrl || '/contact#mailing-list'}
+              className="text-accent hover:text-accent-hover font-heading text-sm sm:text-base underline-offset-4 hover:underline"
+            >
+              {eventsPage.mailingListCtaLabel || 'Sign up for updates'}
+            </Link>
+          </div>
+        )}
+
+        {eventsPage.upcomingShow !== false && !nextEvent && (
+          <section className="mb-12">
+            <h2 className="font-heading text-3xl font-bold mb-6">
+              {eventsPage.upcomingHeading || 'UPCOMING'}
+            </h2>
+            <div className="py-16 text-center bg-surface/50 border border-border rounded-xl">
+              <p className="text-muted-foreground text-lg mb-4">
+                No upcoming events at the moment.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                Follow us on social media to be the first to know when new dates are announced.
+              </p>
+              <div className="flex gap-3 justify-center flex-wrap mb-4">
+                {generalSettings.instagram && (
+                  <a
+                    href={generalSettings.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent hover:underline text-sm"
+                  >
+                    Instagram
+                  </a>
+                )}
+                {generalSettings.tiktok && (
+                  <a
+                    href={generalSettings.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent hover:underline text-sm"
+                  >
+                    TikTok
+                  </a>
+                )}
+                {generalSettings.twitter && (
+                  <a
+                    href={generalSettings.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent hover:underline text-sm"
+                  >
+                    X
+                  </a>
+                )}
+              </div>
+              {eventsPage.mailingListCtaShow !== false && (
+                <div className="mt-6">
+                  <Link to={eventsPage.mailingListCtaUrl || '/contact#mailing-list'}>
+                    <Button variant="primary" size="sm">
+                      {eventsPage.mailingListCtaLabel || 'Sign up for updates'}
+                    </Button>
+                  </Link>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    {eventsPage.mailingListCtaIntro ||
+                      'Join the mailing list for email and WhatsApp updates.'}
+                  </p>
+                </div>
+              )}
+            </div>
           </section>
         )}
 

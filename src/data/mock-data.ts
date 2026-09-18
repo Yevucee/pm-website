@@ -12,6 +12,7 @@ export interface Event {
   image: string;
   description: string;
   comingSoon?: boolean;
+  photosComingSoon?: boolean;
   lineup?: string[];
   ticketTiers: {
     name: string;
@@ -45,6 +46,7 @@ interface EventContent {
   image?: string;
   description?: string;
   comingSoon?: boolean;
+  photosComingSoon?: boolean;
   lineup?: string[];
   ticketTiers?: {
     name?: string;
@@ -137,6 +139,7 @@ const parseEvent = (path: string, data: EventContent): Event | null => {
     image,
     description,
     comingSoon: data.comingSoon,
+    photosComingSoon: data.photosComingSoon === true,
     lineup: Array.isArray(data.lineup) ? data.lineup : undefined,
     ticketTiers,
     soldOut: data.soldOut
