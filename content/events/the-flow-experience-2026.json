@@ -8,14 +8,14 @@
   "city": "London SW9 6LH",
   "image": "/uploads/the-flow-experience-2026.jpg",
   "description": "London, get ready! For the first time ever, Flowking Stone takes the stage for his first headline concert in London.\n\nTHE FLOW EXPERIENCE — Flowking Stone & Friends\n\nSunday 27th December 2026 at Brixton Jamm. Supported by live band and DJs playing Hiplife, Afrobeats and Amapiano.\n\nStrictly 18+ | No ID, no entry.\n\nA time will be had — tell someone!",
-  "comingSoon": true,
-  "lineup": ["Flowking Stone", "Live Band", "DJs"],
+  "comingSoon": false,
+  "lineup": ["Flowking Stone", "The PM", "Live Band", "DJs"],
   "ticketTiers": [
     {
-      "name": "General Admission",
-      "price": 0,
-      "available": false,
-      "stripeLink": "https://www.fixr.co"
+      "name": "Buy Tickets",
+      "price": 22.5,
+      "available": true,
+      "stripeLink": "https://shoobs.com/events/176142/the-flow-experience-flowking-stone-friends"
     }
   ],
   "soldOut": false
