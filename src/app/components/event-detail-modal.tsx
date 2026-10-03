@@ -142,10 +142,12 @@ export function EventDetailModal({ event, open, onOpenChange }: EventDetailModal
           {/* Tickets */}
           <div className="pt-4 border-t border-border">
             <h3 className="font-heading text-lg mb-4">
-              {event.comingSoon ? 'COMING SOON' : 'TICKETS'}
+              {event.photosComingSoon ? 'PHOTOS' : event.comingSoon ? 'COMING SOON' : 'TICKETS'}
             </h3>
 
-            {event.comingSoon ? (
+            {event.photosComingSoon ? (
+              <p className="text-muted-foreground text-sm">Photos coming soon.</p>
+            ) : event.comingSoon ? (
               <div className="space-y-3">
                 <p className="text-muted-foreground text-sm">
                   Register your interest and we will notify you.

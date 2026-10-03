@@ -28,6 +28,7 @@ Upload via **/admin** (Decap) or add the file under `public/uploads/` and refere
 - **Live tickets:** one tier with `"available": true`, correct **price** (number, GBP), and **payment link** in `stripeLink` (Fixr and Stripe links both work; the key name is historical).
 - **Not on sale yet:** set `"comingSoon": true` and either omit available tiers or set `available: false`. The card shows **Tickets / TBC** in the same slot as **From / £** so alignment matches priced events.
 - **Sold out:** `"soldOut": true` and update tiers as needed.
+- **Past event, photos not ready:** set `"photosComingSoon": true` and turn ticket tiers `"available": false`. The card and details show **Photos coming soon** instead of buy buttons.
 
 ## Checklist before publishing
 
