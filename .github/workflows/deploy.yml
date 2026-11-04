@@ -43,6 +43,7 @@ jobs:
           VITE_STATS_ACCESS_KEY: ${{ secrets.VITE_STATS_ACCESS_KEY }}
           VITE_LOOKER_STUDIO_EMBED_URL: ${{ secrets.VITE_LOOKER_STUDIO_EMBED_URL }}
           VITE_STATS_SHEET_EMBED_URL: ${{ secrets.VITE_STATS_SHEET_EMBED_URL }}
+          VITE_STUDIO_API_URL: ${{ secrets.VITE_STUDIO_API_URL }}
           CANONICAL_BASE: https://theonlypm.com
           SITE_BASE_PATH: /pm-website
         run: npm run build

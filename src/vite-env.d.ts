@@ -7,6 +7,7 @@ interface ImportMetaEnv {
   readonly VITE_STATS_ACCESS_KEY?: string;
   readonly VITE_LOOKER_STUDIO_EMBED_URL?: string;
   readonly VITE_STATS_SHEET_EMBED_URL?: string;
+  readonly VITE_STUDIO_API_URL?: string;
 }
 
 interface ImportMeta {

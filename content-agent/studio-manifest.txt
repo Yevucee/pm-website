@@ -1,0 +1,14 @@
+The PM website (Yevucee/pm-website) — file-based CMS. Edit ONLY paths under content/ or public/uploads/.
+
+content/pages/*.json — page copy (home, about, contact, events, media, merch, music, pm-the-dj, pm-the-artist, etc.)
+content/events/*.json — events (see content/events/README.md: date YYYY-MM-DD, image /uploads/..., ticketTiers, type boat-party|club-night|festival)
+content/merch/*.json — products
+content/media/*.json — gallery items
+content/releases/*.md — music releases (YAML frontmatter + optional body)
+content/settings/general.json — site settings
+public/uploads/* — images (png, jpg, webp). Reference in JSON as /uploads/filename.ext
+
+Do NOT edit src/, scripts/, .github/, package.json, or admin config.
+When replacing names/brands, scope edits to the fields the user meant — do not blindly replace every "PM" in the repo.
+Preserve valid JSON (pretty-print with 2 spaces). For .md releases keep --- frontmatter --- format.
+New event slugs: lowercase kebab-case matching filename without .json.

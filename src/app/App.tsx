@@ -18,6 +18,7 @@ import { PmTheArtistPage } from '@/app/pages/pm-the-artist';
 import { PrivacyPage } from '@/app/pages/privacy';
 import { TermsPage } from '@/app/pages/terms';
 import { InsightsPage } from '@/app/pages/insights';
+import { StudioPage } from '@/app/pages/studio';
 import { detectSiteBase } from '@/utils/site-base';
 import { AnalyticsPageView } from '@/app/components/analytics-page-view';
 
@@ -60,6 +61,8 @@ function App() {
       <Routes>
         <Route path="/insights" element={<InsightsPage />} />
         <Route path="/insights/" element={<InsightsPage />} />
+        <Route path="/studio" element={<StudioPage />} />
+        <Route path="/studio/" element={<StudioPage />} />
         <Route
           path="*"
           element={
