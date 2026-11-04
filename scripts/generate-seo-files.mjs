@@ -84,6 +84,7 @@ Disallow: /
 
 # Private stats dashboard (not in sitemap or navigation)
 Disallow: /insights/
+Disallow: /studio/
 
 Sitemap: ${CANONICAL_BASE}/sitemap.xml
 `;

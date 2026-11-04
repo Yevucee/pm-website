@@ -1,0 +1,8 @@
+name = "pm-website-studio"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_GITHUB_USERS = "Yevucee"
+ALLOWED_ORIGINS = "https://www.theonlypm.com,https://theonlypm.com,https://yevucee.github.io,http://localhost:5173"
+OPENROUTER_MODEL = "openai/gpt-4o-mini"

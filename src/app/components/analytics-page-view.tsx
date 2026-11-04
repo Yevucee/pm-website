@@ -12,7 +12,7 @@ export function AnalyticsPageView() {
 
   useEffect(() => {
     const path = `${location.pathname}${location.search}${location.hash}`;
-    if (path.startsWith('/insights')) {
+    if (path.startsWith('/insights') || path.startsWith('/studio')) {
       return;
     }
     trackPageView(path);
