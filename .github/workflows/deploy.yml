@@ -18,7 +18,9 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # ubuntu-latest is 26.04. Playwright 1.58 has no Chromium build for that
+    # release, so the prerender step cannot install a browser there.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
