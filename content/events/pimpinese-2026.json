@@ -1,0 +1,22 @@
+{
+  "title": "PIMPINESE (An Old School Party)",
+  "type": "club-night",
+  "date": "2026-11-28",
+  "time": "9PM – 3AM",
+  "venue": "Inn on the Lake, Bond Avenue",
+  "venueName": "Inn on the Lake",
+  "city": "Milton Keynes MK1 1PA",
+  "image": "/uploads/pimpinese-2026.jpg",
+  "description": "Step back in time at PIMPINESE (An Old School Party). Join The PM, DJ Rexy, MC Pacman and DJ Kudjo for Borga Highlife, Hiplife, '80s Funk, '90s R&B and old school Afrobeats. Nostalgia galore.\n\nSaturday 28 November 2026, 9PM–3AM at Inn on the Lake, Bond Avenue, Milton Keynes, MK1 1PA.\n\nFree entry before 10:30pm. £10 after.",
+  "comingSoon": false,
+  "lineup": ["The PM", "DJ Rexy", "MC Pacman", "DJ Kudjo"],
+  "ticketTiers": [
+    {
+      "name": "Free before 10:30pm · £10 after",
+      "price": 0,
+      "available": true,
+      "stripeLink": "https://fixr.co/event/63542823"
+    }
+  ],
+  "soldOut": false
+}
